@@ -836,7 +836,7 @@ sbc <- summcat %>%
   # scale_fill_brewer(palette="Set2")
 ```
 
-These findings also highlight that there may be more limited "room for improvement" in ITN use than previously thought. Nets not used for 'objective' reasons and those that are 'extra' are relatively impervious to social behaviour change communication, and these categories explain non-use for, on average, `r round(roommove$tot[1], digits=0)`% of all nets in the included surveys, with a range of `r min(sbc$sum)`% to `r max(sbc$sum)`% of all nets depending on the country and survey. Even with highly effective social behaviour change, not all nets can be reasonably expected to be used.  
+These findings also highlight that there may be more limited "room for improvement" in ITN use than previously thought. Nets not used for 'objective' reasons and those that are 'extra' are relatively impervious to social behaviour change communication, and these categories explain non-use for, on average, `r round(roommove$tot[1], digits=0)`% of all nets in the included surveys, with a range of `r min(sbc$sum)`% to `r max(sbc$sum)`% of all nets depending on the country and survey. Even with highly effective social behaviour change, not all nets can be reasonably expected to be used. 
 
 
 ## Limitations
