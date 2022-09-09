@@ -1,0 +1,72 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/netnotused.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Aug 2022, 15:25:00
+{txt}
+{com}. cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
+{res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR
+{txt}
+{com}. lookfor_all "net not used", codebook
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR6H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR6H_acc.dta" }
+ variables: {txt}sh130ah
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130ah  {res}  1207      2  .0057995    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR71_acc.dta" }
+ variables: {txt}sh130ah
+{res}
+{txt}Variable    Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130ah  {res}  1084      1     0    0    0  {txt}reason children under 5 did not sleep under mosquito net (...
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR81_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR81_acc.dta" }
+ variables: {txt}sh130
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130    {res}    0      0     .    .    .  {txt}main reason bed net not used
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR82_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR82_acc.dta" }
+ variables: {txt}sh129aa sh129ab sh129ac sh129ad sh129ae sh129af sh129ag sh129ah sh129ai sh129aj sh129ak sh129al sh129am sh129an sh129ax
+{res}
+{txt}Variable     Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh129aa  {res}  11087      1     0    0    0  {txt}net not used because: too hot
+{txt}sh129ab  {res}  11087      1     0    0    0  {txt}net not used because: no mosquitoes
+{txt}sh129ac  {res}  11087      1     0    0    0  {txt}net not used because: no malaria
+{txt}sh129ad  {res}  11087      1     0    0    0  {txt}net not used because: prefer other method
+{txt}sh129ae  {res}  11087      1     0    0    0  {txt}net not used because: net too old/torn
+{txt}sh129af  {res}  11087      1     0    0    0  {txt}net not used because: chemicals in net are unsafe
+{txt}sh129ag  {res}  11087      1     0    0    0  {txt}net not used because: don't like smell
+{txt}sh129ah  {res}  11087      1     0    0    0  {txt}net not used because: net too short/small
+{txt}sh129ai  {res}  11087      1     0    0    0  {txt}net not used because: usual user did not sleep here
+{txt}sh129aj  {res}  11087      1     0    0    0  {txt}net not used because: extra net/saving for later
+{txt}sh129ak  {res}  11087      1     0    0    0  {txt}net not used because: net was being washed/dried/aired
+{txt}sh129al  {res}  11087      1     0    0    0  {txt}net not used because: slept outside
+{txt}sh129am  {res}  11087      1     0    0    0  {txt}net not used because: net brought bugs
+{txt}sh129an  {res}  11087      1     0    0    0  {txt}net not used because: don't like shape
+{txt}sh129ax  {res}  11087      1     0    0    0  {txt}net not used because: other
+{txt}{hline 101}
+
+
+ Total {res}294{txt} out of {res}294{txt} files checked in {stata `"dir "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/""' : "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/}"
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/netnotused.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Aug 2022, 15:25:19
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

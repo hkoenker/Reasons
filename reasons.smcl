@@ -1,0 +1,1595 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/reasons.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}19 Aug 2022, 11:00:08
+{txt}
+{com}. cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
+{res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR
+{txt}
+{com}. lookfor_all reason, codebook
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR61_acc.dta" }
+ variables: {txt}sh147 sh151 sh155 sh165 sh169 sh173
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh147    {res}  1961      6  2.618562    1    9  {txt}main reason to seek care
+{txt}sh151    {res}   125      5     2.856    1    6  {txt}main reason to seek care
+{txt}sh155    {res}    18      5  3.388889    1    9  {txt}main reason to seek care
+{txt}sh165    {res}  6413     26  22.69484    1   99  {txt}main reason to seek care
+{txt}sh169    {res}   563     25  30.06394    1   99  {txt}main reason to seek care
+{txt}sh173    {res}    62     12  40.85484    1   99  {txt}main reason to seek care
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR71FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR71FL.dta" }
+ variables: {txt}sh55 sh68
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh55     {res}   66      6      62.5    1   96  {txt}reason for absence of work
+{txt}sh68     {res}  652     14  26.10736    1   98  {txt}reason for absence of work
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LSPR41FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LSPR41FL.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  2072      4  .2456564    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NMPR52_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NMPR52_acc.dta" }
+ variables: {txt}sh141 hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh141    {res}  32503      8  5.907024    1    9  {txt}reason house has not been sprayed
+{txt}hc13     {res}   5732      5  .2939637    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR72_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR72_acc.dta" }
+ variables: {txt}sh128aa sh128ab sh128ac sh128ad sh128ae sh128af sh128ax sh128az
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128aa  {res}    0      0     .    .    .  {txt}reason net was not used: too hot
+{txt}sh128ab  {res}    0      0     .    .    .  {txt}reason net was not used: don't like smell
+{txt}sh128ac  {res}    0      0     .    .    .  {txt}reason net was not used: no mosquitoes
+{txt}sh128ad  {res}    0      0     .    .    .  {txt}reason net was not used: net too old/too many holes
+{txt}sh128ae  {res}    0      0     .    .    .  {txt}reason net was not used: net not hung
+{txt}sh128af  {res}    0      0     .    .    .  {txt}reason net was not used: extra net/used for visitors
+{txt}sh128ax  {res}    0      0     .    .    .  {txt}reason net was not used: other reason
+{txt}sh128az  {res}    0      0     .    .    .  {txt}reason net was not used: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}    0      0     .    .    .  {txt}na - reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STPR50FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STPR50FL.dta" }
+ variables: {txt}sh128a hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128a   {res}  3382      8  15.13897    1   99  {txt}reason for not having a mosquito net
+{txt}hc13     {res}  2115      5  .6009456    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CDPR50_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CDPR50_acc.dta" }
+ variables: {txt}sh121aa sh121ab sh121ac sh121ad sh121ae sh121af sh121ag sh121ax hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh121aa  {res}  32166      3  .7324193    0    9  {txt}reason for not using bed net : too expensive
+{txt}sh121ab  {res}  32166      3  .2139526    0    9  {txt}reason for not using bed net : no bednets for sale
+{txt}sh121ac  {res}  32166      3  .1308525    0    9  {txt}reason for not using bed net : don't know about bed nets
+{txt}sh121ad  {res}  32166      3  .0638562    0    9  {txt}reason for not using bed net : spray bedroom
+{txt}sh121ae  {res}  32166      3  .0534104    0    9  {txt}reason for not using bed net : uncomfortable, too hot
+{txt}sh121af  {res}  32166      3   .097743    0    9  {txt}reason for not using bed net : no mosquitoes in vicinity
+{txt}sh121ag  {res}  32166      3   .040291    0    9  {txt}reason for not using bed net : gave net to others
+{txt}sh121ax  {res}  32166      3  .0858982    0    9  {txt}reason for not using bed net : other
+{txt}hc13     {res}   4495      5  .4053393    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}    0      0     .    .    .  {txt}na - reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR6H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR6H_acc.dta" }
+ variables: {txt}sh130aa sh130ab sh130ac sh130ad sh130ae sh130af sh130ag sh130ah sh130ai sh130aj sh130ax
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130aa  {res}  1207      2   .029826    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ab  {res}  1207      1         0    0    0  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ac  {res}  1207      2   .003314    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ad  {res}  1207      2   .013256    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ae  {res}  1207      2  .5749793    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130af  {res}  1207      2  .1748136    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ag  {res}  1207      2  .0588235    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ah  {res}  1207      2  .0057995    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ai  {res}  1207      2   .061309    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130aj  {res}  1207      2  .0107705    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}sh130ax  {res}  1207      2  .1052196    0    1  {txt}reason children under 5 did not sleep under mosquito n...
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR7A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR7A_acc.dta" }
+ variables: {txt}sh127e sh128a
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127e   {res}  152      5  4.065789    1    6  {txt}reason for not hanging the net
+{txt}sh128a   {res}    0      0         .    .    .  {txt}reason why no one slept under the mosquito net last night
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR7ZFL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR7ZFL.dta" }
+ variables: {txt}sh128c sh128da sh128db sh128dc sh128dd sh128de sh128dz sh128dx sh137ac_01 sh137ac_02 sh137ac_03 sh137ac_04 sh137ac_05 sh137ac_06 sh137ac_07 sh137ac_08 sh137ac_09 sh137ac_10 sh137ac_11 sh137ac_12 sh137ac_13 sh137ac_14 sh137ac_15 sh137ac_16 sh137ac_17 sh137ac_18 sh137ac_19 sh137ac_20 sh137ac_21 sh137ac_22 sh137ac_23 sh137ac_24 sh137ac_25
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128c    {res}  2439      6  1.657237    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh128da   {res}  8380      2  .0310263    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh128db   {res}  8380      2  .0054893    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh128dc   {res}  8380      2  .0315036    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh128dd   {res}  8380      2  .0100239    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh128de   {res}  8380      2  .0081146    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh128dz   {res}  8380      2  .0015513    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh128dx   {res}  8380      2  .0140811    0    1  {txt}reasons no mosquito nets: other
+{txt}sh137ac_01{res}  1562      6  2.413572    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_02{res}  1594      6  2.765997    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_03{res}  1442      6  2.995146    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_04{res}  1350      6   3.34963    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_05{res}  1082      6  3.602588    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_06{res}   919      6  3.776931    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_07{res}   671      6  3.839046    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_08{res}   491      6  4.089613    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_09{res}   342      6  3.923977    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_10{res}   304      6  3.924342    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_11{res}   216      6  4.013889    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_12{res}   196      5  4.040816    1    6  {txt}reason nobody slept in this net
+{txt}sh137ac_13{res}   124      6  3.774194    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_14{res}   116      6  3.724138    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_15{res}    84      6      4.25    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_16{res}    73      6  4.219178    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_17{res}    47      5  4.468085    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_18{res}    45      4  4.066667    1    6  {txt}reason nobody slept in this net
+{txt}sh137ac_19{res}    39      5  4.358974    1    6  {txt}reason nobody slept in this net
+{txt}sh137ac_20{res}    35      6       4.2    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_21{res}    19      4  5.157895    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_22{res}    20      4      5.45    1    8  {txt}reason nobody slept in this net
+{txt}sh137ac_23{res}    15      3  4.733333    1    6  {txt}reason nobody slept in this net
+{txt}sh137ac_24{res}    15      4  4.866667    1    6  {txt}reason nobody slept in this net
+{txt}sh137ac_25{res}    11      3  4.818182    1    6  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR71_acc.dta" }
+ variables: {txt}sh130aa sh130ab sh130ac sh130ad sh130ae sh130af sh130ag sh130ah sh130ai sh130aj sh130ax sh131da sh131db sh131dc sh131dd sh131de sh131df sh131dg sh131dh sh131dx sh131ea sh131eb sh131ec sh131ed sh131ee sh131ef sh131eg sh131eh sh131ex
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130aa  {res}   1084      2   .054428    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ab  {res}   1084      2  .0055351    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ac  {res}   1084      2  .0332103    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ad  {res}   1084      1         0    0    0  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ae  {res}   1084      2  .4234317    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130af  {res}   1084      2  .3607011    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ag  {res}   1084      1         0    0    0  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ah  {res}   1084      1         0    0    0  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ai  {res}   1084      2  .0369004    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130aj  {res}   1084      2  .0046125    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh130ax  {res}   1084      2  .1771218    0    1  {txt}reason children under 5 did not sleep under mosquito ...
+{txt}sh131da  {res}  10324      2  .7771213    0    1  {txt}reasons prefer conical net:easier to hang
+{txt}sh131db  {res}  10324      2  .0148198    0    1  {txt}reasons prefer conical net:easier to store when not hung
+{txt}sh131dc  {res}  10324      2  .0113328    0    1  {txt}reasons prefer conical net:easier to travel with outs...
+{txt}sh131dd  {res}  10324      2  .1927547    0    1  {txt}reasons prefer conical net:better fit around sleeping...
+{txt}sh131de  {res}  10324      2  .0321581    0    1  {txt}reasons prefer conical net:taller
+{txt}sh131df  {res}  10324      2  .1096474    0    1  {txt}reasons prefer conical net:more people can sleep unde...
+{txt}sh131dg  {res}  10324      2  .1931422    0    1  {txt}reasons prefer conical net:looks nicer
+{txt}sh131dh  {res}  10324      2  .0879504    0    1  {txt}reasons prefer conical net:stronger
+{txt}sh131dx  {res}  10324      2  .0166602    0    1  {txt}reasons prefer conical net:other
+{txt}sh131ea  {res}   3944      2  .3681542    0    1  {txt}reasons prefer rectangular net:easier to hang
+{txt}sh131eb  {res}   3944      2   .015213    0    1  {txt}reasons prefer rectangular net:easier to store when n...
+{txt}sh131ec  {res}   3944      2  .0190162    0    1  {txt}reasons prefer rectangular net:easier to travel with ...
+{txt}sh131ed  {res}   3944      2  .2479716    0    1  {txt}reasons prefer rectangular net:better fit around slee...
+{txt}sh131ee  {res}   3944      2  .0167343    0    1  {txt}reasons prefer rectangular net:taller
+{txt}sh131ef  {res}   3944      2  .3458418    0    1  {txt}reasons prefer rectangular net:more people can sleep ...
+{txt}sh131eg  {res}   3944      2  .1501014    0    1  {txt}reasons prefer rectangular net:looks nicer
+{txt}sh131eh  {res}   3944      2  .1087728    0    1  {txt}reasons prefer rectangular net:stronger
+{txt}sh131ex  {res}   3944      2  .0502028    0    1  {txt}reasons prefer rectangular net:other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SLPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SLPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  3165      5  .3832543    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR6H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR6H_acc.dta" }
+ variables: {txt}sh41r
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh41r    {res}  6110     11  23.74599   11   98  {txt}Main reason why person didn't sleep under net - reason
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MRPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MRPR71_acc.dta" }
+ variables: {txt}hc35 shbrtype
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  12398      4  .3446524    0    3  {txt}reason for re-measurement
+{txt}shbrtype {res}   2673      3  1.656566    1    3  {txt}remeasure - reason
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR71_acc.dta" }
+ variables: {txt}sh506 sh510 sh514 sh604 sh606b sh606g
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh506    {res}    838     11   6.52148    1   98  {txt}main reason for hospitalization
+{txt}sh510    {res}     92      9  6.641304    1   96  {txt}main reason for hospitalization
+{txt}sh514    {res}      4      3      3.75    1    8  {txt}main reason for hospitalization
+{txt}sh604    {res}  11320     17  9.385159    1   96  {txt}main reason to seek care
+{txt}sh606b   {res}    417     13   10.7482    2   96  {txt}main reason to seek care
+{txt}sh606g   {res}     20      2      10.8    8   16  {txt}main reason to seek care
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR51FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR51FL.dta" }
+ variables: {txt}hc13 sh205
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  5908      4   .162153    0    6  {txt}reason not measured
+{txt}sh205    {res}  3975     12  28.51069   11   96  {txt}reason for child's absence from school
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR72_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR72_acc.dta" }
+ variables: {txt}sh136d
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh136d   {res}  9407      5  1.196449    1    8  {txt}main reason for disposing the net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGPR71FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGPR71FL.dta" }
+ variables: {txt}sh116b sh116d
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh116b   {res}  573      6  2.940663    1    8  {txt}reasons why household was not enumerated
+{txt}sh116d   {res}  587      4  6.236797    1    8  {txt}reasons household did not receive coupon
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR51FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR51FL.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}    0      0     .    .    .  {txt}na - reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR71_acc.dta" }
+ variables: {txt}sh122ca sh122cb sh122cc sh122cd sh122ce sh122cx sh140
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh122ca  {res}  49141      2  .0012413    0    1  {txt}reason didn't allow irs: smell
+{txt}sh122cb  {res}  49141      2  .0000814    0    1  {txt}reason didn't allow irs: dirty
+{txt}sh122cc  {res}  49141      2  .0003052    0    1  {txt}reason didn't allow irs: displace furniture
+{txt}sh122cd  {res}  49141      2  .0013838    0    1  {txt}reason didn't allow irs: makes people sick
+{txt}sh122ce  {res}  49141      2   .000061    0    1  {txt}reason didn't allow irs: contaminate crops
+{txt}sh122cx  {res}  49141      2  .0026454    0    1  {txt}reason didn't allow irs: other
+{txt}sh140    {res}   5850     11  26.06017   11   98  {txt}main reason member did not sleep under net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR61_acc.dta" }
+ variables: {txt}sh41r
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh41r    {res}  5238     11  21.90722   11   98  {txt}main reason why person didn't sleep under net - reason
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR61FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR61FL.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127df sh127dx sh136d_1 sh136d_2 sh136d_3 sh136d_4 sh136d_5 sh136d_6 sh136d_7
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  2649      6  1.285768    1    8  {txt}Reasons household members don't use mosquito net all y...
+{txt}sh127da  {res}  7902      2  .0647937    0    1  {txt}Reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  7902      2  .0373323    0    1  {txt}Reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  7902      2  .0464439    0    1  {txt}Reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  7902      2  .0304986    0    1  {txt}Reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  7902      2   .015186    0    1  {txt}Reasons no mosquito nets: don't like
+{txt}sh127df  {res}  7902      2  .0024045    0    1  {txt}Reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  7902      1         0    0    0  {txt}Reasons no mosquito nets: other
+{txt}sh136d_1 {res}  1778      6  1.681102    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_2 {res}  1595      6  1.759875    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_3 {res}  1198      6  2.084307    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_4 {res}   824      6  2.230583    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_5 {res}   577      6  2.405546    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_6 {res}   396      6   2.69697    1    8  {txt}Reason nobody slept in this net
+{txt}sh136d_7 {res}   270      6  2.692593    1    8  {txt}Reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CGPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CGPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  4954      6  .3015745    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR7Q_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR7Q_acc.dta" }
+ variables: {txt}sh129ha sh129hb sh129hc sh129hd sh129he sh129hf sh129hg sh129hh sh129hi sh129hj sh129hk sh129hl sh129hx sh129hz
+{res}
+{txt}Variable     Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh129ha  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: no mosquitos
+{txt}sh129hb  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: no malaria now
+{txt}sh129hc  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: too hot
+{txt}sh129hd  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: don't like smell
+{txt}sh129he  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: feel closed in/afraid
+{txt}sh129hf  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: net too old/torn
+{txt}sh129hg  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: net too dirty
+{txt}sh129hh  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: net not available last nig...
+{txt}sh129hi  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: usual user(s) did not slee...
+{txt}sh129hj  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: net too small
+{txt}sh129hk  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: saving net for later
+{txt}sh129hl  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: no longer kills/repels mos...
+{txt}sh129hx  {res}  25088      1     0    0    0  {txt}reason nobody slept under net:: other
+{txt}sh129hz  {res}  25088      1     0    0    0  {txt}reason nobody slept under net: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MLPR53_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MLPR53_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  13360      4  .1678892    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7ZFL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7ZFL.dta" }
+ variables: {txt}sh128c sh128da sh128db sh128dc sh128dd sh128de sh128dz sh128dx sh137ac
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128c   {res}  23513      6  1.608472    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh128da  {res}  78950      2  .0405826    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh128db  {res}  78950      2  .0039392    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh128dc  {res}  78950      2  .0216719    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh128dd  {res}  78950      2  .0082204    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh128de  {res}  78950      2  .0048005    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh128dz  {res}  78950      2  .0013553    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh128dx  {res}  78950      2  .0140215    0    1  {txt}reasons no mosquito nets: other
+{txt}sh137ac  {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/cdhr50fl.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/cdhr50fl.dta" }
+ variables: {txt}sh121aa sh121ab sh121ac sh121ad sh121ae sh121af sh121ag sh121ax hc13_01 hc13_02 hc13_03 hc13_04 hc13_05 hc13_06 hc13_07 hc13_08 hc13_09 hc13_10
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh121aa  {res}  6115      2  .7015536    0    1  {txt}reason for not using bed net : too expensive
+{txt}sh121ab  {res}  6115      2  .1816844    0    1  {txt}reason for not using bed net : no bednets for sale
+{txt}sh121ac  {res}  6115      2  .1008994    0    1  {txt}reason for not using bed net : don't know about bed nets
+{txt}sh121ad  {res}  6115      2  .0245298    0    1  {txt}reason for not using bed net : spray bedroom
+{txt}sh121ae  {res}  6115      2  .0147179    0    1  {txt}reason for not using bed net : uncomfortable, too hot
+{txt}sh121af  {res}  6115      2  .0578904    0    1  {txt}reason for not using bed net : no mosquitoes in vicinity
+{txt}sh121ag  {res}  6115      2  .0047424    0    1  {txt}reason for not using bed net : gave net to others
+{txt}sh121ax  {res}  6115      2  .0487326    0    1  {txt}reason for not using bed net : other
+{txt}hc13_01  {res}  2626      4  .1610815    0    6  {txt}reason not measured
+{txt}hc13_02  {res}  1363      4  .2054292    0    6  {txt}reason not measured
+{txt}hc13_03  {res}   300      4  .3133333    0    6  {txt}reason not measured
+{txt}hc13_04  {res}    68      3  .4264706    0    4  {txt}reason not measured
+{txt}hc13_05  {res}    14      3  .8571429    0    6  {txt}reason not measured
+{txt}hc13_06  {res}     7      2  .4285714    0    3  {txt}reason not measured
+{txt}hc13_07  {res}     4      2       .75    0    3  {txt}reason not measured
+{txt}hc13_08  {res}     2      2       1.5    0    3  {txt}reason not measured
+{txt}hc13_09  {res}     2      2       1.5    0    3  {txt}reason not measured
+{txt}hc13_10  {res}     1      1         0    0    0  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR52_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR52_acc.dta" }
+ variables: {txt}sh33 hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh33     {res}  2223      7  4.677013    1    9  {txt}reason not registered
+{txt}hc13     {res}  6165      5  .1961071    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STHR50FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STHR50FL.dta" }
+ variables: {txt}sh128a hc13_01 hc13_02 hc13_03 hc13_04 hc13_05 hc13_06 hc13_07 hc13_08 hc13_09 hc13_10 hc13_11 hc13_12 hc13_13 hc13_14 hc13_15 hc13_16 hc13_17
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128a   {res}  1159      8  15.93356    1   99  {txt}reason for not having a mosquito net
+{txt}hc13_01  {res}  1561      5  .5797566    0    9  {txt}reason not measured
+{txt}hc13_02  {res}   490      5  .6918367    0    9  {txt}reason not measured
+{txt}hc13_03  {res}    60      4        .4    0    9  {txt}reason not measured
+{txt}hc13_04  {res}     3      2         1    0    3  {txt}reason not measured
+{txt}hc13_05  {res}     1      1         0    0    0  {txt}reason not measured
+{txt}hc13_06  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_07  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_08  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_09  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_10  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_11  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_12  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_13  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_14  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_15  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_16  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_17  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SZPR52_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SZPR52_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique     Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  3119      5  .332799    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BUPR6H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BUPR6H_acc.dta" }
+ variables: {txt}sh130ca sh130cb sh130cc sh130cd sh130ce sh130cx sh130cz
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130ca  {res}  23319      3  .4988636    0    9  {txt}reason not using nets: cleaning
+{txt}sh130cb  {res}  23319      3  .5045671    0    9  {txt}reason not using nets: curtain
+{txt}sh130cc  {res}  23319      3  .5092843    0    9  {txt}reason not using nets: crop protection
+{txt}sh130cd  {res}  23319      3  .4946181    0    9  {txt}reason not using nets: fishing
+{txt}sh130ce  {res}  23319      3  .5733951    0    9  {txt}reason not using nets: future use
+{txt}sh130cx  {res}  23319      3  .5564132    0    9  {txt}reason not using nets: other
+{txt}sh130cz  {res}  23319      3  .4945324    0    9  {txt}reason not using nets: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR6A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR6A_acc.dta" }
+ variables: {txt}sh305 sh206 sh210 sh214
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh305    {res}  17685     12  7.487193    1   99  {txt}Main reason for seeking care most recent time
+{txt}sh206    {res}   2404      5  4.122712    1   99  {txt}Main reason for seeking care most recent time
+{txt}sh210    {res}    117      5  6.230769    1   99  {txt}Main reason for seeking care next-to-last time
+{txt}sh214    {res}     20      5      7.25    1   99  {txt}Main reason for seeking care second-to-last time
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR7A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR7A_acc.dta" }
+ variables: {txt}hc35
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  3225      4  .4434109    0    3  {txt}reason for re-measurement
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LSHR41FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LSHR41FL.dta" }
+ variables: {txt}hc13_1 hc13_2 hc13_3 hc13_4 hc13_5
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_1   {res}  1560      4       .25    0    6  {txt}reason not measured
+{txt}hc13_2   {res}   439      4  .2323462    0    6  {txt}reason not measured
+{txt}hc13_3   {res}    66      3  .1666667    0    4  {txt}reason not measured
+{txt}hc13_4   {res}     4      2       .75    0    3  {txt}reason not measured
+{txt}hc13_5   {res}     3      2         1    0    3  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOHR71FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOHR71FL.dta" }
+ variables: {txt}sh55 sh68_01 sh68_02 sh68_03 sh68_04 sh68_05 sh68_06 sh68_07 sh68_08 sh68_09 sh68_10 sh68_11 sh68_12 sh68_13
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh55     {res}   13      6  53.84615    1   96  {txt}reason for absence of work
+{txt}sh68_01  {res}  385     13  25.21818    1   98  {txt}reason for absence of work
+{txt}sh68_02  {res}  212     14  26.50472    1   98  {txt}reason for absence of work
+{txt}sh68_03  {res}   36     10      36.5    1   98  {txt}reason for absence of work
+{txt}sh68_04  {res}    9      6  15.77778    1   98  {txt}reason for absence of work
+{txt}sh68_05  {res}    7      6  31.85714    1   98  {txt}reason for absence of work
+{txt}sh68_06  {res}    2      1         4    4    4  {txt}reason for absence of work
+{txt}sh68_07  {res}    1      1         7    7    7  {txt}reason for absence of work
+{txt}sh68_08  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}sh68_09  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}sh68_10  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}sh68_11  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}sh68_12  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}sh68_13  {res}    0      0         .    .    .  {txt}reason for absence of work
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR61_acc.dta" }
+ variables: {txt}sh121a sh121b sh121c sh121d sh121e sh121f sh121x
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh121a   {res}  8498      3  .0550718    0    9  {txt}reason for no mosquito nets in household: no mosquitoes
+{txt}sh121b   {res}  8498      3  .7795952    0    9  {txt}reason for no mosquito nets in household: not available
+{txt}sh121c   {res}  8498      3  .0960226    0    9  {txt}reason for no mosquito nets in household: don't like t...
+{txt}sh121d   {res}  8498      3  .0594257    0    9  {txt}reason for no mosquito nets in household: too expensive
+{txt}sh121e   {res}  8498      3  .0857849    0    9  {txt}reason for no mosquito nets in househld: absent for / ...
+{txt}sh121f   {res}  8498      3  .1373264    0    9  {txt}reason for no mosquito nets in household: net spoiled
+{txt}sh121x   {res}  8498      3  .0941398    0    9  {txt}reason for no mosquito nets in household: other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CMHR44FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CMHR44FL.dta" }
+ variables: {txt}hc13_01 hc13_02 hc13_03 hc13_04 hc13_05 hc13_06 hc13_07 hc13_08 hc13_09 hc13_10 hc13_11 hc13_12 hc13_13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_01  {res}  2535      5  .2205128    0    6  {txt}reason not measured
+{txt}hc13_02  {res}  1193      5  .2137469    0    6  {txt}reason not measured
+{txt}hc13_03  {res}   349      5   .252149    0    6  {txt}reason not measured
+{txt}hc13_04  {res}   111      3  .1441441    0    4  {txt}reason not measured
+{txt}hc13_05  {res}    35      2  .2285714    0    4  {txt}reason not measured
+{txt}hc13_06  {res}    12      2       .25    0    3  {txt}reason not measured
+{txt}hc13_07  {res}     6      1         0    0    0  {txt}reason not measured
+{txt}hc13_08  {res}     2      1         0    0    0  {txt}reason not measured
+{txt}hc13_09  {res}     1      1         6    6    6  {txt}reason not measured
+{txt}hc13_10  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_11  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_12  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_13  {res}     0      0         .    .    .  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR70_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR70_acc.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  14715      6  1.457356    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  40723      2  .0615131    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  40723      2  .0044938    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  40723      2  .0344032    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  40723      2  .0039535    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  40723      2  .0045183    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  40723      2   .001768    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  40723      2  .0208973    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c   {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR53_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR53_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  26324      4  .1402143    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR61_acc.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127df sh127dx sh136d
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  26741      6  1.276803    1    8  {txt}Reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  77269      2  .0610594    0    1  {txt}Reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  77269      2  .0363276    0    1  {txt}Reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  77269      2  .0437174    0    1  {txt}Reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  77269      2  .0293261    0    1  {txt}Reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  77269      2  .0137442    0    1  {txt}Reasons no mosquito nets: don't like
+{txt}sh127df  {res}  77269      2  .0021225    0    1  {txt}Reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  77269      1         0    0    0  {txt}Reasons no mosquito nets: other
+{txt}sh136d   {res}      0      0         .    .    .  {txt}Reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR70_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR70_acc.dta" }
+ variables: {txt}sh119aa sh119ab sh119ac sh119ad sh119ae sh119af sh119ag sh119ax sh130d sh128aa sh128ab sh128ac sh128ad sh128ae sh128af sh128ag sh128ah sh128ai sh128aj sh128ak sh128al sh128am sh128an sh128ax sh128az
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh119aa  {res}  7508      2    .01252    0    1  {txt}reason for no mosquito nets in household: no mosquitoes
+{txt}sh119ab  {res}  7508      2   .170618    0    1  {txt}reason for no mosquito nets in household: not available
+{txt}sh119ac  {res}  7508      2   .052211    0    1  {txt}reason for no mosquito nets in household: don't like t...
+{txt}sh119ad  {res}  7508      2  .0427544    0    1  {txt}reason for no mosquito nets in household: too expensive
+{txt}sh119ae  {res}  7508      2  .4356686    0    1  {txt}reason for no mosquito nets in househld:  did not receive
+{txt}sh119af  {res}  7508      2  .3789291    0    1  {txt}reason for no mosquito nets in household: spoiled
+{txt}sh119ag  {res}  7508      2   .005594    0    1  {txt}reason for no mosquito nets in household: have window ...
+{txt}sh119ax  {res}  7508      2  .0267714    0    1  {txt}reason for no mosquito nets in household: other
+{txt}sh130d   {res}  8041      9  13.10148   11   96  {txt}main reason the mosquito net was disposed
+{txt}sh128aa  {res}     0      0         .    .    .  {txt}reason net was not used: too hot/difficult to breathe
+{txt}sh128ab  {res}     0      0         .    .    .  {txt}reason net was not used: size of the bed
+{txt}sh128ac  {res}     0      0         .    .    .  {txt}reason net was not used: not hung up/stored away
+{txt}sh128ad  {res}     0      0         .    .    .  {txt}reason net was not used: net not in good condition
+{txt}sh128ae  {res}     0      0         .    .    .  {txt}reason net was not used: material is too hard/rough
+{txt}sh128af  {res}     0      0         .    .    .  {txt}reason net was not used: child does not like
+{txt}sh128ag  {res}     0      0         .    .    .  {txt}reason net was not used: skin irritation/itching
+{txt}sh128ah  {res}     0      0         .    .    .  {txt}reason net was not used: bad for health
+{txt}sh128ai  {res}     0      0         .    .    .  {txt}reason net was not used: superstition/witchcraft
+{txt}sh128aj  {res}     0      0         .    .    .  {txt}reason net was not used: too weak to hang
+{txt}sh128ak  {res}     0      0         .    .    .  {txt}reason net was not used: chemical smell/toxic
+{txt}sh128al  {res}     0      0         .    .    .  {txt}reason net was not used: saving for later
+{txt}sh128am  {res}     0      0         .    .    .  {txt}reason net was not used: no mosquitos
+{txt}sh128an  {res}     0      0         .    .    .  {txt}reason net was not used: usual user(s) did not sleep here
+{txt}sh128ax  {res}     0      0         .    .    .  {txt}reason net was not used: other reason
+{txt}sh128az  {res}     0      0         .    .    .  {txt}reason net was not used: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NIPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NIPR61_acc.dta" }
+ variables: {txt}sh17c sh20a
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh17c    {res}  3001     17  16.97501    1   99  {txt}Reason for not going to school
+{txt}sh20a    {res}  3753      7  3.855582    1    9  {txt}Reason did not declare birth
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBHR51FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBHR51FL.dta" }
+ variables: {txt}hc13_1 hc13_2 hc13_3 hc13_4 hc13_5 hc13_6 hc13_7 hc13_8 hc13_9 sh205_01 sh205_02 sh205_03 sh205_04 sh205_05 sh205_06 sh205_07 sh205_08 sh205_09 sh205_10 sh205_11
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_1   {res}  3766      4  .1468401    0    6  {txt}reason not measured
+{txt}hc13_2   {res}  1624      4  .1687192    0    6  {txt}reason not measured
+{txt}hc13_3   {res}   394      4   .215736    0    6  {txt}reason not measured
+{txt}hc13_4   {res}    88      3  .4090909    0    6  {txt}reason not measured
+{txt}hc13_5   {res}    25      2       .16    0    4  {txt}reason not measured
+{txt}hc13_6   {res}     7      2  .8571429    0    6  {txt}reason not measured
+{txt}hc13_7   {res}     4      1         0    0    0  {txt}reason not measured
+{txt}hc13_8   {res}     0      0         .    .    .  {txt}reason not measured
+{txt}hc13_9   {res}     0      0         .    .    .  {txt}reason not measured
+{txt}sh205_01 {res}  1834     11  28.44984   11   96  {txt}reason for child's absence from school
+{txt}sh205_02 {res}  1143     12  28.79353   11   96  {txt}reason for child's absence from school
+{txt}sh205_03 {res}   614     11  27.84853   12   96  {txt}reason for child's absence from school
+{txt}sh205_04 {res}   257     10  28.42802   12   96  {txt}reason for child's absence from school
+{txt}sh205_05 {res}    94      9  28.89362   12   96  {txt}reason for child's absence from school
+{txt}sh205_06 {res}    23      7  33.91304   12   96  {txt}reason for child's absence from school
+{txt}sh205_07 {res}     9      4  36.55556   12   96  {txt}reason for child's absence from school
+{txt}sh205_08 {res}     1      1        12   12   12  {txt}reason for child's absence from school
+{txt}sh205_09 {res}     0      0         .    .    .  {txt}reason for child's absence from school
+{txt}sh205_10 {res}     0      0         .    .    .  {txt}reason for child's absence from school
+{txt}sh205_11 {res}     0      0         .    .    .  {txt}reason for child's absence from school
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR81_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR81_acc.dta" }
+ variables: {txt}sh130
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh130    {res}    0      0     .    .    .  {txt}main reason bed net not used
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGHR71FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGHR71FL.dta" }
+ variables: {txt}sh116b sh116d
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh116b   {res}  227      6  3.004405    1    8  {txt}reasons why household was not enumerated
+{txt}sh116d   {res}  242      4  6.231405    1    8  {txt}reasons household did not receive coupon
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7H_acc.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  14877      6  1.396989    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  41902      2  .0510238    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  41902      2  .0069209    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  41902      2  .0412629    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  41902      2  .0037946    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  41902      2  .0010023    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  41902      2  .0015512    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  41902      1         0    0    0  {txt}reasons no mosquito nets: other
+{txt}sh135c   {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TGPR71_acc.dta" }
+ variables: {txt}sh116b sh116d
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh116b   {res}  573      6  2.940663    1    8  {txt}reasons why household was not enumerated
+{txt}sh116d   {res}  587      4  6.236797    1    8  {txt}reasons household did not receive coupon
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/ZWPR52_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/ZWPR52_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  5837      4  .3049512    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR7I_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR7I_acc.dta" }
+ variables: {txt}sh128aa sh128ab sh128ac sh128ad sh128ae sh128af sh128ag sh128ah sh128ai sh128aj sh128ak sh128ax sh128az
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128aa  {res}    0      0     .    .    .  {txt}reason net was not used: too hot
+{txt}sh128ab  {res}    0      0     .    .    .  {txt}reason net was not used: don't like smell
+{txt}sh128ac  {res}    0      0     .    .    .  {txt}reason net was not used: no mosquitos
+{txt}sh128ad  {res}    0      0     .    .    .  {txt}reason net was not used: net too old/many holes
+{txt}sh128ae  {res}    0      0     .    .    .  {txt}reason net was not used: unable to hang
+{txt}sh128af  {res}    0      0     .    .    .  {txt}reason net was not used: no place to hang
+{txt}sh128ag  {res}    0      0     .    .    .  {txt}reason net was not used: chemicals in net not safe
+{txt}sh128ah  {res}    0      0     .    .    .  {txt}reason net was not used: saving for rainy season
+{txt}sh128ai  {res}    0      0     .    .    .  {txt}reason net was not used: saving to replace other net
+{txt}sh128aj  {res}    0      0     .    .    .  {txt}reason net was not used: material too hard/rough
+{txt}sh128ak  {res}    0      0     .    .    .  {txt}reason net was not used: usual user didn't sleep here
+{txt}sh128ax  {res}    0      0     .    .    .  {txt}reason net was not used: other reason
+{txt}sh128az  {res}    0      0     .    .    .  {txt}reason net was not used: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/PGPR70_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/PGPR70_acc.dta" }
+ variables: {txt}sh19aa
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh19aa   {res}  6383     14  24.52875    0   96  {txt}main reason for not attending school
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR7A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR7A_acc.dta" }
+ variables: {txt}hc35 sh136a
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  12867      4  .5699075    0    3  {txt}reason for re-measurement
+{txt}sh136a   {res}      0      0         .    .    .  {txt}reason not sleeping inside the net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MZPR7A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MZPR7A_acc.dta" }
+ variables: {txt}sh116ca sh116cb sh116cc sh116cd sh116ce sh116cf sh116cg sh116ch sh116ci sh116cx sh116cz sh130aa sh130ab sh130ac sh130ad sh130ax sh130la sh130lb sh130lc sh130ld sh130le sh130lf sh130lg sh130lx sh128a
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh116ca  {res}  1715      2        .6    0    1  {txt}reason house was not sprayed: no one at home
+{txt}sh116cb  {res}  1715      2  .0215743    0    1  {txt}reason house was not sprayed: difficult to prepare
+{txt}sh116cc  {res}  1715      2  .1381924    0    1  {txt}reason house was not sprayed: team did not come
+{txt}sh116cd  {res}  1715      2  .0075802    0    1  {txt}reason house was not sprayed: the house was full
+{txt}sh116ce  {res}  1715      2  .0052478    0    1  {txt}reason house was not sprayed: indoor residual spraying...
+{txt}sh116cf  {res}  1715      2  .0338192    0    1  {txt}reason house was not sprayed: afraid of chemicals
+{txt}sh116cg  {res}  1715      2  .0081633    0    1  {txt}reason house was not sprayed: indoor residual spraying...
+{txt}sh116ch  {res}  1715      2  .0314869    0    1  {txt}reason house was not sprayed: indoor residual spraying...
+{txt}sh116ci  {res}  1715      2  .0507289    0    1  {txt}reason house was not sprayed: baby or sick person at home
+{txt}sh116cx  {res}  1715      2  .1113703    0    1  {txt}reason house was not sprayed: other
+{txt}sh116cz  {res}  1715      2  .0087464    0    1  {txt}reason house was not sprayed: don't know
+{txt}sh130aa  {res}  2730      2  .8798535    0    1  {txt}reason household does not have mosquito net: no net av...
+{txt}sh130ab  {res}  2730      2  .0575092    0    1  {txt}reason household does not have mosquito net: does not ...
+{txt}sh130ac  {res}  2730      2  .0311355    0    1  {txt}reason household does not have mosquito net: it is too...
+{txt}sh130ad  {res}  2730      2  .0208791    0    1  {txt}reason household does not have mosquito net: there are...
+{txt}sh130ax  {res}  2730      2  .0274725    0    1  {txt}reason household does not have mosquito net: other
+{txt}sh130la  {res}  1691      2  .1466588    0    1  {txt}reason did not seek advice or treatment: not available
+{txt}sh130lb  {res}  1691      2  .0325251    0    1  {txt}reason did not seek advice or treatment: it is too exp...
+{txt}sh130lc  {res}  1691      2  .3317564    0    1  {txt}reason did not seek advice or treatment: it is very far
+{txt}sh130ld  {res}  1691      2  .0697812    0    1  {txt}reason did not seek advice or treatment: there is no t...
+{txt}sh130le  {res}  1691      2  .0266115    0    1  {txt}reason did not seek advice or treatment: had a lot of ...
+{txt}sh130lf  {res}  1691      2  .2950917    0    1  {txt}reason did not seek advice or treatment: fever was not...
+{txt}sh130lg  {res}  1691      2  .0011827    0    1  {txt}reason did not seek advice or treatment: did not have ...
+{txt}sh130lx  {res}  1691      2  .1407451    0    1  {txt}reason did not seek advice or treatment: other
+{txt}sh128a   {res}     0      0         .    .    .  {txt}reason no one slept under net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR61_acc.dta" }
+ variables: {txt}sh26a sh26b sh26c sh26d sh26x sh37
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh26a    {res}  30537      3  .1170711    0    9  {txt}reason hh doesn't have a mosquito net: no mosquitoes
+{txt}sh26b    {res}  30537      3  .3622163    0    9  {txt}reason hh doesn't have a mosquito net: not available
+{txt}sh26c    {res}  30537      3  .1391427    0    9  {txt}reason hh doesn't have a mosquito net: don't like to ...
+{txt}sh26d    {res}  30537      3  .2549694    0    9  {txt}reason hh doesn't have a mosquito net: too expensive
+{txt}sh26x    {res}  30537      3  .0941481    0    9  {txt}reason hh doesn't have a mosquito net: other
+{txt}sh37     {res}      0      0         .    .    .  {txt}reason no one slept under the net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NGPR71_acc.dta" }
+ variables: {txt}sh122a sh122b sh122c sh122d sh122x sh124a sh124b sh124c sh124d sh124e sh124f sh124g sh124x sh136
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh122a   {res}  38442      2  .0125124    0    1  {txt}reason household doesn't have mosquito nets: no mosqu...
+{txt}sh122b   {res}  38442      2  .1809219    0    1  {txt}reason household doesn't have mosquito nets: not avai...
+{txt}sh122c   {res}  38442      2  .0227355    0    1  {txt}reason household doesn't have mosquito nets: don't li...
+{txt}sh122d   {res}  38442      2  .0189896    0    1  {txt}reason household doesn't have mosquito nets: too expe...
+{txt}sh122x   {res}  38442      2  .0153218    0    1  {txt}reason household doesn't have mosquito nets: other
+{txt}sh124a   {res}  38442      3  .0115499    0    8  {txt}reason no longer have net: no mosquitos
+{txt}sh124b   {res}  38442      3  .0363665    0    8  {txt}reason no longer have net: not available
+{txt}sh124c   {res}  38442      3  .0191457    0    8  {txt}reason no longer have net: don't like to use nets
+{txt}sh124d   {res}  38442      3  .0106914    0    8  {txt}reason no longer have net: too expensive
+{txt}sh124e   {res}  38442      3  .0524687    0    8  {txt}reason no longer have net: net was old
+{txt}sh124f   {res}  38442      3  .0277041    0    8  {txt}reason no longer have net: threw away net
+{txt}sh124g   {res}  38442      3  .0108475    0    8  {txt}reason no longer have net: have window nets
+{txt}sh124x   {res}  38442      3  .0143593    0    8  {txt}reason no longer have net: other
+{txt}sh136    {res}      0      0         .    .    .  {txt}reason nobody slept under net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MDPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  6528      5  .1568627    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR4B_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GHPR4B_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  3928      5  .3836558    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CDPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/CDPR61_acc.dta" }
+ variables: {txt}sh206 sh210 sh214 sh226 sh230 sh234
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh206    {res}  3630      6   3.39697    1    6  {txt}main reason for hospitalization
+{txt}sh210    {res}   276      6   3.48913    1    6  {txt}main reason for hospitalization
+{txt}sh214    {res}    26      4  4.038462    3    6  {txt}main reason for hospitalization
+{txt}sh226    {res}  6769     12  7.398877    1   98  {txt}main reason to seek care
+{txt}sh230    {res}   444     10  8.734234    2   96  {txt}main reason to seek care
+{txt}sh234    {res}    41      9  23.31707    2   96  {txt}main reason to seek care
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/PKPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/PKPR71_acc.dta" }
+ variables: {txt}sh19a sh24
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh19a    {res}   8823     13  15.99671    1   98  {txt}reasons for not attending school
+{txt}sh24     {res}  11733      8  2.759823    1    8  {txt}primary reason to move to this village/city
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GMPR81_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GMPR81_acc.dta" }
+ variables: {txt}hc35
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  4563      4  .2081964    0    3  {txt}reason for re-measurement
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7Q_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7Q_acc.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  11519      6  1.512892    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  41632      2  .0291362    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  41632      2  .0086472    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  41632      2  .0232513    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  41632      2  .0050922    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  41632      2  .0013932    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  41632      2  .0002642    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  41632      2  .0098242    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c   {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR7QFL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR7QFL.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c_01 sh135c_02 sh135c_03 sh135c_04 sh135c_05 sh135c_06 sh135c_07 sh135c_08 sh135c_09 sh135c_10 sh135c_11 sh135c_12 sh135c_13 sh135c_14 sh135c_15 sh135c_16 sh135c_17 sh135c_18 sh135c_19 sh135c_20 sh135c_21 sh135c_22 sh135c_23 sh135c_24 sh135c_25
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  1194      6  1.547739    1    8  {txt}reasons household members don't use mosquito net all y...
+{txt}sh127da  {res}  4437      2  .0259184    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  4437      2   .010142    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  4437      2  .0338066    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  4437      2  .0078882    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  4437      2  .0031553    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  4437      2  .0006761    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  4437      2  .0105927    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c_01{res}   835      6  2.748503    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_02{res}   896      6  3.296875    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_03{res}   813      6  3.503075    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_04{res}   816      6  3.901961    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_05{res}   732      6  4.202186    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_06{res}   630      6  4.222222    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_07{res}   511      6  4.344423    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_08{res}   426      6  4.415493    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_09{res}   322      6  4.409938    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_10{res}   288      6     4.375    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_11{res}   210      6  4.428571    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_12{res}   179      5  4.458101    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_13{res}   125      5     4.496    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_14{res}   110      6       4.6    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_15{res}    83      6  4.445783    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_16{res}    78      6  4.564103    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_17{res}    50      4      4.08    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_18{res}    42      4  4.071429    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_19{res}    31      4  4.032258    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_20{res}    30      4       4.1    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_21{res}    21      4  3.904762    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_22{res}    20      4      3.75    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_23{res}    16      4      3.75    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_24{res}    13      4  3.615385    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_25{res}    10      3       3.6    1    6  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR6D_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR6D_acc.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  16913      6  1.277479    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  41593      2  .0376265    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  41593      2   .007381    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  41593      2   .042435    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  41593      2  .0104585    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  41593      2  .0050249    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  41593      2   .001683    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  41593      2  .0165653    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c   {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR80_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR80_acc.dta" }
+ variables: {txt}sh128c sh128da sh128db sh128dc sh128dd sh128de sh128dz sh128dx sh137ac
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128c   {res}  12694      6  1.955176    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh128da  {res}  43564      2  .0386328    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh128db  {res}  43564      2  .0032596    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh128dc  {res}  43564      2  .0361767    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh128dd  {res}  43564      2  .0085162    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh128de  {res}  43564      2   .004568    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh128dz  {res}  43564      2  .0009641    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh128dx  {res}  43564      2  .0125792    0    1  {txt}reasons no mosquito nets: other
+{txt}sh137ac  {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SLPR7A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SLPR7A_acc.dta" }
+ variables: {txt}hc35
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  5618      4  .4220363    0    3  {txt}reason for re-measurement
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR8A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR8A_acc.dta" }
+ variables: {txt}sh128c sh128da sh128db sh128dc sh128dd sh128de sh128dz sh128dx sh137ac
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128c   {res}  10419      6  1.569248    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh128da  {res}  41050      2  .0454811    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh128db  {res}  41050      2  .0032643    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh128dc  {res}  41050      2   .041827    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh128dd  {res}  41050      2  .0035079    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh128de  {res}  41050      2  .0033861    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh128dz  {res}  41050      2  .0009501    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh128dx  {res}  41050      2    .01257    0    1  {txt}reasons no mosquito nets: other
+{txt}sh137ac  {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR7H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR7H_acc.dta" }
+ variables: {txt}sh305 sh206 sh210 sh214 sh137aa sh137ab sh137ac sh137ad sh137ae sh137af sh137ag sh137ah sh137ai sh137aj sh137ak sh137al sh137ax sh137az
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh305    {res}  26632     11  16.14524    1   98  {txt}main reason for seeking care most recent time
+{txt}sh206    {res}   1864      4  2.340129    1    6  {txt}main reason for seeking care most recent time
+{txt}sh210    {res}    129      4  2.682171    1    6  {txt}main reason for seeking care next-to-last time
+{txt}sh214    {res}     15      3  2.666667    1    6  {txt}main reason for seeking care second-to-last time
+{txt}sh137aa  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: no mosquitos
+{txt}sh137ab  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: no malaria now
+{txt}sh137ac  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: too hot
+{txt}sh137ad  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: don't like s...
+{txt}sh137ae  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: feel closed ...
+{txt}sh137af  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: net too old/...
+{txt}sh137ag  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: net too dirty
+{txt}sh137ah  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: net not avai...
+{txt}sh137ai  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: usual sleepe...
+{txt}sh137aj  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: net too small
+{txt}sh137ak  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: saving net f...
+{txt}sh137al  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: no longer ki...
+{txt}sh137ax  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: other
+{txt}sh137az  {res}      0      0         .    .    .  {txt}reason not slept under the mosquito net: don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR7H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KEPR7H_acc.dta" }
+ variables: {txt}sh128p sh128r sh128y sh126a1 sh126a2 sh126a3 sh126a4 sh126a5 sh126a6 sh126a7 sh127cc1 sh127cc2 sh127cc3 sh127cc4 sh127cc5
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128p   {res}  496      4  2.985887    1    6  {txt}the reason household was not registered
+{txt}sh128r   {res}  660      4  4.583333    1    6  {txt}reason not going to a distribution point
+{txt}sh128y   {res}  144      4  3.430556    1    8  {txt}reason not receiving nets at a distribution point
+{txt}sh126a1  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: net never used
+{txt}sh126a2  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: excess nets
+{txt}sh126a3  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: too hot
+{txt}sh126a4  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: no mosquitos
+{txt}sh126a5  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: net was being wa...
+{txt}sh126a6  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: person normally ...
+{txt}sh126a7  {res}    0      0         .    .    .  {txt}reason for not sleeping under the net: other
+{txt}sh127cc1 {res}  552      2  .0054348    0    1  {txt}reason net not hanging for sleeping: shape difficult to...
+{txt}sh127cc2 {res}  552      2  .0072464    0    1  {txt}reason net not hanging for sleeping: too short to give ...
+{txt}sh127cc3 {res}  552      2  .4945652    0    1  {txt}reason net not hanging for sleeping: no space to hang net
+{txt}sh127cc4 {res}  552      2  .0054348    0    1  {txt}reason net not hanging for sleeping: person normally us...
+{txt}sh127cc5 {res}  552      2  .4945652    0    1  {txt}reason net not hanging for sleeping: other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BFHR43FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BFHR43FL.dta" }
+ variables: {txt}hc13_01 hc13_02 hc13_03 hc13_04 hc13_05 hc13_06 hc13_07 hc13_08 hc13_09 hc13_10
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_01  {res}  5724      5  .2327044    0    6  {txt}reason not measured
+{txt}hc13_02  {res}  2765      5   .236528    0    6  {txt}reason not measured
+{txt}hc13_03  {res}   962      5  .2920998    0    6  {txt}reason not measured
+{txt}hc13_04  {res}   369      4  .3794038    0    6  {txt}reason not measured
+{txt}hc13_05  {res}   149      4  .5302013    0    6  {txt}reason not measured
+{txt}hc13_06  {res}    59      3  .2372881    0    4  {txt}reason not measured
+{txt}hc13_07  {res}    26      2  .1538462    0    4  {txt}reason not measured
+{txt}hc13_08  {res}    13      3  1.615385    0    6  {txt}reason not measured
+{txt}hc13_09  {res}     5      1         0    0    0  {txt}reason not measured
+{txt}hc13_10  {res}     4      1         0    0    0  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR52_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR52_acc.dta" }
+ variables: {txt}sh26ac hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh26ac   {res}  1897     13  36.12968   10   99  {txt}main reason absent
+{txt}hc13     {res}  2986      5  .3600134    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTPR42FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTPR42FL.dta" }
+ variables: {txt}sh29ha sh29hb sh29hc sh29hd sh29he sh29hx sh29ia sh29ib sh29ic sh29id sh29ie sh29if sh29ig sh29ih sh29ii sh29ij sh29ix hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh29ha   {res}  47361      2  .0229936    0    1  {txt}reason prefer establishment
+{txt}sh29hb   {res}  47361      2  .0840776    0    1  {txt}reason prefer establishment
+{txt}sh29hc   {res}  47361      2  .0720635    0    1  {txt}reason prefer establishment
+{txt}sh29hd   {res}  47361      2  .0054686    0    1  {txt}reason prefer establishment
+{txt}sh29he   {res}  47361      2  .0149912    0    1  {txt}reason prefer establishment
+{txt}sh29hx   {res}  47361      2  .0023437    0    1  {txt}reason prefer establishment
+{txt}sh29ia   {res}  47361      2  .0075378    0    1  {txt}reason not treated
+{txt}sh29ib   {res}  47361      2  .0044551    0    1  {txt}reason not trested
+{txt}sh29ic   {res}  47361      2  .0203965    0    1  {txt}reason not treated
+{txt}sh29id   {res}  47361      2  .0002534    0    1  {txt}reason not treated
+{txt}sh29ie   {res}  47361      2  .0012669    0    1  {txt}reason not treated
+{txt}sh29if   {res}  47361      2  .0002956    0    1  {txt}reason not treated
+{txt}sh29ig   {res}  47361      2  .0045185    0    1  {txt}reason not treated
+{txt}sh29ih   {res}  47361      2  .0005912    0    1  {txt}reason not treated
+{txt}sh29ii   {res}  47361      2  .0111695    0    1  {txt}reason not treated
+{txt}sh29ij   {res}  47361      2  .0004012    0    1  {txt}reason not treated
+{txt}sh29ix   {res}  47361      2  .0010979    0    1  {txt}reason not treated
+{txt}hc13     {res}   6689      4  .0746001    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR6A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/TZPR6A_acc.dta" }
+ variables: {txt}sh135a sh135b sh135c sh135d sh135e sh135f sh135g sh135h sh135i sh135j sh135k sh135l sh135x sh135z
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh135a   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: No mosquitoes
+{txt}sh135b   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: No malaria now
+{txt}sh135c   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Too hot
+{txt}sh135d   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Don't like smell
+{txt}sh135e   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Feel closed in / af...
+{txt}sh135f   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Net too old / torn
+{txt}sh135g   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Net too dirty
+{txt}sh135h   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Not available last ...
+{txt}sh135i   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Usual user(s) didn'...
+{txt}sh135j   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Net too small
+{txt}sh135k   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Saving net for later
+{txt}sh135l   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: No longer kills/rep...
+{txt}sh135x   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Other
+{txt}sh135z   {res}    0      0     .    .    .  {txt}Reason no one slept under mosquito net: Don't know
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KHHR42FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KHHR42FL.dta" }
+ variables: {txt}hc13_1 hc13_2 hc13_3 hc13_4
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_1   {res}  2885      4  .0870017    0    6  {txt}reason not measured
+{txt}hc13_2   {res}   982      4  .0590631    0    6  {txt}reason not measured
+{txt}hc13_3   {res}    89      2  .1011236    0    3  {txt}reason not measured
+{txt}hc13_4   {res}     5      2        .6    0    3  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/gnhr52fl.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/gnhr52fl.dta" }
+ variables: {txt}hc13_1 hc13_2 hc13_3 hc13_4 hc13_5 hc13_6 hc13_7 hc13_8
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_1   {res}  1902      4  .1619348    0    6  {txt}reason not measured
+{txt}hc13_2   {res}   892      4  .1334081    0    6  {txt}reason not measured
+{txt}hc13_3   {res}   261      4  .1455939    0    6  {txt}reason not measured
+{txt}hc13_4   {res}    76      3  .1315789    0    4  {txt}reason not measured
+{txt}hc13_5   {res}    23      2  .1304348    0    3  {txt}reason not measured
+{txt}hc13_6   {res}     7      1         0    0    0  {txt}reason not measured
+{txt}hc13_7   {res}     4      1         0    0    0  {txt}reason not measured
+{txt}hc13_8   {res}     0      0         .    .    .  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/nmhr51fl.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/nmhr51fl.dta" }
+ variables: {txt}sh141 hc13_1 hc13_2 hc13_3 hc13_4 hc13_5 hc13_6 hc13_7
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh141    {res}  7313      7  5.836045    1    8  {txt}reason house has not been sprayed
+{txt}hc13_1   {res}  3778      4  .1352567    0    6  {txt}reason not measured
+{txt}hc13_2   {res}  1340      4  .1425373    0    6  {txt}reason not measured
+{txt}hc13_3   {res}   378      4  .1216931    0    6  {txt}reason not measured
+{txt}hc13_4   {res}    96      3  .0729167    0    4  {txt}reason not measured
+{txt}hc13_5   {res}    29      3  .3103448    0    6  {txt}reason not measured
+{txt}hc13_6   {res}     8      2      .375    0    3  {txt}reason not measured
+{txt}hc13_7   {res}     1      1         0    0    0  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTPR70_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTPR70_acc.dta" }
+ variables: {txt}sh171a sh171b sh171c sh171d sh171e sh171x sh172a sh172b sh172c sh172d sh172e sh172f sh172g sh172h sh172i sh172j sh172x
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh171a   {res}  337      2  .1661721    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh171b   {res}  337      2  .4985163    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh171c   {res}  337      2  .4777448    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh171d   {res}  337      2  .0890208    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh171e   {res}  337      2  .1216617    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh171x   {res}  337      2  .1335312    0    1  {txt}reason of not going to closer place of treatment/advice...
+{txt}sh172a   {res}  157      1         0    0    0  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172b   {res}  157      2   .133758    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172c   {res}  157      2   .566879    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172d   {res}  157      2  .0063694    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172e   {res}  157      2  .0127389    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172f   {res}  157      2  .0127389    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172g   {res}  157      2  .0828025    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172h   {res}  157      1         0    0    0  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172i   {res}  157      2  .1783439    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172j   {res}  157      2  .0254777    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}sh172x   {res}  157      2  .1146497    0    1  {txt}reason of not going to any place of treatment/advice - ...
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR71_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR71_acc.dta" }
+ variables: {txt}sh55 sh68
+{res}
+{txt}Variable   Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh55     {res}   66      6      62.5    1   96  {txt}reason for absence of work
+{txt}sh68     {res}  652     14  26.10736    1   98  {txt}reason for absence of work
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR5A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR5A_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}    0      0     .    .    .  {txt}na - reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR5H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR5H_acc.dta" }
+ variables: {txt}sh114c sh114da sh114db sh114dc sh114dd sh114de sh114df sh114dx hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh114c   {res}  40558      7  2.372158    1    9  {txt}reasons household members don't use mosquito net all ...
+{txt}sh114da  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: lack of means
+{txt}sh114db  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: not necessary
+{txt}sh114dc  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: use other thing
+{txt}sh114dd  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: no mosquitoes
+{txt}sh114de  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: don't like
+{txt}sh114df  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: don't know
+{txt}sh114dx  {res}  90824      3  .4883731    0    9  {txt}reasons for no mosquito nets: other
+{txt}hc13     {res}      0      0         .    .    .  {txt}na - reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR81_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/RWPR81_acc.dta" }
+ variables: {txt}hc35 mhc35
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  4087      4  .3464644    0    3  {txt}reason for re-measurement
+{txt}mhc35    {res}  2217      4  .2764998    0    3  {txt}reason for re-measurement
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7QFL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7QFL.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  11519      6  1.512892    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh127da  {res}  41632      2  .0291362    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  41632      2  .0086472    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  41632      2  .0232513    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  41632      2  .0050922    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  41632      2  .0013932    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  41632      2  .0002642    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  41632      2  .0098242    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c   {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STPR50_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/STPR50_acc.dta" }
+ variables: {txt}sh128a hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128a   {res}  3382      8  15.13897    1   99  {txt}reason for not having a mosquito net
+{txt}hc13     {res}  2115      5  .6009456    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NIPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NIPR51_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  4616      5  .3347054    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/szhr51fl.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/szhr51fl.dta" }
+ variables: {txt}hc13_1 hc13_2 hc13_3 hc13_4 hc13_5 hc13_6 hc13_7 hc13_8
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13_1   {res}  1962      4  .2094801    0    6  {txt}reason not measured
+{txt}hc13_2   {res}   788      4   .214467    0    6  {txt}reason not measured
+{txt}hc13_3   {res}   236      4  .2033898    0    6  {txt}reason not measured
+{txt}hc13_4   {res}    66      4  .1969697    0    6  {txt}reason not measured
+{txt}hc13_5   {res}    18      2  .2222222    0    4  {txt}reason not measured
+{txt}hc13_6   {res}     5      2       1.2    0    3  {txt}reason not measured
+{txt}hc13_7   {res}     1      1         0    0    0  {txt}reason not measured
+{txt}hc13_8   {res}     0      0         .    .    .  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KHPR42FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/KHPR42FL.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  3961      4  .0810401    0    6  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR5A_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/LBPR5A_acc.dta" }
+ variables: {txt}sh111a sh111b sh111c sh111d sh111x
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh111a   {res}  9607      3  .0878526    0    9  {txt}reason no mosquito nets in household: no mosquitoes
+{txt}sh111b   {res}  9607      3  .7028209    0    9  {txt}reason no mosquito nets in household: not available
+{txt}sh111c   {res}  9607      3  .1233476    0    9  {txt}reason no mosquito nets in household: don't like to us...
+{txt}sh111d   {res}  9607      3  .2876028    0    9  {txt}reason no mosquito nets in household: too expensive
+{txt}sh111x   {res}  9607      3  .1924638    0    9  {txt}reason no mosquito nets in household: other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR7Q_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/MWPR7Q_acc.dta" }
+ variables: {txt}sh137a sh137b sh137c sh137d sh137e sh137f sh137g sh137h sh137x sh138a sh138b sh138c sh138d sh138e sh138f sh138g sh138h sh138x
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh137a   {res}  16755      2  .6816473    0    1  {txt}reason for preference of conical-shaped net: easier t...
+{txt}sh137b   {res}  16755      2  .0219039    0    1  {txt}reason for preference of conical-shaped net: easier t...
+{txt}sh137c   {res}  16755      2   .010564    0    1  {txt}reason for preference of conical-shaped net: easier t...
+{txt}sh137d   {res}  16755      2  .2025664    0    1  {txt}reason for preference of conical-shaped net: better f...
+{txt}sh137e   {res}  16755      2  .0811101    0    1  {txt}reason for preference of conical-shaped net: taller
+{txt}sh137f   {res}  16755      2  .0663682    0    1  {txt}reason for preference of conical-shaped net: more peo...
+{txt}sh137g   {res}  16755      2  .1324978    0    1  {txt}reason for preference of conical-shaped net: looks nicer
+{txt}sh137h   {res}  16755      2  .0799164    0    1  {txt}reason for preference of conical-shaped net: stronger
+{txt}sh137x   {res}  16755      2  .0191585    0    1  {txt}reason for preference of conical-shaped net: other
+{txt}sh138a   {res}  16755      2  .1128021    0    1  {txt}reason for preference of rectangular-shaped net: easi...
+{txt}sh138b   {res}  16755      2  .0039391    0    1  {txt}reason for preference of rectangular-shaped net: easi...
+{txt}sh138c   {res}  16755      2   .003581    0    1  {txt}reason for preference of rectangular-shaped net: easi...
+{txt}sh138d   {res}  16755      2  .0765145    0    1  {txt}reason for preference of rectangular-shaped net: bett...
+{txt}sh138e   {res}  16755      2  .0034617    0    1  {txt}reason for preference of rectangular-shaped net: taller
+{txt}sh138f   {res}  16755      2  .0721576    0    1  {txt}reason for preference of rectangular-shaped net: more...
+{txt}sh138g   {res}  16755      2  .0156371    0    1  {txt}reason for preference of rectangular-shaped net: look...
+{txt}sh138h   {res}  16755      2  .0113399    0    1  {txt}reason for preference of rectangular-shaped net: stro...
+{txt}sh138x   {res}  16755      2  .0056103    0    1  {txt}reason for preference of rectangular-shaped net: other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NMPR61_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/NMPR61_acc.dta" }
+ variables: {txt}sh145 sh151 sh316 sh325 sh335 sh336l
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh145    {res}   7421     11  11.18865    1   98  {txt}reason for the stay
+{txt}sh151    {res}  16439     11  9.655089    1   98  {txt}reason for seeking the health care
+{txt}sh316    {res}      4      1       994  994  994  {txt}reason not measured
+{txt}sh325    {res}     36      3  995.0556  994  996  {txt}reason not measured
+{txt}sh335    {res}    145      3  994.2897  994  996  {txt}reason not measured
+{txt}sh336l   {res}     35      2  994.7429  994  996  {txt}reason blood glucose not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR6DFL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR6DFL.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c_01 sh135c_02 sh135c_03 sh135c_04 sh135c_05 sh135c_06 sh135c_07 sh135c_08 sh135c_09 sh135c_10 sh135c_11 sh135c_12 sh135c_13 sh135c_14 sh135c_15 sh135c_16 sh135c_17 sh135c_18 sh135c_19 sh135c_20 sh135c_21 sh135c_22 sh135c_23 sh135c_24
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  1571      6  1.316359    1    8  {txt}reasons household members don't use mosquito net all y...
+{txt}sh127da  {res}  4175      2  .0371257    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  4175      2  .0124551    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  4175      2  .0579641    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  4175      2  .0124551    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  4175      2  .0093413    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  4175      2  .0021557    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  4175      2  .0172455    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c_01{res}  1052      6  1.648289    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_02{res}   929      6  1.846071    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_03{res}   775      6  2.096774    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_04{res}   601      6  2.193012    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_05{res}   420      6  2.361905    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_06{res}   274      6  2.364964    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_07{res}   187      5  2.278075    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_08{res}   132      5  2.386364    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_09{res}    94      6  2.244681    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_10{res}    84      6  2.440476    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_11{res}    53      5  2.433962    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_12{res}    44      5  2.386364    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_13{res}    32      5     2.375    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_14{res}    26      3  1.923077    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_15{res}    20      4       2.3    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_16{res}    10      3       2.1    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_17{res}    10      2       2.5    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_18{res}    11      3  2.454545    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_19{res}     8      3     1.875    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_20{res}     7      2  2.428571    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_21{res}     3      2  2.666667    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_22{res}     3      2  2.666667    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_23{res}     2      2       3.5    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_24{res}     2      2       3.5    1    6  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR50_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR50_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable   Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}    0      0     .    .    .  {txt}reason not measured        -na
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7Z_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNPR7Z_acc.dta" }
+ variables: {txt}sh128c sh128da sh128db sh128dc sh128dd sh128de sh128dz sh128dx sh137ac
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh128c   {res}  23513      6  1.608472    1    8  {txt}reasons household members don't use mosquito net all ...
+{txt}sh128da  {res}  78950      2  .0405826    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh128db  {res}  78950      2  .0039392    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh128dc  {res}  78950      2  .0216719    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh128dd  {res}  78950      2  .0082204    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh128de  {res}  78950      2  .0048005    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh128dz  {res}  78950      2  .0013553    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh128dx  {res}  78950      2  .0140215    0    1  {txt}reasons no mosquito nets: other
+{txt}sh137ac  {res}      0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR62_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/AOPR62_acc.dta" }
+ variables: {txt}sh112a sh112b sh112c sh112d sh112x
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh112a   {res}  24920      2  .0439005    0    1  {txt}reason - no mosquitoes
+{txt}sh112b   {res}  24920      2  .4971509    0    1  {txt}reason - no available mosquito nets
+{txt}sh112c   {res}  24920      2   .237801    0    1  {txt}reason - does not like to use mosquito nets
+{txt}sh112d   {res}  24920      2  .1930177    0    1  {txt}reason - nets are too expensive
+{txt}sh112x   {res}  24920      2  .0479133    0    1  {txt}reason - other
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR81_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR81_acc.dta" }
+ variables: {txt}hc35 sh130
+{res}
+{txt}Variable    Obs Unique  Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc35     {res}  4540      1     0    0    0  {txt}reason for re-measurement
+{txt}sh130    {res}     0      0     .    .    .  {txt}reason for not using the mosquito net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTHR42FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/HTHR42FL.dta" }
+ variables: {txt}sh29ha sh29hb sh29hc sh29hd sh29he sh29hx sh29ia sh29ib sh29ic sh29id sh29ie sh29if sh29ig sh29ih sh29ii sh29ij sh29ix hc13_1 hc13_2 hc13_3 hc13_4 hc13_5
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh29ha   {res}  9595      2  .0218864    0    1  {txt}reason prefer establishment
+{txt}sh29hb   {res}  9595      2  .0777488    0    1  {txt}reason prefer establishment
+{txt}sh29hc   {res}  9595      2  .0649297    0    1  {txt}reason prefer establishment
+{txt}sh29hd   {res}  9595      2  .0045857    0    1  {txt}reason prefer establishment
+{txt}sh29he   {res}  9595      2  .0132361    0    1  {txt}reason prefer establishment
+{txt}sh29hx   {res}  9595      2  .0025013    0    1  {txt}reason prefer establishment
+{txt}sh29ia   {res}  9595      2  .0066701    0    1  {txt}reason not treated
+{txt}sh29ib   {res}  9595      2  .0050026    0    1  {txt}reason not trested
+{txt}sh29ic   {res}  9595      2  .0220948    0    1  {txt}reason not treated
+{txt}sh29id   {res}  9595      2  .0002084    0    1  {txt}reason not treated
+{txt}sh29ie   {res}  9595      2  .0013549    0    1  {txt}reason not treated
+{txt}sh29if   {res}  9595      2  .0003127    0    1  {txt}reason not treated
+{txt}sh29ig   {res}  9595      2  .0045857    0    1  {txt}reason not treated
+{txt}sh29ih   {res}  9595      2  .0005211    0    1  {txt}reason not treated
+{txt}sh29ii   {res}  9595      2  .0111516    0    1  {txt}reason not treated
+{txt}sh29ij   {res}  9595      2  .0004169    0    1  {txt}reason not treated
+{txt}sh29ix   {res}  9595      2  .0012507    0    1  {txt}reason not treated
+{txt}hc13_1   {res}  4342      4  .0757715    0    6  {txt}reason not measured
+{txt}hc13_2   {res}  1850      4  .0724324    0    6  {txt}reason not measured
+{txt}hc13_3   {res}   405      3   .054321    0    4  {txt}reason not measured
+{txt}hc13_4   {res}    76      3  .1447368    0    4  {txt}reason not measured
+{txt}hc13_5   {res}    16      2     .1875    0    3  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR70FL.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/SNHR70FL.dta" }
+ variables: {txt}sh127c sh127da sh127db sh127dc sh127dd sh127de sh127dz sh127dx sh135c_01 sh135c_02 sh135c_03 sh135c_04 sh135c_05 sh135c_06 sh135c_07 sh135c_08 sh135c_09 sh135c_10 sh135c_11 sh135c_12 sh135c_13 sh135c_14 sh135c_15 sh135c_16 sh135c_17 sh135c_18 sh135c_19 sh135c_20 sh135c_21 sh135c_22 sh135c_23 sh135c_24 sh135c_25 sh135c_26 sh135c_27 sh135c_28 sh135c_29 sh135c_30
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh127c   {res}  1487      6  1.458642    1    8  {txt}reasons household members don't use mosquito net all y...
+{txt}sh127da  {res}  4231      2   .054597    0    1  {txt}reasons no mosquito nets: lack of means
+{txt}sh127db  {res}  4231      2  .0059088    0    1  {txt}reasons no mosquito nets: not necessary
+{txt}sh127dc  {res}  4231      2  .0418341    0    1  {txt}reasons no mosquito nets: use other thing
+{txt}sh127dd  {res}  4231      2  .0061451    0    1  {txt}reasons no mosquito nets: no mosquitoes
+{txt}sh127de  {res}  4231      2  .0066178    0    1  {txt}reasons no mosquito nets: don't like
+{txt}sh127dz  {res}  4231      2  .0021272    0    1  {txt}reasons no mosquito nets: don't know
+{txt}sh127dx  {res}  4231      2  .0184354    0    1  {txt}reasons no mosquito nets: other
+{txt}sh135c_01{res}  1141      5   1.80631    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_02{res}  1006      6  1.964215    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_03{res}   844      6  2.167062    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_04{res}   676      6  2.443787    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_05{res}   463      6  2.604752    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_06{res}   350      5  2.634286    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_07{res}   259      5  2.776062    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_08{res}   171      5  2.538012    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_09{res}   119      5  2.630252    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_10{res}    93      4  2.870968    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_11{res}    60      5  2.766667    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_12{res}    50      5      2.82    1    8  {txt}reason nobody slept in this net
+{txt}sh135c_13{res}    38      4  2.684211    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_14{res}    34      4  2.617647    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_15{res}    20      4       3.2    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_16{res}    16      3      3.25    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_17{res}    13      2  3.307692    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_18{res}    13      2  3.307692    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_19{res}    11      2  3.272727    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_20{res}     9      2  2.666667    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_21{res}     8      2     2.875    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_22{res}     7      4  2.857143    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_23{res}     6      2       3.5    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_24{res}     6      2       3.5    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_25{res}     5      2         3    1    6  {txt}reason nobody slept in this net
+{txt}sh135c_26{res}     0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}sh135c_27{res}     0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}sh135c_28{res}     0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}sh135c_29{res}     0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}sh135c_30{res}     0      0         .    .    .  {txt}reason nobody slept in this net
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BJPR51_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/BJPR51_acc.dta" }
+ variables: {txt}sh09i hc13
+{res}
+{txt}Variable     Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh09i    {res}  90650     13  75.13665   11   99  {txt}reason for moving to current residence
+{txt}hc13     {res}  16474      6  .5417628    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR5H_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/UGPR5H_acc.dta" }
+ variables: {txt}sh131a sh131b sh131c sh131d sh131e sh131x sh131z
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}sh131a   {res}  4962      3  .0719468    0    9  {txt}too hot: reason this net was not used?
+{txt}sh131b   {res}  4962      3  .0528013    0    9  {txt}don't like smell: reason this net was not used?
+{txt}sh131c   {res}  4962      3  .0620717    0    9  {txt}no mosquitoes: reason this net was not used?
+{txt}sh131d   {res}  4962      3  .0697299    0    9  {txt}net too old/ too many holes: reason this net was not u...
+{txt}sh131e   {res}  4962      3  .1394599    0    9  {txt}net not hang: reason this net was not used?
+{txt}sh131x   {res}  4962      3  .0949214    0    9  {txt}other: reason this net was not used?
+{txt}sh131z   {res}  4962      3  .0538089    0    9  {txt}don't know: reason this net was not used?
+{txt}{hline 101}
+
+{res}Variables in:
+{ stata `"use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR53_acc.dta""' : use "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/GNPR53_acc.dta" }
+ variables: {txt}hc13
+{res}
+{txt}Variable    Obs Unique     Mean  Min  Max  Label
+{txt}{hline 101}
+{txt}hc13     {res}  3215      5  .288647    0    9  {txt}reason not measured
+{txt}{hline 101}
+
+
+ Total {res}294{txt} out of {res}294{txt} files checked in {stata `"dir "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/""' : "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR/}"
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/reasons.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}19 Aug 2022, 11:01:11
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
