@@ -64,7 +64,7 @@ use SNHR61FL.dta, clear
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR61_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2011") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -236,7 +236,7 @@ gen filename="SNHR6D"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR6D_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2012") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -404,7 +404,7 @@ gen filename="SNHR70"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR70_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2014") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -574,7 +574,7 @@ gen filename="SNHR7H"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR7H_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2015") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -747,7 +747,7 @@ gen filename="SNHR7Q"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR7Q_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2016") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -922,7 +922,7 @@ gen filename="SNHR7Z"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR7Z_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2017") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1097,7 +1097,7 @@ gen filename="SNHR80"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR80_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2018") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1272,7 +1272,7 @@ gen filename="SNHR8A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/SNHR8A_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal2019") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1390,7 +1390,7 @@ gen filename="SNHR8A"
 		}		
 
 ***********
-* NGHR61 sh37 1-7 problems with the loop on tab sh37 per ; row labels saved in macro e(labels), invalid syntax.
+*  Nigeria 2010 - NGHR61 sh37 1-7 problems with the loop on tab sh37 per ; row labels saved in macro e(labels), invalid syntax.
 ***********
 	
 	use NGHR61FL.dta, clear 
@@ -1448,7 +1448,7 @@ gen filename="SNHR8A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/NGHR61_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Nigeria2010") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1624,7 +1624,7 @@ gen filename="NGHR71"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/NGHR71_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Nigeria2015") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1797,7 +1797,7 @@ gen filename="NGHR7A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/NGHR7A_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Nigeria2018") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -1973,7 +1973,7 @@ gen filename="NGHR7A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/MZHR7A_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Mozambique2018") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -2163,7 +2163,7 @@ gen filename="NGHR7A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/GNHR81_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Guinea2021") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -2355,7 +2355,7 @@ gen filename="NGHR7A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/KEHR81_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Kenya2020") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
@@ -2545,7 +2545,7 @@ gen filename="NGHR7A"
 	save "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/MDHR80_netfile_reasons.dta", replace
 	
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Madagascar2021") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
 	
 		** do % of nets used first
 		
