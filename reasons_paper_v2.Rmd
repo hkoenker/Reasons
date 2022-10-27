@@ -1,13 +1,12 @@
 ---
 title: Reported reasons for non-use of insecticide-treated nets in large national household surveys, 2009-2020
 author:
-  - Hannah Koenker^[Tropical Health LLP, hannah@trophealth.com]
+  - Hannah Koenker^[Tropical Health LLP, hannah@trophealth.com, corresponding author]
+  - E. Kuor Kumoji^[Johns Hopkins Center for Communication Programs, KuorKumoji@jhu.edu]
   - Marcy Erskine^[International Federation of the Red Cross and Red Crescent Societies, marcy.erskine@ifrc.org] 
   - Robert Opoku^[International Federation of the Red Cross and Red Crescent Societies, robert.opoku@ifrc.org]
   - Eleanore Sternberg^[Tropical Health LLP, eleanore@trophealth.com]
-  - Zainab Ali^[International Federation of the Red Cross and Red Crescent Societies, zainab.ali@ifrc.org]
-  # - Kuor Kumoji^[Johns Hopkins Bloomberg School of Public Health Center for Communication Programs, kuorkumoji@jhu.edu]
-  - Cameron Taylor^[ICF, cameron.taylor@icf.com]
+  - Cameron Taylor^[The DHS Program, ICF, Cameron.taylor@icf.com]
 # address:
 #   - code: Tropical Health LLP
 #     address: Baltimore, USA
@@ -15,24 +14,19 @@ author:
 #   - code: 1
 #     text: ""
 abstract: |
-  Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with over 2 billion ITNs delivered to households in endemic areas since 2000. ITN access, i.e. availability within the household, based on the number of ITNs and number of household members, is the sine qua non of ITN use. Once ITNs are in a given household, however, individuals may choose to use or not use them on a given night, with structural, cultural, opportunistic, and social barriers impeding optimal use. Factors determining ITN use are frequently examined in published literature, but to date, large household survey data on reasons given for non-use of nets have not been explored. 
-  A total of 155 DHS, MIS, and MICS surveys since 2003 were downloaded with permission and reviewed for presence of questions on reasons why nets were not used the previous night, and twenty-four surveys were identified. The percent of nets that were reported used the previous night was calculated for 155 surveys, and frequencies and proportions of reasons for non-use were calculated within the twenty-four surveys. Results were stratified by household supply of ITNs in three categories (not enough", "enough", and "more than enough").
-  
-  The percent of nets used the previous night averaged 70.4% across the 155 surveys conducted since 2003. Stratifying by households ITN supply, this was 75%, 71%, and 53% for households with not enough, enough, and more than enough ITNs, respectively. Population ITN use within these households was 51%, 74%, and 76%, respectively. Reported reasons for non-use of ITNs were primarily nets being extra or being saved for later, followed by low perceived risk of malaria (no mosquitoes/no malaria). The least frequent categories cited as reasons for nets not being used were “net attributes” (size, shape, color, etc) and “fears”. Using continuous DHS data from Senegal, the proportions of nets used peaked during high transmission season, while "no/few mosquitoes" responses peaked during the dry season.
-  
-   The proportion of nets used the previous night has averaged over 70% since 2003, with no discernible change over this period. Reported reasons for why a net goes unused fall largely into three categories - nets that are extra/being saved for future use; the perception that there is little risk of malaria (particularly in dry season); and “other” responses. Net attributes such as color, size, shape, and texture, and fears related to chemicals were the least frequent reasons given. Classifying reasons for non-use into broader categories facilitates the design of appropriate social and behaviour change interventions to address the major underlying reasons for non-use, where this is feasible. Finally, national malaria programs should request the inclusion of this question in future surveys to provide actionable data to inform SBC programming. [Meant to be 350 words max; it's over currently]
+
    
 keywords: 
   - insecticide-treated nets
   - long-lasting insecticidal nets
   - net use
 # journal: "Malaria Journal"
-date: Draft of `r format(Sys.time(), '%d %B, %Y')`
+# date: Draft of `r format(Sys.time(), '%d %B, %Y')`
 # classoption: review, 3p
 bibliography: reasons_paper/mybibfile.bib
 biblio-style: reasons_paper/model6-num-names
 # natbiboptions: longnamesfirst,angle,semicolon
-# linenumbers: false
+linenumbers: true
 # numbersections: true
 # preprint: false
 csl: https://www.zotero.org/styles/biomed-central
@@ -47,7 +41,7 @@ output:
     fig_caption: yes
     number_sections: no
     line_numbers: yes
-    reference_docx: "../../../R Directory/Quantification/drdanholmes-ref-word.docx"
+    reference_docx: "../../../R Directory/Quantification/drdanholmes-ref-word-lineno.docx"
   # rticles::elsevier_article:
   #   latex_engine: xelatex
     keep_tex: true
@@ -84,6 +78,8 @@ library(knitr)
 library(stringr)
 library(cowplot) 
 library(lubridate)
+library(countrycode)
+library(spData)
 
 ##### Might need to reinstall pandoc, if so, run this from Terminal. Takes a few minutes:
 # brew install pandoc
@@ -118,20 +114,32 @@ reason_palette <- c("net used"=rgb(102,194,165, maxColorValue=255), "objective" 
 
 ```
 
+\pagebreak
+
+# Abstract
+ 
+Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with nearly 3 billion ITNs delivered to households in endemic areas since 2000. ITN access, i.e. availability within the household, based on the number of ITNs and number of household members, is a pre-requisite for ITN use. Factors determining ITN use are frequently examined in published literature, but to date, large household survey data on reasons given for non-use of nets have not been explored. 
+  
+A total of 156 DHS, MIS, and MICS surveys since 2003 were reviewed for questions on reasons why nets were not used the previous night, identifying twenty-four surveys. The percent of nets that were reported used the previous night was calculated for 156 surveys, and frequencies and proportions of reasons for non-use were calculated within the twenty-four surveys. Results were stratified by household supply of ITNs in three categories (not enough", "enough", and "more than enough").
+  
+The percent of nets used the previous night averaged 70.4% across the 156 surveys conducted since 2003. Reported reasons for non-use of ITNs were primarily nets being extra or being saved for later, followed by low perceived risk of malaria (no mosquitoes/no malaria). The least frequent categories cited as reasons for nets not being used were “net attributes” (size, shape, color, etc) and “fears”. In Senegal’s continuous DHS, the proportions of nets used peaked during high transmission season, while "no/few mosquitoes" responses peaked during the dry season.
+  
+The proportion of nets used the previous night averaged over 70% from 2003-2020, with no discernible change over this period. Reported reasons for why a net goes unused fell largely into three categories - nets that are extra/being saved for future use; the perception that there is little risk of malaria (particularly in dry season); and “other” responses. Net attributes such as color, size, shape, and texture, and fears related to chemicals were the least frequent reasons given. Classifying reasons for non-use into broader categories facilitates the design of appropriate social and behaviour change interventions to address the major underlying reasons for non-use, where this is feasible. 
+
 # Introduction
 
-Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with over 2 billion ITNs delivered to households in endemic areas since 2000 [@Milliner:2016um]. Consistent use of ITNs provides the most protection from malaria vectors, but households may only have enough nets for all household members in the several months immediately following mass ITN distributions after which the nets begin to wear out [@Bhatt:2015gn; @Koenker:2018gx; @Girond:2018bc; @10.1038/s41467-021-23707-7]. ITN access, i.e. availability within the household, determined by the number of ITNs and number of household members, is a prequisite for ITN use. ITN access is defined as the proportion of the population that could sleep under an ITN if each ITN in the household were used by up to two people. Once ITNs are in a given household, individuals may choose to use or not use them on a given night, with structural, cultural, opportunistic, and social barriers impeding optimal use [@Pulford:2011dc; @10.1080/13648470.2021.1884185].
+Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with nearly 3 billion ITNs delivered to households in endemic areas since 2000 [@Milliner:2016um]. Consistent use of ITNs provides the most protection from malaria vectors, but households may only have enough nets for all household members in the several months immediately following mass ITN distributions after which the nets begin to wear out [@Bhatt:2015gn; @Koenker:2018gx; @Girond:2018bc; @10.1038/s41467-021-23707-7]. ITN access, i.e. availability within the household, determined by the number of ITNs and number of household members, is a prequisite for ITN use. ITN access is defined as the proportion of the population that could sleep under an ITN if each ITN in the household were used by up to two people. Once ITNs are in a given household, individuals may choose to use or not use them on a given night, with structural, cultural, opportunistic, ideational, and social barriers impeding optimal use [@Pulford:2011dc; @10.1080/13648470.2021.1884185;@Storey:2018fj].
 
-Many papers evaluate determinants of ITN use, although not all account for ITN access. A primary factor influencing use of available nets is the perceived risk of malaria, due to seasonality of transmission - ITN use among those with access is typically lower during long, hot, dry seasons, when malaria vectors and other nuisance biting insects are less abundant [@Koenker:2019id]. Perceptions of heat and feeling closed in are frequently cited alongside each other [@Pulford:2011dc; @Ahorlu:2019ck,]. ITN use is also affected by who within a given household can share a single ITN, as well as space available to hang ITNs [@Toe:2009gb; @Lam:2014fc; @Galvin:2011ea; @10.1186/s12936-021-03705-2]. The condition of an ITN, related to its age and the development of holes and tears, is associated with early discarding of ITNs and therefore lack of use [@10.1186/s12936-022-04126-5; @10.1371/journal.pmed.1003248; @10.1186/s12936-021-03686-2; @10.1186/s12936-021-03976-9]; the decay rate of ITNs is a critical component of overall trends in ITN access, determining how quickly coverage declines following mass distribution campaigns and other large-scale distributions [@Bhatt:2015gn; @10.1038/s41467-021-23707-7].
+Many papers evaluate determinants of ITN use, although not all account for ITN access. A primary factor influencing use of available nets is the perceived risk of malaria, due to seasonality of transmission; ITN use among those with access is typically lower during long, hot, dry seasons, when malaria vectors and other nuisance biting insects are less abundant [@Koenker:2019id]. Perceptions of heat and feeling closed in are frequently cited alongside each other [@Pulford:2011dc; @Ahorlu:2019ck]. ITN use is also affected by who within a given household can share a single ITN based on age, cultural and social norms, as well as space available to hang ITNs [@Toe:2009gb; @Lam:2014fc; @Galvin:2011ea; @10.1186/s12936-021-03705-2]. Children under five years of age and women of reproductive age are consistently prioritized for ITN use, particularly when households don't have enough ITNs, with adolescents (especially boys) the least prioritized [@Olapeju:2018bc]. The condition of an ITN, related to its age and the development of holes and tears, is associated with early discarding of ITNs and therefore lack of use [@10.1186/s12936-022-04126-5; @10.1371/journal.pmed.1003248; @10.1186/s12936-021-03686-2; @10.1186/s12936-021-03976-9]; the decay rate of ITNs is a critical component of overall trends in ITN access, determining how quickly coverage declines following mass distribution campaigns and other large-scale distributions [@Bhatt:2015gn; @10.1038/s41467-021-23707-7].
 
 Pulford et al [@Pulford:2011dc] reviewed 22 available studies in 2011 for reasons why nets went unused, finding that discomfort due to heat and perceived low risk of malaria due to low mosquito density were the primary reasons cited, but noted that findings were tentative given the dearth of published studies. Since this time, large national household surveys including Malaria Indicator Surveys (MIS) and Demographic and Health Surveys (DHS) have in several cases added questions about reasons for not using nets. This paper summarizes the available MIS and DHS data and explores trends in ITNs use. Finally, recommendations are given for further exploration of reasons for non-use of ITNs.
 
 ## Study objectives
 
-The study objectives are to use national population-based household survey data to characterize the reasons underlying non-use of ITNs. The goal of the analysis is to explore the reasons for not using an ITN during the previous night in relation to net supply at household level, and how these reasons vary by country and, where possible, by time. The primary research questions are:
+The study objective is to use national population-based household survey data to characterize the reasons underlying non-use of ITNs. The goal of the analysis is to explore the reasons for not using an ITN during the previous night in relation to net supply at household level, and how these reasons vary by country and, where possible, by time. The research questions are:
 
 1.	What proportion of nets were used the night prior to the survey?
-1.	Of nets that went unused, what are the primary reported reasons for non-use, and how do reasons vary by country and net supply?
+1.	Of nets that went unused, what are the most frequently reported reasons for non-use, and how do reasons vary by country and net supply?
 
 # Methods
 
@@ -168,7 +176,7 @@ meannetsused <- round(mean(pnets$netsused), digits=1)
 
 ```{r lists}
 multilist <- c("Uganda2009","Uganda2014","Uganda2019","Tanzania2011","Tanzania2015","Tanzania2017","Liberia2016","Kenya2015")
-singlelist <- c("Senegal2011","Senegal2012","Senegal2014","Senegal2015","Senegal2016","Senegal2017","Senegal2018","Senegal2019","Nigeria2010","Nigeria2015","Nigeria2018","Mozambique2018","Guinea2021","Kenya2020","Ghana2019","Mad")
+singlelist <- c("Senegal2011","Senegal2012","Senegal2014","Senegal2015","Senegal2016","Senegal2017","Senegal2018","Senegal2019","Nigeria2010","Nigeria2015","Nigeria2018","Mozambique2018","Guinea2021","Kenya2020","Ghana2019","Madagascar2021")
 fulllist <- c(multilist,singlelist)
 
 # for (k in 1:length(multilist)){
@@ -192,27 +200,130 @@ nummis <- pnets %>%
          hasreasons=if_else(survyr %in% fulllist,"yes","no")) %>% 
   filter(hasreasons=="yes")
 
+nmis <- nummis %>% 
+  filter(survey=="MIS")
+
+ndhs <- nummis %>% 
+  filter(survey=="DHS")
 ```
 
-For the first study objective, `r nsurv[1]` DHS, MIS, and MICS surveys conducted since `r startyr` were downloaded with permission from dhsprogram.com and mics.unicef.org. Each dataset was reshaped to a long format to create a net file with details including its age, whether it was an ITN, the number of users, and whether it was reported to have been used the previous night. The Roll Back Malaria indicator for the percentage of nets used the previous night was calculated for all surveys and linear regression was used to assess temporal changes for each type of survey. To evaluate net use in the context of household ITN supply, a variable was created according to ITN supply levels where "not enough" indicated less than 0.5 nets available per person (less than one ITN per two people), “enough” indicated 0.5 to 0.75 nets available per person (at least one ITN per two people), and "more than enough" nets indicated a supply of 0.75 or more nets available per person (i.e. at least two nets per three people). Households consisting of one person with one net were categorized as ‘enough’, rather than "more than enough". For this variable, both untreated nets and ITNs were included.
 
-For the second study objective, all DHS and MIS surveys were reviewed and `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries from `r min(nummis$year)` or later were identified as having included a follow-up question asking why the nets were not used. Ten were Malaria Indicator Surveys, conducted during peak malaria transmission season (approximately three months of fieldwork), and fourteen were DHS surveys including the Madagascar 2021 DHS, Nigeria 2018 DHS, the Tanzania 2015-16 DHS/MIS, and eight continuous DHS surveys from Senegal (2011-2019). The DHS surveys also aligned with peak malaria transmission season but were conducted over a longer time period (up to 10 months in Senegal). The "svy" family of commands in Stata 17 was used to appropriately weight results within each country. Plots were produced with R.
+```{r bigmap, message=FALSE, warning=FALSE, include=FALSE}
+bigmap <- pnets %>% 
+  dplyr::select(country) %>% 
+  count(country) %>% 
+  rename(nsurv=n) %>% 
+  mutate(country=case_when(country=="Sierra" ~ "Sierra Leone",
+                           country=="Burkina" ~ "Burkina Faso",
+                           country=="Congo" ~ "Rep. Congo",
+                           country=="Cote" ~ "Cote d'Ivoire",
+                           country=="Sao" ~ "Sao Tome and Principe",
+                           country=="Papua" ~ "Papua New Guinea",
+                           country=="East" ~ "Timor Leste",
+                           country=="CAR" ~ "Central African Republic",
+                           country=="Dakar" ~ "Senegal",
+                           TRUE ~ as.character(country)
+                           )) %>% 
+  mutate(iso_a2=countrycode(country, origin="country.name", destination="iso2c"))
+
+# world <- st_read(system.file("shapes/world.gpkg", package="spData")) %>% 
+#   st_crop(c(xmin= -19, ymin = -30, xmax = 161, ymax = 45))
+
+afasia <- world %>% 
+  filter(continent == "Africa" | continent=="Asia" | continent=="Oceania",!is.na(iso_a2), name_long!="New Zealand", name_long!="Fiji", name_long!="New Caledonia", name_long!="Vanuatu", name_long!="Solomon Islands")
+
+bigmap <- afasia %>% 
+  left_join(bigmap, by="iso_a2") %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+
+
+```
+
+```{r, fig.cap = "Countries included in the analysis and number of DHS, MIS, and MICS surveys per country"}
+mapa <- ggplot(bigmap) +
+  geom_sf(
+    data = bigmap,
+    aes(fill = as.factor(nsurv)),
+    color = "white",
+    size = 0.5
+  ) +
+  theme_void() +
+  scale_fill_brewer(palette = "RdYlBu",
+                   na.value = "WhiteSmoke",
+                   direction = 1) +
+  coord_sf() +
+  labs(fill = "",
+       title = "") +
+  theme(plot.margin = grid::unit(c(0, 0, 0, 0), "null"),
+        legend.text=element_text(size=6),
+        legend.key.size=unit(0.25, "cm"))
+```
+
+```{r smallmap, message=FALSE, fig.cap = "Countries with surveys containing questions about the reason nets were not used the previous night and number of DHS, MIS, and MICS surveys per country"}
+smallmap <- nummis %>% 
+  dplyr::select(country) %>% 
+  mutate(cty=word(country)) %>% 
+  count(cty) %>% 
+  mutate(iso_a2=countrycode(cty, origin="country.name", destination="iso2c"))
+
+africa = world %>%
+  filter(continent == "Africa",!is.na(iso_a2)) 
+
+smallmap <- africa %>% 
+  left_join(smallmap, by="iso_a2") %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+mapb <- ggplot(smallmap) +
+  geom_sf(
+    data = smallmap,
+    aes(fill = as.factor(n)),
+    color = "white",
+    size = 0.5
+  ) +
+  theme_void() +
+  scale_fill_brewer(palette = "RdYlBu",
+                   na.value = "WhiteSmoke",
+                   direction = 1) +
+  coord_sf() +
+  labs(fill = "",
+       title = "") +
+  theme(plot.margin = grid::unit(c(0, 0, 0, 0), "null"),
+        legend.text=element_text(size=6),
+        legend.key.size=unit(0.25, "cm"))
+
+```
+
+
+
+For the first study objective, `r nsurv[1]` DHS, MIS, and Multiple Cluster Indicator Surveys (MICS) survey data collected since `r startyr` were downloaded with permission from dhsprogram.com and mics.unicef.org (Fig. 1A). Each dataset was reshaped to a long format to create a net file with details including its age, whether it was an ITN, the number of users, and whether it was reported to have been used the previous night. The Roll Back Malaria indicator for the percentage of nets used the previous night was calculated for all surveys and linear regression was used to assess temporal changes for each type of survey. To evaluate net use in the context of household ITN supply, a variable was created according to ITN supply levels where "not enough" indicated less than 0.5 nets available per person (less than one ITN per two people), “enough” indicated 0.5 to 0.75 nets available per person (at least one ITN per two people), and "more than enough" nets indicated a supply of 0.75 or more nets available per person (i.e. at least two nets per three people). Households consisting of one person with one net were categorized as "enough", rather than "more than enough". For this variable, both untreated nets and ITNs were included.
+
+For the second study objective, all DHS and MIS surveys were reviewed and `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries (Fig. 1B) from `r min(nummis$year)` or later were identified as having included a follow-up question for unused nets, asking for the reason or reasons that the net was not used (in `r words(length(unique(multilist)))` surveys, multiple responses were possible, while in `r words(length(unique(singlelist)))`, only a single response could be selected). `r Words(length(nmis$survey))` were Malaria Indicator Surveys conducted during peak malaria transmission season (approximately three months of fieldwork), and `r words(length(ndhs$survey))` were DHS surveys including the Madagascar 2021 DHS, Nigeria 2018 DHS, the Tanzania 2015-16 DHS/MIS, and eight continuous DHS surveys from Senegal (2011-2019). The DHS surveys also aligned with peak malaria transmission season but were conducted over a longer time period (up to 10 months in Senegal). The "svy" family of commands in Stata 17 was used to appropriately weight results within each country. Plots were produced with R.  
+
+```{r maps, out.width="40%", fig.cap = "A) Number of DHS, MICS, MIS surveys per country included in study objective 1; B) Number of surveys per country containing questions about the reasons nets were not used the previous night"}
+# ggpubr::ggarrange(mapa, mapb, label="auto", widths=c(1.8,1), common.legend = T, legend="top")
+
+plot_grid(mapa, mapb, labels="AUTO",ncol=1,align="v", vjust=4, hjust=-5)
+```
 
 # Results
 
-The percent of nets used the previous night averaged `r meannetsused`% across all available (n=`r nsurv[1]`) DHS, MIS, and MICS surveys since `r startyr` (Fig. \@ref(fig:fig-netsused)). Linear regression stratified by survey type indicated that there was no significant change over time in the percentage of nets used the previous night for MIS (p=`r round(pnetuseyearmis$p.value[2], digits=3)`), DHS (p=`r round(pnetuseyeardhs$p.value[2], digits=3)`) or MICS (p=`r round(pnetuseyearmics$p.value[2], digits=3)`). MIS surveys, conducted during high transmission season, were associated with a `r round(ptypesurv$estimate[3], digits=1)`-point increase in rates of net use when compared to DHS surveys (p=`r round(ptypesurv$p.value[3], digits=3)`), which are generally conducted during dry season when malaria transmission is lower. Net use rates in MICS surveys did not differ significantly from DHS surveys (`r round(ptypesurv$p.value[2], digits=3)`).
+The percent of nets used the previous night averaged `r meannetsused`% across all available (n=`r nsurv[1]`) DHS, MIS, and MICS surveys since `r startyr` (Fig. \@ref(fig:fig-netsused)). Linear regression stratified by survey type indicated that there was no significant change over time in the percentage of nets used the previous night for MIS (p=`r round(pnetuseyearmis$p.value[2], digits=3)`), DHS (p=`r round(pnetuseyeardhs$p.value[2], digits=3)`) or MICS (p=`r round(pnetuseyearmics$p.value[2], digits=3)`). MIS surveys, conducted during high transmission season, were associated with a `r round(ptypesurv$estimate[3], digits=1)`-point increase in rates of net use when compared to DHS surveys (p=`r round(ptypesurv$p.value[3], digits=3)`), which are generally conducted during dry season when malaria transmission is lower. Net use rates in MICS surveys did not differ significantly from DHS surveys (p=`r round(ptypesurv$p.value[2], digits=3)`).
 
-```{r fig-netsused, fig.cap = "Percentage of nets used the night before, DHS, MICS, MIS surveys 2003-2020"}
+```{r fig-netsused, fig.cap = "Percentage of nets used the night before the survey with linear trend: DHS, MICS, MIS surveys 2003-2020"}
 pnets %>% 
   ggplot() +
   #geom_point(aes(year, percent_nets_used), color="gray", alpha=0.5) +
   geom_text(aes(x=year, y=netsused, label=country, color=typeofsurvey), size=2, alpha=0.75) +
   geom_errorbar(aes(x=year, ymin=netsusedlb, ymax=netsusedub), width=0.3, color="lightgray", alpha=0.5) +
-  geom_smooth(aes(year, netsused, color=typeofsurvey), method="lm", alpha=0) +
+  geom_smooth(aes(year, netsused, color=typeofsurvey, fill=typeofsurvey), method="lm", level=0.95, alpha=0.3) +
   scale_color_brewer(palette="Set2") +
+  scale_fill_brewer(palette="Set2") +
+  theme(legend.position="bottom") +
   labs(x="",
        y="Percent of bednets used the previous night",
-       color="Survey Type")
+       color="Survey Type",
+       fill="Survey Type")
 ```
 
 ```{r supply_prep}
@@ -276,15 +387,18 @@ supplyjoin %>%
 
 ## Reported reasons for not using nets
 
-Response options for reasons why a net was not used the previous night were inconsistent between countries and sometimes changed over time within a given country. Table 1 summarizes the response options for the question “Why was this net not used the previous night?” and categorizes them into seven broad categories: 'extra' (nets being saved for later, or extra), 'fears' (chemicals are unsafe or toxic), 'net attributes' (size, shape, or textile), 'objective' (usual user not here; net being washed; no space to hang; net too torn), 'risk perception' (no mosquitoes or no malaria), 'subjective' (related to heat, smell, etc), and 'other' (capturing 'other' as well as 'not hung' and 'net not needed last night', all of which fail to provide useful information about the respondent's reasoning). Risk perception and subjective reasons for a net going unused may be more amenable to certain social behaviour change interventions, while objective reasons are not. In `r words(length(unique(multilist)))` surveys, multiple responses were possible, while in `r words(length(unique(singlelist)))`, only a single response could be selected. 
+While the question "Why was this net not used the previous night" was consistent across all surveys, response options were inconsistent between countries and sometimes changed over time within a given country. Table 1 summarizes the response options and categorizes them into seven broad categories. The 'other' category captured 'other' responses (no survey had an "other, specify" option), as well as 'not hung' and 'net not needed last night', as the latter two responses fail to provide useful information about the respondent's reasoning and thus cannot be grouped into other categories.   
 
  
 ```{r table1, tab.cap = "Categorization of reasons why nets were not used"}
 reasoncats <- read_excel("output/reason_category_table.xlsx")
 t1 <- flextable(reasoncats) %>% 
   set_table_properties(layout = "autofit") %>% 
-  theme_vanilla
+  theme_vanilla %>% 
+  font(fontname="Times New Roman", part="all") 
 t1
+
+
 ```
 
                                                              
@@ -363,10 +477,10 @@ tzz <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reas
 
 ```
 
-Figure \@ref(fig:summ-reas-cat) below shows the percentage of nets used the previous night across `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries, and the reasons why certain nets were not used. The percentage of nets reported used ranged from 50% in Ghana 2019 to 85% in Mozambique 2018. Senegal's continuous DHS surveys had the highest percentages of reasons relating to risk perception, with up to 25% of nets going unused due to "no mosquitoes" or "no malaria". This category was relatively infrequent in other surveys, except for Tanzania where up to 11% of nets were unused due to risk perception, especially in lower-transmission areas (Supplemental Material). "Extra/saving for later" nets were reported most frequently in Ghana 2019 (19%), Liberia 2016 (19%), and in Tanzania (12-14% of nets). Senegal and Uganda had the highest rates of 'other' responses. In 2018, Uganda updated response options for this question to be more detailed, resulting in the 'extra' and 'objective' categories becoming more prominent; 'extra' category was comprised largely of 'saving to replace other net', while 'objective' was a combination of 'usual user not here' and 'too old/torn' (Supplemental Material). Subsequent surveys in Ghana, Guinea, Mozambique, and Madagascar adopted similar answer options.
+Figure \@ref(fig:summ-reas-cat) below shows the percentage of nets used the previous night across `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries, and the reasons why certain nets were not used. The percentage of nets reported used ranged from 50% in Ghana 2019 to 85% in Mozambique 2018. Senegal's continuous DHS surveys had the highest percentages of reasons relating to risk perception, with up to 25% of nets going unused due to "no mosquitoes" or "no malaria". This category was relatively infrequent in other surveys, except for Tanzania where up to 11% of nets were unused due to risk perception, especially in lower-transmission areas (Supplemental Material, Figure 7). "Extra/saving for later" nets were reported most frequently in Ghana 2019 (19%), Liberia 2016 (19%), and in Tanzania (12-14% of nets). Senegal and Uganda had the highest rates of 'other' responses. In 2018, Uganda updated response options for this question to be more detailed, resulting in the 'extra' and 'objective' categories becoming more prominent; 'extra' category was comprised largely of 'saving to replace other net', while 'objective' was a combination of 'usual user not here' and 'too old/torn' (Supplemental Material, Figure 13). Subsequent surveys in Ghana, Guinea, Mozambique, and Madagascar adopted similar answer options.
 
 
-```{r summ-reas-cat, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Summary of reasons nets were not used, across surveys"}
+```{r summ-reas-cat, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Distribution of reasons nets were not used, across surveys. Surveys allowing multiple responses total more than 100% of all nets in the survey."}
 ## append all the reason dataframes together, so that we can facet:
 cleancat <- x1 %>% reduce(bind_rows) %>%
   drop_na(reason_net_not_used, country) %>% ## drop rows for dfs that aren't relevant (senegal year round, tz_zonal, etc)
@@ -480,6 +594,13 @@ summcat %>%
 
 ```
 
+```{r numreasonsct}
+count <- cleancat %>% 
+  select(country, reason_net_not_used) %>% 
+  group_by(country) %>% 
+  summarize(count=n_distinct(reason_net_not_used))
+  
+```
 
 ```{r cats}
 sa <- summcat %>% 
@@ -632,14 +753,16 @@ pcat <- summcat %>%
   arrange(-pct)
 ```
 
+
+
 Figure \@ref(fig:fig-cats)A summarizes the categories of reasons for non-use across all `r words(length(unique(fulllist)))` surveys, demonstrating that an average of `r round(max(pcat$pct), digits=1)`% of nets were used the previous night, and that the leading category for non-use was "`r pcat$type[2]`", followed by "`r pcat$type[3]`". The least frequent categories cited as reasons for nets not being used were "`r pcat$type[7]`" and "`r pcat$type[8]`". Figure \@ref(fig:fig-cats)B presents reasons for nets not being used in the context of household net supply.
 
-```{r fig-cats, fig.width = 8, fig.height = 4, fig.align='center', fig.topcaption=TRUE, out.width="100%", fig.cap = "Summary of reasons across surveys, by household supply of ITNs"}
+```{r fig-cats, fig.width = 8, fig.height = 4, fig.align='center', fig.topcaption=TRUE, out.width="100%", fig.cap = "Summary of reasons nets were not used the previous night across surveys, by household supply of ITNs"}
 
 plot_grid(sa, sb, labels="AUTO")
 ```
 
-Not surprisingly, "extra" nets comprised a higher proportion of reasons for non-use among households with at least two ITN for three people (`r round(x2$value[3], digits=1)`%) compared to households with fewer than one ITN per two people (`r round(x2$value[1], digits=1)`%) or households with at least one ITN for two people but fewer than two nets for three people (`r round(x2$value[2], digits=1)`%). "Other" responses were more frequent in households with at least two ITNs for three people (`r round(x2$value[18], digits=1)`% vs `r round(x2$value[17], digits=1)`% and `r round(x2$value[16], digits=1)`%), indicating that 'other' reasons are likely related to having extra nets, particularly in surveys prior to 2018 when response options did not capture extra nets well. The "risk perception" category was stable across ITN supply categories, ranging between `r round(x2$value[20], digits=1)`% and `r round(x2$value[19], digits=1)`%, as were "subjective" reasons, ranging from `r round(x2$value[23], digits=1)`% to `r round(x2$value[24], digits=1)`%. Reasons for non-use related to net attributes or fears comprised less than 2% across all ITN supply categories. 
+Not surprisingly, "extra" nets comprised a higher proportion of reasons for non-use for nets in households with at least two ITN for three people (`r round(x2$value[3], digits=1)`%) compared to nets in households with fewer than one ITN per two people (`r round(x2$value[1], digits=1)`%) or nets in households with at least one ITN for two people but fewer than two nets for three people (`r round(x2$value[2], digits=1)`%). "Other" responses were more frequent for nets in households with at least two ITNs for three people (`r round(x2$value[18], digits=1)`% vs `r round(x2$value[17], digits=1)`% and `r round(x2$value[16], digits=1)`%), indicating that 'other' reasons are likely related to having extra nets, particularly in surveys prior to 2018 when response options did not capture extra nets well. The "risk perception" category was stable across ITN supply categories, ranging between `r round(x2$value[20], digits=1)`% and `r round(x2$value[19], digits=1)`%, as were "subjective" reasons, ranging from `r round(x2$value[23], digits=1)`% to `r round(x2$value[24], digits=1)`%. Reasons for non-use related to net attributes or fears comprised less than 2% of nets across all ITN supply categories. 
 
 
 ```{r read_senegal_allyear}
@@ -692,10 +815,10 @@ heat <- sennotallyear %>%
 psenall <- tidy(lm(useall ~ year, senall))
 ```
 
-In each of the eight surveys from Senegal two additional questions were asked. In households that owned at least one net, respondents were asked “do members of this household use nets all year round” (Fig. \@ref(fig:fig-sen)A below). The percentage of respondents reporting people in their household do use nets year-round increased from `r round(min(senall$useall), digits=1)`% to `r round(max(senall$useall), digits=1)`% over the `r min(senall$year)`-`r max(senall$year)` period (p<0.001 for trend) and generally tracked with increasing levels of population access to ITNs. In households responding “no”, a follow-up question was asked: “what are the reasons household members do not use nets year round?”. The most frequent answer was “no/few mosquitoes” (Fig. \@ref(fig:fig-sen)B), which fell from a high of `r max(nomosq$values)`% in `r nomosq$year[9]` to `r min(nomosq$values)`% in `r nomosq$year[1]`, as a proportion of all households in the survey. “Heat” was the next most common response, ranging between `r min(heat$values)`-`r max(heat$values)`%. Not liking the net and forgetfulness were relatively uncommon (less than `r sennotallyear %>% filter(reason=="don't like") %>% arrange(-values) %>% slice(1) %$% values`% and `r sennotallyear %>% filter(reason=="forgetfulness") %>% arrange(-values) %>% slice(1) %$% values`% of all households in any survey, respectively).
+In each of the eight surveys from Senegal two additional questions were asked. In households that owned at least one net, respondents were asked “do members of this household use nets all year round?” (Fig. \@ref(fig:fig-sen)A below). The percentage of respondents reporting that people in their household did use nets year-round increased from `r round(min(senall$useall), digits=1)`% to `r round(max(senall$useall), digits=1)`% over the `r min(senall$year)`-`r max(senall$year)` period (p<0.001 for trend) and generally tracked with increasing levels of population access to ITNs. In households responding “no”, a follow-up question was asked: “what are the reasons household members do not use nets year round?”. The most frequent answer was “no/few mosquitoes” (Fig. \@ref(fig:fig-sen)B), which fell from a high of `r max(nomosq$values)`% in `r nomosq$year[9]` to `r min(nomosq$values)`% in `r nomosq$year[1]`, as a proportion of all households in the survey. “Heat” was the next most common response, ranging between `r min(heat$values)`-`r max(heat$values)`%. Not liking the net and forgetfulness were relatively uncommon (less than `r sennotallyear %>% filter(reason=="don't like") %>% arrange(-values) %>% slice(1) %$% values`% and `r sennotallyear %>% filter(reason=="forgetfulness") %>% arrange(-values) %>% slice(1) %$% values`% of all households in any survey, respectively).
 
 
-```{r fig-sen, fig.width = 7, fig.height = 7, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Year-round net use and reasons for not using nets, Senegal 2008-2019"}
+```{r fig-sen, fig.width = 7, fig.height = 7, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Proportion of households reporting year-round net use and households' reported reasons for not using nets, Senegal 2008-2019"}
 fig5a <- senall %>% 
   ggplot() +
   geom_line(aes(x=year, y=useall, color="Respondents reporting net use all year")) +
@@ -734,7 +857,7 @@ plot_grid(fig5a, fig5b, labels="AUTO", align="h", axis="bottom")
 ```
 
 
-```{r seasons-fig, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reported net use and reasons for non-use, Senegal 2011-2019"}
+```{r seasons-fig, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Percent of nets used the previous night (green) and reasons for non-use, Senegal 2011-2019"}
 
 sreas <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet="Sen_Season_Reason") %>% 
   clean_names() %>% 
@@ -789,7 +912,7 @@ sreas %>%
   geom_col(data=transmission, aes(y=transl, x=month_seq, alpha="high transmission season")) +
   geom_line(aes(x=mdate, y=overall, color=reason)) +
   geom_ribbon(aes(x=mdate, ymin=lb, ymax=ub, fill=reason), alpha=0.2) +
-  scale_alpha_manual(values=c(0.15,0.0)) +
+  scale_alpha_manual(values=c(0.10,0.0)) +
   labs(x="",
        y="Percent of all nets",
        color="",
@@ -810,15 +933,15 @@ roommove <- pcat %>%
 
 # Discussion
 
-Over the past nearly twenty years, an average of over 70% of ITNs were reported as being used the previous night in `r count(pnets)` large household surveys from `r words(length(unique(pnets$country)))` countries. Questions about why nets go unused have only been included in `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries, but among these, the primary reasons given are that unused nets are surplus to immediate requirements or are not needed due to perceived low risk of malaria and/or mosquito bites. Responses related to extra nets were more frequent among households owning more ITNs than deemed strictly necessary by WHO (one ITN per two people) [@WorldHealthOrganization:2019ws]. Unsurprisingly, the proportion of nets used the previous night was lower in households with "more than enough" nets than in households with less than enough or "enough" nets, while at the same time, the proportion of people that used an ITN the previous night was highest in households with "enough" or "more than enough" ITNs. Households with more than one ITN per two people may have acquired additional nets to cover individual sleeping spaces or to accommodate sleepers who cannot share a sleeping space and thus are able to have most household members sleep under a net; other households may have extra nets being saved for later use, when current nets wear out. Households with "not enough" ITNs had lower rates of population use, but high rates of nets being used - indicating that these households are using the nets that they have, and are challenged primarily by not having enough for other members of the family. It should be noted that having 'extra' nets is reflective of the inherent inefficiencies of ITN distribution systems, wherein some households will have too few while others may receive additional nets slightly earlier than required [@Bhatt:2015gn]. The authors view having extra nets on hand within households as a positive, given the unpredictability of net replacement timing.
+Over the past nearly twenty years, an average of over 70% of ITNs were reported as being used the previous night in `r count(pnets)` large household surveys from `r words(length(unique(pnets$country)))` countries. Questions about why nets go unused have only been included in `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries, but among these, the primary reasons given were that unused nets are surplus to immediate requirements or are not needed due to perceived low risk of malaria and/or mosquito bites. Responses related to extra nets were more frequent among households owning more ITNs than deemed strictly necessary by WHO (one ITN per two people) [@WorldHealthOrganization:2019ws]. Unsurprisingly, the proportion of nets used the previous night was lower in households with "more than enough" nets than in households with "not enough" or "enough" nets, while at the same time, the proportion of people that used an ITN the previous night was highest in households with "enough" or "more than enough" ITNs. Households with more than one ITN per two people may have acquired additional nets to cover individual sleeping spaces or to accommodate sleepers who cannot share a sleeping space and thus are able to have most household members sleep under a net; other households may have extra nets being saved for later use, when current nets wear out. Households with "not enough" ITNs had lower rates of population use, but high rates of nets being used - indicating that these households are using the nets that they have, and are challenged primarily by not having enough for other members of the family. It should be noted that having 'extra' nets is reflective of the inherent inefficiencies of ITN distribution systems, wherein some households will have too few while others may receive additional nets slightly earlier than required [@Bhatt:2015gn]. The authors view having extra nets on hand within households as a positive, given the unpredictability of net replacement timing.
 
-Reasons related to net attributes, including size, shape, color, texture, and mosquito-killing ability, were inconsistently included in survey questionnaires, but represented a negligible fraction of reasons for not using nets. While this does not preclude these issues from contributing to net non-use, it provides some evidence that these issues are not top of mind when families are making net use decisions. The 2011 Pulford review findings [@Pulford:2011dc] that discomfort due to heat and perceived low mosquito density were the most widely identified reasons for non-use are partially confirmed here; heat per se was not widely reported in more recent surveys, but risk perception as a category, particularly for Senegal, was a key driver. Pulford et al also use categories such as "social factors" (sleeping elsewhere), "technical factors" (not being able to hang a net), which are considered "objective" reasons for non-use in our study. Pulford's review, conducted just as universal coverage campaigns were scaling up, was limited to 22 studies between 1990 and 2010. Since this time, a number of qualitative research studies have also been conducted, in which respondents cite being bothered by net attributes including smell, itching, shape, and size [@Mattern:2016dp; @Berthe:2014ja; @Sande:2012vb; @Galvin:2011ea]. However, these reasons are only rarely cited during quantitative surveys included in this study. Research from Senegal indicates that initial itching or smell are transitory, noticeable when nets are first received, but subsiding over time, not impeding net use [@Berthe:2014ja]. Other less preferable attributes of nets may similarly be less noticeable over time, and are no longer a key reason for non-use, particularly when, as in most countries distributing ITNs, there are seldom enough nets in good condition for everyone to use. Families are thus obliged to use the imperfect ITNs they have, or risk contracting malaria. 
+Reasons related to net attributes, including size, shape, color, texture, and mosquito-killing ability, were inconsistently included in survey questionnaires, but represented a negligible fraction of reasons for not using nets. While this does not preclude these issues from contributing to net non-use, it provides some evidence that these net attributes are not a key priority when families are making net use decisions. The 2011 Pulford review findings [@Pulford:2011dc] that discomfort due to heat and perceived low mosquito density were the most widely identified reasons for non-use are partially confirmed here; heat per se was not widely reported in more recent surveys, but risk perception as a category, particularly for Senegal, was a key driver. Pulford et al also use categories such as "social factors" (sleeping elsewhere), "technical factors" (not being able to hang a net), which are considered "objective" reasons for non-use in our study. Pulford's review, conducted just as universal coverage campaigns were scaling up, was limited to 22 studies between 1990 and 2010. Since this time, a number of qualitative research studies have also been conducted, in which respondents cite being bothered by net attributes including smell, itching, shape, and size [@Mattern:2016dp; @Berthe:2014ja; @Sande:2012vb; @Galvin:2011ea]. However, these reasons were only rarely cited during quantitative surveys included in this study. Research from Senegal indicates that initial itchiness or smell of nets are transitory, noticeable when nets are first received, but subsiding over time, not impeding net use [@Berthe:2014ja]. Other less preferable attributes of nets may similarly become less noticeable over time, and no longer constitute a key reason for non-use, particularly when, as in most countries distributing ITNs, there are seldom enough nets in good condition for everyone to use. Families thus face choices about using the imperfect ITNs they have, or risk contracting malaria. 
 
 Nearly 80 unique answer options were included across the surveys. The categorization of responses into "extra", "risk perception", "objective", "subjective", etc., is intended to facilitate interpretation and guide national malaria programmes and their partners in designing appropriate responses for improving net use. Where the majority of unused nets are not used due to subjective reasons, social behaviour change may be able to change attitudes and behaviours; however, where most nets are unused due to being too old or torn, programmes may need to focus on net maintenance behaviours and/or additional ITN distribution to improve ITN use rates.
 
 As one example, Senegal has focused messaging over the last decade to address the perceived lower risk of malaria in the hot/dry season, in part because of findings in these surveys, through the "Trois Toutes" campaign ("Toute la famille, toutes les nuits, toute l'année" or "Every family member; every night; all year round"). Self-reported use of nets all year round has increased over time, although it remains unclear whether this is driven primarily by corresponding increases in overall access to ITNs with the household, or represent real changes in behaviour for more consistent ITN use. The continuous DHS in Senegal, conducted over multiple months annually for the last eight years, present a unique opportunity for assessing trends over time in year-round use, as well as evaluating the associations between seasons and frequency of certain responses, notably "no/few mosquitoes". Indeed, net use peaks during periods of high malaria transmission, while the proportion of nets not used due to "no mosquitoes" peaks during the hot dry season when mosquito densities are substantially lower. 
 
-Another example of refining the net non-use question to better inform programming is from Uganda. Following the 2009 survey Uganda implemented "hang up campaigns" to ensure nets were hung and used, partially in response to low hanging rates observed in the 2009 and other surveys. Operational research showed that these hang up campaigns did not improve hanging or use rates, as net hanging increased at similar rates over time in control and intervention groups [@Anonymous:2015ff]. In its most recent surveys, Uganda teased apart the nebulous "not hung" answer option to better focus on specific barriers to net use, enabling the programme to understand what lies behind the non-use of nets. Key reasons for non-use in 2018 were "saving net for later", "user not here", and "too old/torn", none of which are best addressed with social behaviour change (SBC) efforts to hang up nets. The specification of reasons for non-use enables programmes and their SBC partners to better design and target net use interventions. The absence of these types of questions even in many recent surveys has been a missed opportunity, particularly as ITNs remain the primary tool for malaria vector control across the globe. Happily, however, the question is now standard in MIS and DHS surveys conducted since 2019. 
+Another example of refining the net non-use question to better inform programming is from Uganda. Following the 2009 MIS survey Uganda implemented "hang up campaigns" to ensure nets were hung and used, partially in response to low hanging rates observed in the 2009 and other surveys. Operational research showed that these hang up campaigns did not improve hanging or use rates, as net hanging increased at similar rates over time in control and intervention groups [@Anonymous:2015ff]. In its most recent surveys, Uganda teased apart the nebulous "not hung" answer option to better focus on specific barriers to net use, enabling the programme to understand what lies behind the non-use of nets. Key reasons for non-use in 2018 were "saving net for later", "user not here", and "too old/torn", none of which are best addressed with social behaviour change (SBC) efforts to hang up nets. The specification of reasons for non-use enables programmes and their SBC partners to better design and target net use interventions. The absence of these types of questions even in many recent surveys has been a missed opportunity, particularly as ITNs remain the primary tool for malaria vector control across the globe. Happily, however, the question is now standard in MIS and DHS surveys conducted since 2019, with a set of recommended response options drawn in large part from earlier iterations of the present study. 
 
 ```{r obj_sbc}
 sbc <- summcat %>% 
@@ -840,18 +963,12 @@ These findings also highlight that there may be more limited "room for improveme
 
 
 ## Limitations
-```{r numreasonsct}
-count <- cleancat %>% 
-  select(country, reason_net_not_used) %>% 
-  group_by(country) %>% 
-  summarize(count=n_distinct(reason_net_not_used))
-  
-```
 
-The study has several limitations. First, the question of reasons why nets were not used was included in only `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries. While it is not possible to generalize reasons for non-use of nets to other countries, the present findings show that there are substantial similarities across countries in overall percentage of nets used and the relative importance of certain types of reasons. Second, response options and the number of reasons vary considerably by country, from `r words(min(count$count))` in Senegal to `r words(max(count$count))` in Liberia and Mozambique. Nonetheless, some of the differences in response options were minimal changes in wording, and major categories of reasons were generally included in each survey. Third, the categorization of the reasons for non-use into broader categories relies on assumptions about which barriers are similar, and opinions may differ depending on subject familiarity, lived experience, and other factors. Some reasons may also belong in multiple categories. Fourth, around half the surveys posed the question about reasons for why a net wasn't used the previous night as a multiple choice question, while the other half restricted it to a single response. This may introduce some unequal weighting into the results, or put more emphasis on single-choice responses to the exclusion of other possible reasons for not using nets. Finally, there were a substantial number of responses recorded as "other" in many of the surveys; it cannot be determined what type of reason this may have been, although it seems likely that they are at least in part related to extra nets or saving nets for future use, given the increase in other responses among households with "more than enough" nets. 
+
+The study has several limitations. First, the question of reasons why nets were not used was included in only `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries, with eight of these from Senegal. While it is not possible to generalize reasons for non-use of nets to other countries, the present findings show that there are substantial similarities across countries in overall percentage of nets used and the relative importance of certain types of reasons. Second, response options and the number of reasons vary considerably by country, from `r words(min(count$count))` in Senegal to `r words(max(count$count))` in Liberia and Mozambique. Nonetheless, some of the differences in response options were minimal changes in wording, and major categories of reasons were generally included in each survey. Third, the categorization of the reasons for non-use into broader categories relies on assumptions about which barriers are similar, and opinions may differ depending on subject familiarity, lived experience, and other factors. Some reasons may also belong in multiple categories. Fourth, around half the surveys posed the question about reasons for why a net wasn't used the previous night as a multiple choice question, while the other half restricted it to a single response. This may introduce some unequal weighting into the results, or put more emphasis on single-choice responses to the exclusion of other possible reasons for not using nets. Finally, there were a substantial number of responses recorded as "other" in many of the surveys; it cannot be determined what type of reason this may have been, although it seems likely that they are at least in part related to extra nets or saving nets for future use, given the increase in other responses among households with "more than enough" nets. 
 
 # Conclusion
-The percentage of nets used the previous night has averaged over 70% since 2003, with no discernible change over this period. Reported reasons for why a net goes unused fall largely into three categories - nets that are extra/being saved for future use; the perception that there is little risk of malaria (particularly in dry season); and "other" responses. Net attributes such as color, size, shape, and texture, and fears related to chemicals were the least frequent reasons given. Classifying reasons for non-use into broader categories facilitates the design of appropriate SBC interventions to address the major underlying reasons for non-use, where this is feasible. Finally, national malaria programs should request the inclusion of this question in future surveys to provide actionable data to inform SBC programming.
+The percentage of nets used the previous night averaged over 70% from 2003-2020, with no discernible change over this period. Reported reasons for why a net was unused fell largely into three categories - nets that were extra/being saved for future use; the perception that there was little risk of malaria (particularly in dry season); and "other" responses. Net attributes such as color, size, shape, and texture, and fears related to chemicals were the least frequent reasons given. Classifying reasons for non-use into broader categories facilitates the design of appropriate SBC interventions to address the major underlying reasons for non-use, where this is feasible. Finally, national malaria programs should take advantage of the inclusion of this question in future surveys to provide actionable data to inform SBC programming.
 
 # Declarations
 
@@ -865,7 +982,7 @@ Not applicable
 
 ## Availability of data and materials
 
-Code is available at https://github.com/hkoenker/Reasons 
+Code is available at https://github.com/hkoenker/Reasons. Data are publicly available from www.dhsprogram.com and from mics.unicef.org.  
 
 ## Competing interests
 
@@ -873,16 +990,43 @@ The authors declare that they have no competing interests.
 
 ## Funding
 
-HK, ME, RO, ZA, ES were supported through a grant from The Bill & Melinda Gates Foundation. USAID provided support to the revision of the DHS questionnaires under USAID DHS Program. [Get official language from projects] CT supported by DHS Program; early work under VectorWorks (mention?).
+This work was supported, in whole or in part, by the Bill & Melinda Gates Foundation INV-016322. Under the grant conditions of the Foundation, a Creative Commons Attribution 4.0 Generic License has already been assigned to the Author Accepted Manuscript version that might arise from this submission. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 
 ## Authors' contributions
+HK designed the study and conducted the analysis. EKK and CT contributed to the analysis. ME, RO, ES, EKK, and CT provided inputs on the drafts. All authors reviewed and approved the final version of the manuscript.
 
 ## Acknowledgements
 
-## Authors' information (optional)
+An early version of this study was made possible by the generous support of the American people through the United States Agency for International Development (USAID) under the terms of USAID/JHU Cooperative Agreement No: AID-OAAA-14-00057 for the VectorWorks Project. The contents are the responsibility of the authors and do not necessarily reflect the views of USAID or the United States Government. 
+
 
 
 # Supplemental Material
+
+```{r summcat-cty, include=FALSE, fig.width=7, fig.height=5, fig.align="center", fig.topcaption=TRUE, out.width="80%", fig.cap = "Reported net use and reasons for non-use equally weighted by country"}
+
+ctycat <- summcat %>% 
+  mutate(cty=word(country)) %>% 
+  # filter(cty!="Senegal") %>% 
+  group_by(cty, type) %>% 
+  # group_by(type) %>%
+  summarize(pct=mean(pct)) %>% 
+  arrange(-pct)
+
+ctycat %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-pct) # order the bars in reverse order of frequency (so they show up in order in plot)
+         ) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +
+  geom_col(aes(x=pct, y=cty, fill=type)) +
+  # geom_text(aes(x = 95, y = cty, label=x1), size=3, color="white") +
+  scale_fill_manual(values = reason_palette) +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's alpha order top to bottom
+  labs(y="",
+       x="Percent",
+       fill = "Reason category")
+```
+
 
 ```{r tz-facet, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reported net use and reasons for non-use by low and high transmission zones, Tanzania 2017-18 MIS"}
 
