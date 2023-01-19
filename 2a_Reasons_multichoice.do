@@ -60,7 +60,7 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Uganda2009") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh131a_ sh131b_ sh131c_ sh131d_ sh131e_ sh131x_ sh131z_ netused {
 		estpost svy: tab `x'
@@ -133,6 +133,38 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 			scalar drop _all
 			mat drop _all
 			
+		***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh131a_ sh131b_ sh131c_ sh131d_ sh131e_ sh131x_ sh131z_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 **** 
 *** Uganda 2014
 ****
@@ -187,7 +219,7 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Uganda2014") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ax_ sh128az_ netused {
 		estpost svy: tab `x'
@@ -261,6 +293,38 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 			scalar drop _all
 			mat drop _all
 	
+	
+	***** URBAN RURAL ***** 
+	clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ax_ sh128az_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 	**** 
 *** Uganda 2018-19
 ****
@@ -317,7 +381,7 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Uganda2019") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ag_ sh128ah_ sh128ai_ sh128aj_ sh128ak_ sh128ax_ sh128az_ netused {
 		estpost svy: tab `x'
@@ -391,7 +455,38 @@ cd "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/AllHRPR"
 			scalar drop _all
 			mat drop _all
 			
-
+	***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ag_ sh128ah_ sh128ai_ sh128aj_ sh128ak_ sh128ax_ sh128az_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
+			
 *** Tanzania 2011-12
 
 use TZHR6AFL.dta, clear
@@ -448,7 +543,7 @@ use TZHR6AFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Tanzania2011") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh135a_ sh135b_ sh135c_ sh135d_ sh135e_ sh135f_ sh135g_ sh135h_ sh135i_ sh135j_ sh135k_ sh135l_ sh135x_ sh135z_ netused {
 		estpost svy: tab `x'
@@ -522,6 +617,37 @@ use TZHR6AFL.dta, clear
 			scalar drop _all
 			mat drop _all
 		
+		***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh135a_ sh135b_ sh135c_ sh135d_ sh135e_ sh135f_ sh135g_ sh135h_ sh135i_ sh135j_ sh135k_ sh135l_ sh135x_ sh135z_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 *** Tanzania 2015-16
 
 use TZHR7HFL.dta, clear
@@ -579,7 +705,7 @@ use TZHR7HFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Tanzania2015") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh137aa_ sh137ab_ sh137ac_ sh137ad_ sh137ae_ sh137af_ sh137ag_ sh137ah_ sh137ai_ sh137aj_ sh137ak_ sh137al_ sh137ax_ sh137az_ netused {
 		estpost svy: tab `x'
@@ -654,6 +780,37 @@ use TZHR7HFL.dta, clear
 			scalar drop _all
 			mat drop _all
 		
+		***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh137aa_ sh137ab_ sh137ac_ sh137ad_ sh137ae_ sh137af_ sh137ag_ sh137ah_ sh137ai_ sh137aj_ sh137ak_ sh137al_ sh137ax_ sh137az_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 *** Tanzania 2017 ******
 
 	use TZHR7QFL.dta, clear
@@ -712,7 +869,7 @@ use TZHR7HFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Tanzania2017") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh129ha_ sh129hb_ sh129hc_ sh129hd_ sh129he_ sh129hf_ sh129hg_ sh129hh_ sh129hi_ sh129hj_ sh129hk_ sh129hl_ sh129hx_ sh129hz_ netused {
 		estpost svy: tab `x'
@@ -773,6 +930,37 @@ use TZHR7HFL.dta, clear
 				
 				else {
 					estpost svy: tab `y' if netsupply==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
+	***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh129ha_ sh129hb_ sh129hc_ sh129hd_ sh129he_ sh129hf_ sh129hg_ sh129hh_ sh129hi_ sh129hj_ sh129hk_ sh129hl_ sh129hx_ sh129hz_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
 					mat mat1=e(b)
 				
 					scalar `y'`x'=round(mat1[1,2],0.1)
@@ -900,7 +1088,7 @@ use TZHR7HFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Liberia2016") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ag_ sh128ah_ sh128ai_ sh128aj_ sh128ak_ sh128al_ sh128am_ sh128an_ sh128ax_ sh128az_ netused {
 		estpost svy: tab `x'
@@ -973,6 +1161,37 @@ use TZHR7HFL.dta, clear
 			scalar drop _all
 			mat drop _all
 			
+		***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh128aa_ sh128ab_ sh128ac_ sh128ad_ sh128ae_ sh128af_ sh128ag_ sh128ah_ sh128ai_ sh128aj_ sh128ak_ sh128al_ sh128am_ sh128an_ sh128ax_ sh128az_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 ***************			
 *** Kenya  2015 ******
 ***************
@@ -1026,7 +1245,7 @@ use TZHR7HFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Kenya2015") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh126a1_ sh126a2_ sh126a3_ sh126a4_ sh126a5_ sh126a6_ sh126a7_ netused {
 		estpost svy: tab `x'
@@ -1100,7 +1319,38 @@ use TZHR7HFL.dta, clear
 			
 			scalar drop _all
 			mat drop _all
+	
+	***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
 		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh126a1_ sh126a2_ sh126a3_ sh126a4_ sh126a5_ sh126a6_ sh126a7_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
+				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+			
 ***************			
 *** Ghana  2019 ******
 ***************
@@ -1161,7 +1411,7 @@ use TZHR7HFL.dta, clear
 	
 	** Putexcel looping through variables
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Ghana2019") modify
-	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many"), txtwrap
+	putexcel A1=("Country") B1=("Year") C1=("Reason net not used") D1=("overall ") E1=("95% CI") F1=("N") H1=("among hh with not enough") I1=("among hh with just right") J1=("among hh with too many") K1="urban" L1="rural", txtwrap
 	local row=2
 	foreach x of varlist sh129aa_ sh129ab_ sh129ac_ sh129ad_ sh129ae_ sh129af_ sh129ag_ sh129ah_ sh129ai_ sh129aj_ sh129ak_ sh129al_ sh129am_ sh129an_ sh129ax_ netused {
 		estpost svy: tab `x'
@@ -1237,5 +1487,35 @@ use TZHR7HFL.dta, clear
 			scalar drop _all
 			mat drop _all
 		
+		***** URBAN RURAL ***** 
+		clonevar urbrur=hv025 
+		replace urbrur=. if hv025>2 // ignore any refugee levels etc
+		levelsof urbrur, local(urblvl) // create levels of the value labels for netsupply
+		tokenize "K L"
+		
+		foreach x of local urblvl {
+		local row=2
+			foreach y of varlist sh129aa_ sh129ab_ sh129ac_ sh129ad_ sh129ae_ sh129af_ sh129ag_ sh129ah_ sh129ai_ sh129aj_ sh129ak_ sh129al_ sh129am_ sh129an_ sh129ax_ netused {
+		
+				levelsof `y' if hv025==`x', local(lvl)
+				if "`lvl'"=="0" {
+					scalar `y'`x'=0
+				}
 				
+				else {
+					estpost svy: tab `y' if hv025==`x', per
+					mat mat1=e(b)
+				
+					scalar `y'`x'=round(mat1[1,2],0.1)
+				}
+						
+				putexcel `1'`row'=(`y'`x') // put the result into tokenized column (`1') and looping row
+				local row=`row'+1 
+				} // go to next variable
+			mac shift
+			} // go to next level of netsupply
+			
+			scalar drop _all
+			mat drop _all
+					
 				
