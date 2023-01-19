@@ -1,0 +1,1795 @@
+---
+title: Reported reasons for non-use of insecticide-treated nets in large national household surveys, 2009-2021
+author:
+  - Hannah Koenker^[Tropical Health LLP, hannah@trophealth.com, corresponding author]
+  - E. Kuor Kumoji^[Johns Hopkins Center for Communication Programs, KuorKumoji@jhu.edu]
+  - Marcy Erskine^[International Federation of Red Cross and Red Crescent Societies, marcy.erskine@ifrc.org] 
+  - Robert Opoku^[International Federation of Red Cross and Red Crescent Societies, robert.opoku@ifrc.org]
+  - Eleanore Sternberg^[Tropical Health LLP, eleanore@trophealth.com]
+  - Cameron Taylor^[The DHS Program, ICF, & Medicine and Health Sciences University of Antwerp Belgium, Cameron.taylor@icf.com]
+# address:
+#   - code: Tropical Health LLP
+#     address: Baltimore, USA
+# footnote:
+#   - code: 1
+#     text: ""
+abstract: |
+   
+keywords: 
+  - insecticide-treated nets
+  - long-lasting insecticidal nets
+  - net use
+  - malaria
+# journal: "Malaria Journal"
+date: Revision of `r format(Sys.time(), '%d %B, %Y')`
+# classoption: review, 3p
+bibliography: reasons_paper/mybibfile.bib
+biblio-style: reasons_paper/model6-num-names
+# natbiboptions: longnamesfirst,angle,semicolon
+linenumbers: true
+# numbersections: true
+# preprint: false
+csl: https://www.zotero.org/styles/biomed-central
+header-includes:
+  - \usepackage{floatrow}
+  - \floatsetup[figure]{capposition=top}
+  - \floatplacement{figure}{H}
+  - \usepackage{setspace}\doublespacing
+  - \biboptions{sort&compress}
+output: 
+  bookdown::word_document2:
+    fig_caption: yes
+    number_sections: no
+    line_numbers: yes
+    reference_docx: "../../../R Directory/Quantification/drdanholmes-ref-word-lineno.docx"
+  # rticles::elsevier_article:
+  #   latex_engine: xelatex
+    keep_tex: true
+    citation_package: natbib
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+######################
+# Load Libraries
+######################
+library(rticles)
+library(tidyverse)
+library(haven)
+library(sf)
+library(tmap)
+library(readxl)
+library(janitor)
+library(viridis)
+library(broom)
+library(maptools)
+library(maps)
+library(sf)
+library(gtsummary)
+library(english)
+library(magrittr)
+library(flextable)
+library(jtools)
+library(kableExtra)
+library(float)
+library(ggstance)
+library(knitr)
+library(stringr)
+library(cowplot) 
+library(lubridate)
+library(countrycode)
+library(spData)
+library(patchwork)
+
+##### Might need to reinstall pandoc, if so, run this from Terminal. Takes a few minutes:
+# brew install pandoc
+# brew install pandoc-citeproc
+# brew install pandoc-crossref
+######
+
+######################
+# Set figure theme and colors
+######################
+
+theme_set(theme_classic())
+# scale_colour_continuous <- function(...) scale_color_brewer(palette = "RdBu") 
+# scale_colour_discrete   <- function(...) scale_color_brewer(palette = "Set2") # 
+# scale_colour_binned     <- function(...) scale_color_fermenter(palette = "Set3")
+# scale_fill_continuous <- function(...) scale_fill_brewer(palette = "RdBu") #
+# scale_fill_discrete   <- function(...) scale_fill_brewer(palette = "Set3") # 
+# scale_fill_binned     <- function(...) scale_fill_fermenter(palette = "Set3")
+
+######################
+# Knitr options
+######################
+
+knitr::opts_chunk$set(
+  echo = FALSE, message=FALSE, warning=FALSE, tab.cap.style = "Caption")
+
+# setwd("data")
+# knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+# knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, dev="cairo_pdf", fig.width=7, fig.height=3.5)
+
+reason_palette <- c("net used"=rgb(102,194,165, maxColorValue=255), "objective" = rgb(141,160,203, maxColorValue=255), "subjective" = rgb(252,141,98, maxColorValue=255),  "risk perception" = rgb(231,138,195, maxColorValue=255),  "net attributes" = rgb(229,196,148, maxColorValue=255), "extra" = rgb(166,216,84, maxColorValue=255), "fears" = rgb(255,217,47, maxColorValue=255), "other"="lightgray")
+
+```
+
+\pagebreak
+```{r read_pernetsused}
+pnets <- read_dta("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Analysis ITN Indicators compiled/natl_DHSMISMICS_itn_indicators.dta") %>% 
+  select(dataset, surveynameyear, country, year, survey, typeofsurvey, useitn, usenotenough, useenough, usetoomany, netsused, netsusedlb, netsusedub, netsusedinhhwithnotenoug, netsusedinhhwithjustrigh, netsusedinhhwithtoomany, urban, rural, pvalresidence) %>% 
+  clean_names() %>%  
+  drop_na(netsused) %>% 
+  filter(typeofsurvey!="AP",
+         dataset!="ZMHR15",
+         dataset!="ZMHR18",
+         dataset!="ZMHR21") # drop Zambia surveys that we aren't allowed to use for this. 
+
+nsurv <- count(pnets)
+startyr <- min(pnets$year)
+
+pnetmis <- pnets %>% 
+  filter(typeofsurvey=="MIS") 
+
+pnetdhs <- pnets %>% 
+  filter(typeofsurvey=="DHS") 
+
+pnetmics <- pnets %>% 
+  filter(typeofsurvey=="MICS") 
+  
+pnetuseyearmis <- tidy(lm(netsused ~ year, data=pnetmis))
+pnetuseyeardhs <- tidy(lm(netsused ~ year, data=pnetdhs))
+pnetuseyearmics <- tidy(lm(netsused ~ year, data=pnetmics))
+
+ptypesurv <- tidy(lm(netsused ~ typeofsurvey, data=pnets))
+
+meannetsused <- round(mean(pnets$netsused), digits=1)
+```
+
+
+```{r lists}
+multilist <- c("Uganda2009","Uganda2014","Uganda2019","Tanzania2011","Tanzania2015","Tanzania2017","Liberia2016","Kenya2015")
+singlelist <- c("Senegal2011","Senegal2012","Senegal2014","Senegal2015","Senegal2016","Senegal2017","Senegal2018","Senegal2019","Senegal2021","Nigeria2010","Nigeria2015","Nigeria2018","Nigeria2021","Mali2021","Mozambique2018","Guinea2021","Kenya2020","Ghana2019","Madagascar2021")
+fulllist <- c(multilist,singlelist)
+
+# for (k in 1:length(multilist)){
+#  multilist[k] <- read_excel(paste("output/Reasons for not using nets.xlsx", sheet=multilist[k])
+# }
+sheets_to_read <- excel_sheets("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx") ##Obtain the sheets in the workbook
+
+
+list_with_sheets <- lapply(sheets_to_read,
+                           function(i)read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet = i))
+
+names(list_with_sheets) <- sheets_to_read ##Add names
+
+x1 <- lapply(list_with_sheets,clean_names) ## apply the clean_names function to the full list
+invisible(list2env(x1 ,.GlobalEnv)) ## This function should put all the dataframes within the list (x1) into the global environment. Make it 'invisible' otherwise it appears in the Markdown.
+
+nummis <- pnets %>%
+  filter(survey!="MICS") %>% 
+  select(dataset, survey, year, country, surveynameyear) %>% 
+  mutate(survyr=paste0(country,year),
+         hasreasons=if_else(survyr %in% fulllist,"yes","no")) %>% 
+  filter(hasreasons=="yes")
+
+nmis <- nummis %>% 
+  filter(survey=="MIS")
+
+ndhs <- nummis %>% 
+  filter(survey=="DHS")
+```
+
+# Abstract
+ 
+Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with nearly 3 billion ITNs delivered to households in endemic areas since 2000. ITN access, i.e. availability within the household, based on the number of ITNs and number of household members, is a pre-requisite for ITN use. Factors determining ITN use are frequently examined in published literature, but to date, large household survey data on reasons given for non-use of nets have not been explored. 
+  
+A total of `r nsurv[1]` DHS, MIS, and MICS surveys since 2003 were reviewed for questions on reasons why nets were not used the previous night, identifying `r words(length(unique(fulllist)))` surveys. The percent of nets that were reported used the previous night was calculated for the `r nsurv[1]` surveys, and frequencies and proportions of reasons for non-use were calculated within the `r words(length(unique(fulllist)))` surveys. Results were stratified by household supply of ITNs in three categories (not enough", "enough", and "more than enough") and by residence (urban/rural).
+  
+The proportion of nets used the previous night averaged over 70% between 2003-2020, with no discernible change over this period. Reported reasons for why a net goes unused fell largely into three categories - nets that are extra/being saved for future use; the perception that there is little risk of malaria (particularly in dry season); and “other” responses. Net attributes such as color, size, shape, and texture, and concerns related to chemicals were the least frequent reasons given. Reasons for non-use of nets varied by household net supply, and in some surveys by residence. In Senegal’s continuous DHS, the proportion of nets used peaked during high transmission season, and the proportion of nets that went unused due to “no/few mosquitoes” peaked during the dry season. Classifying reasons for non-use into broader categories facilitates the design of appropriate social and behaviour change interventions to address the major underlying reasons for non-use, where this is feasible. 
+
+# Introduction
+
+Insecticide-treated nets (ITN) are the cornerstone of modern malaria vector control, with nearly 3 billion ITNs delivered to households in endemic areas since 2000 [@Milliner:2016um]. Consistent use of ITNs provides the most protection from malaria vectors, but households may only have enough nets for all household members in the several months immediately following mass ITN distributions after which the nets begin to wear out [@Bhatt:2015gn; @Koenker:2018gx; @Girond:2018bc; @10.1038/s41467-021-23707-7]. ITN access, i.e. availability within the household, determined by the number of ITNs and number of household members, is a prequisite for ITN use. ITN access is defined as the proportion of the population that could sleep under an ITN if each ITN in the household were used by up to two people. Once ITNs are in a given household, individuals may choose to use or not use them on a given night, with structural, cultural, opportunistic, ideational, and social barriers impeding optimal use [@Pulford:2011dc; @10.1080/13648470.2021.1884185;@Storey:2018fj].
+
+Many papers evaluate determinants of ITN use, although not all account for ITN access. A primary factor influencing use of available nets is the perceived risk of malaria, due to seasonality of transmission; ITN use among those with access is typically lower during long, hot, dry seasons, when malaria vectors and other nuisance biting insects are less abundant [@Koenker:2019id]. Perceptions of heat and feeling closed in are frequently cited alongside each other [@Pulford:2011dc; @Ahorlu:2019ck]. ITN use is also affected by who within a given household can share a single ITN based on age, cultural and social norms, as well as space available to hang ITNs [@Toe:2009gb; @Lam:2014fc; @Galvin:2011ea; @10.1186/s12936-021-03705-2]. Children under five years of age and women of reproductive age are consistently prioritized for ITN use, particularly when households don't have enough ITNs, with adolescents (especially boys) the least prioritized [@Olapeju:2018bc]. The condition of an ITN, related to its age and the development of holes and tears, is associated with early discarding of ITNs and therefore lack of use [@10.1186/s12936-022-04126-5; @10.1371/journal.pmed.1003248; @10.1186/s12936-021-03686-2; @10.1186/s12936-021-03976-9]; the decay rate of ITNs is a critical component of overall trends in ITN access, determining how quickly coverage declines following mass distribution campaigns and other large-scale distributions [@Bhatt:2015gn; @10.1038/s41467-021-23707-7].
+
+Pulford et al [@Pulford:2011dc] reviewed 22 available studies in 2011 for reasons why nets went unused, finding that discomfort due to heat and perceived low risk of malaria due to low mosquito density were the primary reasons cited, but noted that findings were tentative given the dearth of published studies. Since this time, large national household surveys including Malaria Indicator Surveys (MIS) and Demographic and Health Surveys (DHS) have in several cases added questions about reasons for not using nets. This paper summarizes the available MIS and DHS data and explores trends in ITNs use. Finally, recommendations are given for further exploration of reasons for non-use of ITNs.
+
+## Study objectives
+
+The study objective is to use national population-based household survey data to characterize the reasons underlying non-use of ITNs. The goal of the analysis is to explore the reasons for not using an ITN during the previous night in relation to net supply at household level, and how these reasons vary by country and, where possible, by time. The research questions are:
+
+1.	What proportion of nets were used the night prior to the survey?
+1.	Of nets that went unused, what are the most frequently reported reasons for non-use, and how do reasons vary by country, household net supply, and residence?
+
+# Methods
+
+
+
+```{r bigmap, message=FALSE, warning=FALSE, include=FALSE}
+bigmap <- pnets %>% 
+  dplyr::select(country) %>% 
+  count(country) %>% 
+  rename(nsurv=n) %>% 
+  mutate(country=case_when(country=="Sierra" ~ "Sierra Leone",
+                           country=="Burkina" ~ "Burkina Faso",
+                           country=="Congo" ~ "Rep. Congo",
+                           country=="Cote" ~ "Cote d'Ivoire",
+                           country=="Sao" ~ "Sao Tome and Principe",
+                           country=="Papua" ~ "Papua New Guinea",
+                           country=="East" ~ "Timor Leste",
+                           country=="CAR" ~ "Central African Republic",
+                           country=="Dakar" ~ "Senegal",
+                           TRUE ~ as.character(country)
+                           )) %>% 
+  mutate(iso_a2=countrycode(country, origin="country.name", destination="iso2c"))
+
+# world <- st_read(system.file("shapes/world.gpkg", package="spData")) %>% 
+#   st_crop(c(xmin= -19, ymin = -30, xmax = 161, ymax = 45))
+
+afasia <- world %>% 
+  filter(continent == "Africa" | continent=="Asia" | continent=="Oceania",!is.na(iso_a2), name_long!="New Zealand", name_long!="Fiji", name_long!="New Caledonia", name_long!="Vanuatu", name_long!="Solomon Islands")
+
+bigmap <- afasia %>% 
+  left_join(bigmap, by="iso_a2") %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+
+
+```
+
+```{r, fig.cap = "Countries included in the analysis and number of DHS, MIS, and MICS surveys per country"}
+mapa <- ggplot(bigmap) +
+  geom_sf(
+    data = bigmap,
+    aes(fill = as.factor(nsurv)),
+    color = "white",
+    size = 0.5
+  ) +
+  theme_void() +
+  scale_fill_brewer(palette = "RdYlBu",
+                   na.value = "WhiteSmoke",
+                   direction = 1) +
+  coord_sf() +
+  labs(fill = "",
+       title = "") +
+  theme(plot.margin = grid::unit(c(0, 0, 0, 0), "null"),
+        legend.text=element_text(size=6),
+        legend.key.size=unit(0.25, "cm"))
+```
+
+```{r smallmap, message=FALSE, fig.cap = "Countries with surveys containing questions about the reason nets were not used the previous night and number of DHS, MIS, and MICS surveys per country"}
+smallmap <- nummis %>% 
+  dplyr::select(country) %>% 
+  mutate(cty=word(country)) %>% 
+  count(cty) %>% 
+  mutate(iso_a2=countrycode(cty, origin="country.name", destination="iso2c"))
+
+africa = world %>%
+  filter(continent == "Africa",!is.na(iso_a2)) 
+
+smallmap <- africa %>% 
+  left_join(smallmap, by="iso_a2") %>% 
+  st_transform("+proj=aea +lat_1=20 +lat_2=-23 +lat_0=0 +lon_0=25")
+
+mapb <- ggplot(smallmap) +
+  geom_sf(
+    data = smallmap,
+    aes(fill = as.factor(n)),
+    color = "white",
+    size = 0.5
+  ) +
+  theme_void() +
+  scale_fill_brewer(palette = "RdYlBu",
+                   na.value = "WhiteSmoke",
+                   direction = 1) +
+  coord_sf() +
+  labs(fill = "",
+       title = "") +
+  theme(plot.margin = grid::unit(c(0, 0, 0, 0), "null"),
+        legend.text=element_text(size=6),
+        legend.key.size=unit(0.25, "cm"))
+
+```
+
+
+
+For the first study objective, `r nsurv[1]` DHS, MIS, and Multiple Cluster Indicator Surveys (MICS) survey data collected since `r startyr` were downloaded with permission from dhsprogram.com and mics.unicef.org (Fig. 1A). Each dataset was reshaped to a long format to create a net file with details including its age, whether it was an ITN, the number of users, and whether it was reported to have been used the previous night. The Roll Back Malaria indicator for the percentage of nets used the previous night (out of all nets observed in the survey) was calculated for all surveys and linear regression was used to assess temporal changes for each type of survey. To evaluate net use in the context of household ITN supply, a variable was created according to ITN supply levels where "not enough" indicated less than 0.5 nets available per person (less than one ITN per two people), “enough” indicated 0.5 to 0.75 nets available per person (at least one ITN per two people), and "more than enough" nets indicated a supply of 0.75 or more nets available per person (i.e. at least two nets per three people). Households consisting of one person with one net were categorized as "enough", rather than "more than enough". For this variable, both untreated nets and ITNs were included.
+
+For the second study objective, all DHS and MIS surveys were reviewed and `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries (Fig. 1B) from `r min(nummis$year)` or later were identified as having included a follow-up question for unused nets, asking for the reason or reasons that the net was not used (in `r words(length(unique(multilist)))` surveys, multiple responses were possible, while in `r words(length(unique(singlelist)))`, only a single response could be selected). `r Words(length(nmis$survey))` were Malaria Indicator Surveys conducted during peak malaria transmission season (approximately three months of fieldwork), and `r words(length(ndhs$survey))` were DHS surveys including the Madagascar 2021 DHS, Nigeria 2018 DHS, the Tanzania 2015-16 DHS/MIS, and eight continuous DHS surveys from Senegal (2011-2019). The DHS surveys also aligned with peak malaria transmission season but were conducted over a longer time period (up to 10 months in Senegal). The "svy" family of commands in Stata 17 was used to appropriately weight results within each country. Plots were produced with R.  
+
+```{r maps, out.width="40%", fig.cap = "A) Number of DHS, MICS, MIS surveys per country included in study objective 1; B) Number of surveys per country containing questions about the reasons nets were not used the previous night"}
+# ggpubr::ggarrange(mapa, mapb, label="auto", widths=c(1.8,1), common.legend = T, legend="top")
+
+plot_grid(mapa, mapb, labels="AUTO",ncol=1,align="v", vjust=4, hjust=-5)
+```
+
+# Results
+
+The percent of nets used the previous night averaged `r meannetsused`% across all available (n=`r nsurv[1]`) DHS, MIS, and MICS surveys since `r startyr` (Fig. \@ref(fig:fig-netsused)). Linear regression stratified by survey type indicated that there was no significant change over time in the percentage of nets used the previous night for MIS (p=`r round(pnetuseyearmis$p.value[2], digits=3)`), DHS (p=`r round(pnetuseyeardhs$p.value[2], digits=3)`) or MICS (p=`r round(pnetuseyearmics$p.value[2], digits=3)`). MIS surveys, conducted during high transmission season, were associated with a `r round(ptypesurv$estimate[3], digits=1)`-point increase in rates of net use when compared to DHS surveys (p=`r round(ptypesurv$p.value[3], digits=3)`), which are generally conducted during dry season when malaria transmission is lower. Net use rates in MICS surveys did not differ significantly from DHS surveys (p=`r round(ptypesurv$p.value[2], digits=3)`). 
+
+```{r fig-netsused, fig.cap = "Percentage of nets used the night before the survey with linear trend: DHS, MICS, MIS surveys 2003-2020"}
+pnets %>% 
+  ggplot() +
+  #geom_point(aes(year, percent_nets_used), color="gray", alpha=0.5) +
+  geom_text(aes(x=year, y=netsused, label=country, color=typeofsurvey), size=2, alpha=0.75) +
+  geom_errorbar(aes(x=year, ymin=netsusedlb, ymax=netsusedub), width=0.3, color="lightgray", alpha=0.5) +
+  geom_smooth(aes(year, netsused, color=typeofsurvey, fill=typeofsurvey), method="lm", level=0.95, alpha=0.3) +
+  scale_color_brewer(palette="Set2") +
+  scale_fill_brewer(palette="Set2") +
+  theme(legend.position="bottom") +
+  labs(x="",
+       y="Percent of bednets used the previous night",
+       color="Survey Type",
+       fill="Survey Type")
+```
+
+```{r netsused-residence}
+pnetsres <- pnets %>% 
+  select(country, year, urban, rural, pvalresidence) %>% 
+  pivot_longer(cols=c(urban, rural), names_to="residence", values_to = "netsused") %>% 
+  mutate(country=case_when(country=="Sierra" ~ "Sierra Leone",
+                           country=="Burkina" ~ "Burkina Faso",
+                           country=="Congo" ~ "Rep. Congo",
+                           country=="Cote" ~ "Cote d'Ivoire",
+                           country=="Sao" ~ "Sao Tome and Principe",
+                           country=="Papua" ~ "Papua New Guinea",
+                           country=="East" ~ "Timor Leste",
+                           country=="CAR" ~ "Central African Republic",
+                           country=="Dakar" ~ "Senegal",
+                           TRUE ~ as.character(country)
+                           ))
+
+# pnetsres  %>% 
+#   ggplot() +
+#   #geom_point(aes(year, percent_nets_used), color="gray", alpha=0.5) +
+#   geom_text(aes(x=year, y=netsused, label=country, color=residence), size=2, alpha=0.75) +
+#   # geom_errorbar(aes(x=year, ymin=netsusedlb, ymax=netsusedub), width=0.3, color="lightgray", alpha=0.5) +
+#   geom_smooth(aes(year, netsused, color=residence, fill=residence), method="lm", level=0.95, alpha=0.3) +
+#   scale_color_brewer(palette="Set2") +
+#   scale_fill_brewer(palette="Set2") +
+#   theme(legend.position="bottom") +
+#   labs(x="",
+#        y="Percent of bednets used the previous night",
+#        color="Residence",
+#        fill="Residence")
+
+pnr <- pnets %>% 
+         mutate(delta=abs(urban-rural)) %>% 
+  arrange(delta) %>% 
+  mutate(surveynameyear=fct_reorder(surveynameyear, delta))%>% 
+  mutate(country=case_when(country=="Sierra" ~ "Sierra Leone",
+                           country=="Burkina" ~ "Burkina Faso",
+                           country=="Congo" ~ "Rep. Congo",
+                           country=="Cote" ~ "Cote d'Ivoire",
+                           country=="Sao" ~ "STP",
+                           country=="Papua" ~ "PNG",
+                           country=="East" ~ "Timor Leste",
+                           # country=="CAR" ~ "Central African Republic",
+                           country=="Dakar" ~ "Senegal",
+                           country=="GuineaBissau" ~ "Guinea Bissau",
+                           TRUE ~ as.character(country)
+                           ))
+ 
+
+# ggplot(pnr) +
+#   geom_segment( aes(x=surveynameyear, xend=surveynameyear, y=urban, yend=rural), color="grey") +
+#   geom_point( aes(x=surveynameyear, y=urban), color="lightblue", size=2, alpha=.5) +
+#   geom_point( aes(x=surveynameyear, y=rural), color="orange", size=2, alpha=.5 ) +
+#   coord_flip()+
+#   # theme_ipsum() +
+#   theme(
+#     legend.position = "none",
+#     axis.text.y = element_text(size=2)
+#   ) +
+#   xlab("") +
+#   ylab("Percent of bednets used the previous night, urban/rural")
+
+pnrdiv <- pnr %>% 
+  # filter(survey!="MICS") %>% 
+  # filter(
+  #   # country!="East",
+  #        country!="Vanuatu",
+  #        # country!="Papua",
+  #        country!="Lao",
+  #        country!="Pakistan",
+  #        country!="Comoros",
+  #        country!="Cambodia",
+  #        country!="Myanmar") %>% 
+  mutate(delta=urban-rural) %>% 
+  arrange(-delta) %>% 
+  mutate(dataset=fct_reorder(dataset, -delta),
+         moreurban=if_else(delta>0, "net use higher in urban","net use higher in rural"),
+         pvres=if_else(pvalresidence<0.05,1,0),
+         moreurban=case_when(pvres==0 ~ "p>0.05",
+                             TRUE ~ as.character(moreurban))) 
+
+pnrsum <- pnrdiv %>% 
+  tabyl(moreurban) 
+
+# ggplot(pnrdiv) +
+#   geom_segment( aes(x=dataset, xend=dataset, y=0, yend=delta, color=as.factor(moreurban), alpha=as.factor(pvres))) +
+#   # geom_point( aes(x=surveynameyear, y=urban), color="lightblue", size=2, alpha=.5) +
+#   # geom_point( aes(x=surveynameyear, y=rural), color="orange", size=2, alpha=.5 ) +
+#   coord_flip()+
+#   # scale_color_hue()+
+#   scale_alpha_discrete(range=c(0.3, 1), labels=c("p≥0.05", "p<0.05")) +
+#   # scale_fill_manual(values=c("#959E4A", "#0091C1")) +
+# # theme_ipsum() +
+#   theme(
+#     # legend.position = "none",
+#     axis.text.y = element_text(size=3)
+#   ) +
+#   labs(x="",
+#        y="Difference in percent of bednets used the previous night, urban/rural",
+#        color="",
+#        alpha="")
+# ggsave("cleveland_residence_netsused.pdf")
+
+
+
+# pnetsres %>% 
+#   group_by(residence) %>% 
+#   summarize(median=median(netsused))
+
+# pnrdiv %>% 
+#   filter(country=="Nigeria") %>% 
+#   ggplot() +
+#   geom_col(aes(y=delta, x=year, fill=as.factor(moreurban))) + # , alpha=as.factor(pvres))
+#   geom_text(aes(y=delta, x=year, label=survey)) +
+#     # scale_alpha_discrete(range=c(0.3, 1), labels=c("p≥0.05", "p<0.05")) +
+#   # facet_wrap(~country) +
+#     # coord_flip()+
+#   labs(x="",
+#        y="Difference in percent of bednets used the previous night, urban/rural",
+#        fill="",
+#        alpha="") +
+#   theme(
+#     # legend.position = "none",
+#     axis.text.y = element_text(size=10),
+#     axis.text.x = element_text(size=10, angle=45, vjust=.5),
+#     strip.background = element_rect(color="white"),
+#     strip.text = element_text(size=7)
+#   )
+# 
+# pnrdiv %>% 
+#   filter(country=="Nigeria") %>% 
+#   ggplot() +
+#   geom_col(aes(y=abs(delta), x=year, fill=as.factor(moreurban))) + # , alpha=as.factor(pvres))
+#   geom_text(aes(y=abs(delta), x=year, label=survey)) +
+#     # scale_alpha_discrete(range=c(0.3, 1), labels=c("p≥0.05", "p<0.05")) +
+#   # facet_wrap(~country) +
+#     # coord_flip()+
+#   labs(x="",
+#        y="Difference in percent of bednets used the previous night, urban/rural",
+#        fill="",
+#        alpha="") +
+#   theme(
+#     # legend.position = "none",
+#     axis.text.y = element_text(size=10),
+#     axis.text.x = element_text(size=10, angle=45, vjust=.5),
+#     strip.background = element_rect(color="white"),
+#     strip.text = element_text(size=7)
+#   )
+```
+
+```{r supply_prep}
+supplyfig <- pnets %>% 
+  select(dataset, starts_with("netsused")) %>% 
+  pivot_longer(cols = c(netsused,netsusedinhhwithnotenoug, netsusedinhhwithjustrigh, netsusedinhhwithtoomany), names_to = "netsupply", values_to = "netsused") %>% 
+  select(-netsusedlb,-netsusedub) %>% 
+  mutate(netsupply=case_when(netsupply=="netsused" ~ "Total",
+                             netsupply=="netsusedinhhwithnotenoug" ~ "Not enough",
+                             netsupply=="netsusedinhhwithjustrigh" ~ "Enough",
+                             netsupply=="netsusedinhhwithtoomany" ~ "More than enough",
+                             TRUE ~ as.character(netsupply))) %>% 
+  mutate(netsupply=fct_relevel(netsupply, "Not enough", "Enough", "More than enough", "Total"))
+
+
+usesupp <- pnets %>% 
+ select(dataset, starts_with("use")) %>% 
+  pivot_longer(cols = c(useitn, usenotenough, useenough, usetoomany), names_to = "netsupply", values_to = "useitn") %>% 
+  mutate(netsupply=case_when(netsupply=="useitn" ~ "Total",
+                             netsupply=="usenotenough" ~ "Not enough",
+                             netsupply=="useenough" ~ "Enough",
+                             netsupply=="usetoomany" ~ "More than enough",
+                             TRUE ~ as.character(netsupply))) %>% 
+  mutate(netsupply=fct_relevel(netsupply, "Not enough", "Enough", "More than enough", "Total"))
+
+supplyjoin <- supplyfig %>% 
+  left_join(usesupp) %>% # automatically joins on common varnames (dataset; netsupply)
+  pivot_longer(cols=c(useitn, netsused), names_to="var") %>% 
+  mutate(total=if_else(netsupply=="Total","Yes","No")) 
+
+dodge <- position_dodge(width = .8) # set a dodge position for the graph elements below
+summ <- supplyjoin %>% 
+  group_by(netsupply, var) %>% 
+  summarize(mn=round(mean(value),1))
+```
+
+The percent of nets used the previous night was `r summ$mn[1]`% for households with not enough nets (at least one, but less than one net for two people) and `r summ$mn[3]`% for households with at least one net for two people ("enough nets") but less than two nets for three people (net:person ratio between 0.5 and 0.75), shown in Fig. \@ref(fig:fig-violin). In contrast, in households with at least two nets for three people ("more than enough") `r summ$mn[5]`% of nets were used, potentially reflecting excess nets within the household or different net use behaviours by households with excess nets. Nonetheless, in these same households with "more than enough" nets, the percent of individuals using an ITN the previous night was `r summ$mn[6]`%, on par with those living in households with sufficient ITNs (`r summ$mn[4]`%). For people living within households owning at least one but not enough ITNs, population ITN use was `r summ$mn[2]`%. 
+
+```{r fig-violin, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Violin plots with means for ITNs used the previous night and population use of ITNs, by household net supply level."}
+
+
+supplyjoin %>% 
+  filter(netsupply!="Total") %>% # get rid of total, since total pop ITN use includes additional households that don't own any nets
+  ggplot(aes(y=value, x=netsupply, color=var, fill=var, alpha=as.factor(total))) +
+  geom_violin(position=dodge) + # draw_quantiles = c(0.25, 0.5, 0.75), 
+  # geom_point(position = position_jitter(seed = 1, width = 0.2)) +
+  # geom_boxplot(width=0.1, outlier.size=-1, position=dodge) +
+  stat_summary(fun=mean, colour="black", geom="text", 
+               vjust=0.0, alpha=.8, position=dodge, aes( label=round(..y.., digits=1))) +
+  scale_color_brewer(palette="Set2", labels=c("Percent of nets used","Percent population that used an ITN the previous night")) +
+  scale_fill_brewer(palette="Set2") +
+  scale_alpha_manual(values=c(0.1,0.7)) +
+  labs(y="Percent",
+       x="Household ITN supply",
+       color="") +
+  guides(fill = "none",
+         alpha= "none")+
+  theme(legend.position="bottom")
+```
+
+
+## Reported reasons for not using nets
+
+While the question "Why was this net not used the previous night" was consistent across all surveys, response options were inconsistent between countries and sometimes changed over time within a given country. Table 1 summarizes the response options and categorizes them into seven broad categories. The 'other' category captured 'other' responses (no survey had an "other, specify" option), as well as 'not hung' and 'net not needed last night', as the latter two responses fail to provide useful information about the respondent's reasoning and thus cannot be grouped into other categories.   
+
+ 
+```{r table1, tab.cap = "Categorization of reasons why nets were not used"}
+reasoncats <- read_excel("output/reason_category_table.xlsx")
+t1 <- flextable(reasoncats) %>% 
+  set_table_properties(layout = "autofit") %>% 
+  theme_vanilla %>% 
+  font(fontname="Times New Roman", part="all") 
+t1
+
+
+```
+
+                                                             
+
+```{r tz_zone}
+tzz <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet="Tanzania2017zonal") %>% 
+  clean_names()%>%
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used)), 
+         transm = if_else(zone %in% c("central","northern","southern highlands","southern west highlands"),"low","high"))
+
+```
+
+Figure \@ref(fig:summ-reas-cat) below shows the percentage of nets used the previous night across `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries, and the reasons why certain nets were not used. The percentage of nets reported used ranged from 50% in Ghana 2019 to 85% in Mozambique 2018. Senegal's continuous DHS surveys had the highest percentages of reasons relating to risk perception, with up to 25% of nets going unused due to "no mosquitoes" or "no malaria". This category was relatively infrequent in other surveys, except for Tanzania where up to 11% of nets were unused due to risk perception, especially in lower-transmission areas (Supplemental Material, Fig. \@ref(fig:tz-facet)). "Extra/saving for later" nets were reported most frequently in Ghana 2019 (19%), Liberia 2016 (19%), and in Tanzania (12-14% of nets). Senegal and Uganda had the highest rates of 'other' responses. In 2018, Uganda updated response options for this question to be more detailed, resulting in the 'extra' and 'objective' categories becoming more prominent; 'extra' category was comprised largely of 'saving to replace other net', while 'objective' was a combination of 'usual user not here' and 'too old/torn' (Supplemental Material, Fig. \@ref(fig:ug3-reas)). Subsequent surveys in Ghana, Guinea, Mozambique, Madagascar, Mali, and Nigeria adopted similar answer options.
+
+
+```{r summ-reas-cat, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Distribution of reasons nets were not used, across surveys. Surveys allowing multiple responses total more than 100% of all nets in the survey."}
+## append all the reason dataframes together, so that we can facet:
+cleancat <- x1 %>% reduce(bind_rows) %>%
+  drop_na(reason_net_not_used, country) %>% ## drop rows for dfs that aren't relevant (senegal year round, tz_zonal, etc)
+  select(where( ~ !all(is.na(.)))) %>% ## keep only columns that have some data; drop columns that are all NA
+  filter(is.na(zpct)) %>% 
+  mutate(reason_net_not_used = tolower(reason_net_not_used),
+         country=str_trim(country, side="right")) %>%
+  filter(
+    reason_net_not_used != "total",
+    reason_net_not_used != "Total",
+    reason_net_not_used != "net used",
+    reason_net_not_used != "net was used"
+  ) %>%
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used)))
+
+# Make a table of the mapping of categories to specific reasons, to use in cross checking HTML table later.
+tablecat <- cleancat %>% 
+  select(type, reason_net_not_used) %>% 
+  arrange(type) %>% 
+  distinct()
+  
+  
+summcat <- cleancat %>% 
+  group_by(country, type) %>% 
+  summarize(pct=sum(overall)) %>% 
+  mutate(x1=round(pct,digits=0),
+         x1=replace(x1, x1<=45,""))
+          # make a label that only has values if pct>45
+
+## make a stacked bar plot of all the categories.
+summcat %>%
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-pct) # order the bars in reverse order of frequency (so they show up in order in plot)
+         ) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +  
+  geom_col(aes(x = pct, y = country, fill = type)) +
+  geom_text(aes(x = 95, y = country, label=x1), size=3, color="white") +
+  scale_fill_manual(values = reason_palette) +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's alpha order top to bottom
+  labs(y="",
+       x="Percent",
+       fill = "Reason category")
+
+
+
+```
+
+```{r numreasonsct}
+count <- cleancat %>% 
+  select(country, reason_net_not_used) %>% 
+  group_by(country) %>% 
+  summarize(count=n_distinct(reason_net_not_used))
+  
+```
+
+```{r cats-supply}
+sa <- summcat %>% 
+  group_by(type) %>% 
+  summarize(pct=mean(pct)) %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-pct) # order the bars in reverse order of frequency (so they show up in order in plot)
+         ) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +  
+  geom_col(aes(x = pct, y=type, fill=type)) +
+  geom_text(aes(x = pct, y=type, label=round(pct, digits=1)), hjust=-0.5, size=3) +
+  theme_classic() +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's in order top to bottom
+  scale_x_continuous(breaks=seq(from = 0, to = 100, by = 20), limits=c(0,100)) +
+  scale_fill_manual(values = reason_palette) +
+  labs(y="",
+       x="Percent",
+       fill = "Reason category",
+       title="Overall reasons for net not being used") +
+  # theme(
+  #   legend.position = c(.95, .95),
+  #   legend.justification = c("right", "top"),
+  #   legend.box.just = "right",
+  #   legend.margin = margin(6, 6, 6, 6)
+  #   )
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0, size=10))
+
+## B Figure is the above graph but using the netsupply variable to break each of them out.
+suppcat <- x1 %>% reduce(bind_rows) %>%
+  drop_na(reason_net_not_used, country) %>% ## drop rows for dfs that aren't relevant (senegal year round, etc)
+  select(where( ~ !all(is.na(.)))) %>% ## keep only columns that have some data; drop columns that are all NA
+  mutate(reason_net_not_used = tolower(reason_net_not_used)) %>%
+  filter(
+    reason_net_not_used != "total",
+    reason_net_not_used != "Total",
+    reason_net_not_used != "net used",
+    reason_net_not_used != "net was used",
+    is.na(zpct)
+  ) %>%
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used))) %>% 
+  group_by(country, type) %>% 
+  summarize(pctnot=sum(among_hh_with_not_enough),
+            pcten=sum(among_hh_with_just_right),
+            pcttoo=sum(among_hh_with_too_many)) 
+
+x2 <- suppcat %>% 
+  group_by(type) %>% 
+  summarize(pctnot=mean(pctnot),
+            pcten=mean(pcten),
+            pcttoo=mean(pcttoo)) %>% 
+  pivot_longer(cols=!type, names_to = "netsupply")
+
+sb <- x2 %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-value), # order the bars in reverse order of frequency (so they show up in order in plot)
+         netsupply=case_when(netsupply=="pcttoo" ~ "HH with ≥2 ITN for 3 pp",
+                             netsupply=="pcten" ~ "HH with ≥1 ITN for 2 pp",
+                             netsupply=="pctnot" ~ "HH with <1 ITN for 2 pp")) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +  
+  geom_col(aes(x = value, y=netsupply, fill=type)) +
+  theme_classic() +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's in order top to bottom
+  scale_x_continuous(breaks=seq(from = 0, to = 120, by = 20), limits=c(0,120)) +
+  scale_fill_manual(values = reason_palette) +
+  labs(y="",
+       x="Percent",
+       fill = "Reason category",
+       title = "Reasons by household supply of ITNs") +
+  theme(legend.position = "none") +
+  theme(
+  #   legend.position = "bottom",
+    plot.title = element_text(hjust = 0, size = 10),
+  #   legend.title = element_text(size = 7),
+  #   legend.text = element_text(size = 7),
+  #   # legend.justification = "left",
+  #   legend.box.margin = margin(0,0,0,-2,"cm")
+  ) +
+  guides(fill = guide_legend(override.aes = list(size = 0.5), nrow = 4))
+     
+
+pcat <- summcat %>% 
+  group_by(type) %>% 
+  summarize(pct=mean(pct)) %>% 
+  arrange(-pct)
+```
+
+
+```{r cats-residence}
+
+## C Figure is the above graph but using the residence variable to break each of them out.
+urbancat <- x1 %>% reduce(bind_rows) %>%
+  drop_na(reason_net_not_used, country) %>% ## drop rows for dfs that aren't relevant (senegal year round, etc)
+  select(where( ~ !all(is.na(.)))) %>% ## keep only columns that have some data; drop columns that are all NA
+  mutate(reason_net_not_used = tolower(reason_net_not_used)) %>%
+  filter(
+    reason_net_not_used != "total",
+    reason_net_not_used != "Total",
+    reason_net_not_used != "net used",
+    reason_net_not_used != "net was used",
+    is.na(zpct)
+  ) %>%
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used))) %>% 
+  group_by(country, type) %>% 
+  summarize(pcturb=sum(urban),
+            pctrur=sum(rural)) 
+
+x5 <- urbancat %>% 
+  group_by(type) %>% 
+  summarize(pcturb=mean(pcturb),
+            pctrur=mean(pctrur)) %>% 
+  pivot_longer(cols=!type, names_to = "residence")
+
+surb <- x5 %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-value), # order the bars in reverse order of frequency (so they show up in order in plot)
+         residence=case_when(residence=="pcturb" ~ "Urban",
+                             residence=="pctrur" ~ "Rural")) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +  
+  geom_col(aes(x = value, y=residence, fill=type)) +
+  theme_classic() +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's in order top to bottom
+  scale_x_continuous(breaks=seq(from = 0, to = 120, by = 20), limits=c(0,120)) +
+  scale_fill_manual(values = reason_palette) +
+  labs(y="",
+       x="Percent",
+       fill = "Reason category",
+       title = "Reasons by residence") +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0, size = 10),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 10),
+    legend.justification = "right",
+    legend.box.margin = margin(0,0,0,-2,"cm")
+  ) +
+  guides(fill = guide_legend(override.aes = list(size = 0.5), nrow = 4))
+     
+leg <- get_legend(surb)
+surb <- surb + theme(legend.position = "none") 
+
+pcat <- summcat %>% 
+  group_by(type) %>% 
+  summarize(pct=mean(pct)) %>% 
+  arrange(-pct)
+```
+
+Figure \@ref(fig:fig-cats)A summarizes the categories of reasons for non-use across all `r words(length(unique(fulllist)))` surveys, demonstrating that an average of `r round(max(pcat$pct), digits=1)`% of nets were used the previous night, and that the leading category for non-use was "`r pcat$type[2]`", followed by "`r pcat$type[3]`". The least frequent categories cited as reasons for nets not being used were "`r pcat$type[7]`" and "`r pcat$type[8]`". Figure \@ref(fig:fig-cats)B presents reasons for nets not being used in the context of household net supply.
+
+```{r fig-cats, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="100%", fig.cap = "Summary of reasons nets were not used the previous night across surveys, by household supply of ITNs"}
+
+(sa + sb)/ (surb + leg) + 
+  plot_annotation(tag_levels = list(c("A", "B", "C", "Legend")))
+```
+
+Not surprisingly, "extra" nets comprised a higher proportion of reasons for non-use for nets in households with at least two ITN for three people (`r round(x2$value[3], digits=1)`%) compared to nets in households with fewer than one ITN per two people (`r round(x2$value[1], digits=1)`%) or nets in households with at least one ITN for two people but fewer than two nets for three people (`r round(x2$value[2], digits=1)`%). "Other" responses were more frequent for nets in households with at least two ITNs for three people (`r round(x2$value[18], digits=1)`% vs `r round(x2$value[17], digits=1)`% and `r round(x2$value[16], digits=1)`%), indicating that 'other' reasons are likely related to having extra nets, particularly in surveys prior to 2018 when response options did not capture extra nets well. The "risk perception" category was stable across ITN supply categories, ranging between `r round(x2$value[20], digits=1)`% and `r round(x2$value[19], digits=1)`%, as were "subjective" reasons, ranging from `r round(x2$value[23], digits=1)`% to `r round(x2$value[24], digits=1)`%. Reasons for non-use related to net attributes or fears comprised less than 2% of nets across all ITN supply categories. 
+
+```{r}
+ngdiff <- pnets %>% 
+  filter(country=="Nigeria" & survey!="MICS") %>% 
+  mutate(diff=rural-urban) %>% 
+  filter(diff>0) %>% 
+  select(diff, dataset, year)
+```
+
+When stratifying net use by residence (Fig. \@ref(fig:fig-cats)C), there was little difference overall between urban and rural settings, at `r round(x5$value[7], digits=1)`% and `r round(x5$value[8], digits=1)`% of nets used the previous night, respectively. Among the `r count(pnrdiv)` available surveys, `r round(pnrsum$percent[3]*100, digits=0)`% showed no difference in net use by residence, while `r round(pnrsum$percent[1]*100, digits=0)`% had higher rates of net use in rural areas, and `r round(pnrsum$percent[2]*100, digits=0)`% had higher rates in urban areas. Further details on the magnitude of these differences across countries and surveys is provided in Supplemental Material Fig. \@ref(fig:urbrural-bars). 
+
+Rural areas more frequently cited risk perception reasons for non-use, for `r round(x5$value[14], digits=1)`% of nets, compared to urban settings (`r round(x5$value[13], digits=1)`% of nets), but cited subjective reasons less frequently (`r round(x5$value[16], digits=1)`% of nets in rural and `r round(x5$value[15], digits=1)`% of nets in urban areas). More variation was observed in specific countries, however (Supplemental Material, Figs. \@ref(fig:gh-reas)-\@ref(fig:ug3-reas)). The urban/rural discrepancy in percentage of nets used was greatest in Ghana (`r with(pnets, urban[which(dataset=="GHPR82")])`% in urban vs `r with(pnets, rural[which(dataset=="GHPR82")])` in rural areas). Nets in urban areas of Nigeria were also consistently used less than those in rural areas in the four available surveys, declining from a `r with(ngdiff, max(diff))` percentage-point difference in `r with(ngdiff, year[which(diff==max(ngdiff$diff))])` to a `r with(ngdiff, min(diff))` percentage-point difference in `r with(ngdiff, year[which(diff==min(ngdiff$diff))])`. In Kenya, Liberia, Madagascar, Mali, Mozambique, and Uganda, there was virtually no difference, however, and in Tanzania more urban nets were used than rural ones. Results were variable over the nine Senegal surveys. Urban residents in Ghana much more frequently reported "too hot" compared to their rural counterparts (20.7 vs 6.7 in 2019), as did respondents in Nigeria (2015, 2018, and 2021) and Liberia (2016), while the reverse was true in the three Tanzania surveys. Rural residents in Tanzania more frequently reported "no mosquitoes" than those in urban areas in all three surveys; the same was true in Senegal for surveys conducted from 2011-2016, but urban residents cited it more frequently in 2018 and 2021. Urban residents in Ghana (2019) also more frequently reported preferring other methods (for 9.9% of all nets observed), compared to rural areas (4.3% of all nets).
+
+```{r read_senegal_allyear}
+senall <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet="Senegal Use All Year") %>%
+  clean_names() %>% 
+  rename(useall=percent_household_that_use_nets_year_round) 
+
+senacc <- read_dta("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Analysis ITN Indicators Compiled/national_itn_indicators.dta") %>% 
+  clean_names() %>% 
+  filter(country=="Senegal",
+         year<2020)
+
+sennotallyear <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet="Senegal Year-Round ALLHH", range="A2:J9") %>%
+  clean_names() %>% 
+  rename(reason = reason_nets_not_used_year_round) %>% 
+  mutate(reason=case_when(reason=="fogetfulness" ~ "forgetfulness",
+                          TRUE ~ as.character(reason)),
+         reason=if_else(reason=="no/few mosquitos","no/few mosquitoes",reason)) %>% 
+  pivot_longer(!reason, names_to = "year", names_prefix = "x", values_to = "values") %>% 
+  arrange(year) %>% 
+  mutate(
+    reason = as.factor(reason),
+    reason = fct_relevel(
+      reason,
+      levels = c(
+        "use all year",
+        "no/few mosquitoes",
+        "heat",
+        "forgetfulness",
+        "don't like",
+        "don't know",
+        "other"
+      )
+    ),
+    year = case_when(
+      year == "2008_9" ~ 2008,
+      year == "2010_2011" ~ 2011,
+      year == "2012_2013" ~ 2012,
+      TRUE ~ as.numeric(year)
+    )
+  )
+
+nomosq <- sennotallyear %>% 
+  filter(reason=="no/few mosquitoes") %>% 
+  arrange(values)
+
+heat <- sennotallyear %>% 
+  filter(reason=="heat") %>% 
+  arrange(values)
+
+psenall <- tidy(lm(useall ~ year, senall))
+```
+
+In eight surveys from Senegal two additional questions were asked. In households that owned at least one net, respondents were asked “do members of this household use nets all year round?” (Fig. \@ref(fig:fig-sen)A below). The percentage of respondents reporting that people in their household did use nets year-round increased from `r round(min(senall$useall), digits=1)`% to `r round(max(senall$useall), digits=1)`% over the `r min(senall$year)`-`r max(senall$year)` period (p<0.001 for trend) and generally tracked with increasing levels of population access to ITNs. In households responding “no”, a follow-up question was asked: “what are the reasons household members do not use nets year round?”. The most frequent answer was “no/few mosquitoes” (Fig. \@ref(fig:fig-sen)B), which fell from a high of `r max(nomosq$values)`% in `r nomosq$year[9]` to `r min(nomosq$values)`% in `r nomosq$year[1]`, as a proportion of all households in the survey. “Heat” was the next most common response, ranging between `r min(heat$values)`-`r max(heat$values)`%. Not liking the net and forgetfulness were relatively uncommon (less than `r sennotallyear %>% filter(reason=="don't like") %>% arrange(-values) %>% slice(1) %$% values`% and `r sennotallyear %>% filter(reason=="forgetfulness") %>% arrange(-values) %>% slice(1) %$% values`% of all households in any survey, respectively).
+
+
+```{r fig-sen, fig.width = 7, fig.height = 4, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Proportion of households reporting year-round net use and households' reported reasons for not using nets, Senegal 2008-2019"}
+fig5a <- senall %>% 
+  ggplot() +
+  geom_line(aes(x=year, y=useall, color="Respondents reporting net use all year")) +
+  geom_line(data=senacc, aes(x=year, y=access_merg, color="Population ITN Access")) +
+  geom_ribbon(aes(x=year, ymin=lb, ymax=ub), fill=rgb(102,194,165, maxColorValue=255), alpha=0.2) +
+  labs(x="",
+       y="Percent",
+       color="",
+       title="Self-reported year-round net use") +
+  scale_x_continuous(breaks=seq(from = 2005, to = 2020, by = 1)) +
+  scale_y_continuous(breaks=seq(from = 0, to = 100, by = 20), limits=c(0,100)) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1),
+        legend.position = "bottom") +
+  guides(color=guide_legend(nrow=2,byrow=TRUE)) + 
+  scale_color_manual(values=c(rgb(252,141,98, maxColorValue=255), rgb(102,194,165, maxColorValue=255)))
+
+
+fig5b <- sennotallyear %>% 
+  ggplot() +
+  geom_line(aes(y=values, x=year, color=reason, group=reason)) +
+  geom_ribbon(data=senall, aes(x=year, ymin=lb, ymax=ub), fill=rgb(102,194,165, maxColorValue=255), alpha=0.2) + 
+  # scale_fill_brewer(palette="Paired", direction=-1) +
+  scale_x_continuous(breaks=seq(from = 2005, to = 2020, by = 1)) +
+  scale_y_continuous(breaks=seq(from = 0, to = 100, by = 20), limits=c(0,100)) +
+  labs(x = "",
+       y = "Percent",
+       color = "",
+       title="Reasons for not using nets all year") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1),
+              legend.position="bottom") +
+  guides(color=guide_legend(nrow=4,byrow=TRUE)) +
+  scale_color_brewer(palette="Set2")
+
+plot_grid(fig5a, fig5b, labels="AUTO", align="h", axis="bottom")
+```
+
+
+```{r seasons-fig, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Percent of nets used the previous night (green) and reasons for non-use, Senegal 2011-2019"}
+
+sreas <- read_excel("/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet="Sen_Season_Reason") %>% 
+  clean_names() %>% 
+  select(dataset, year, reason_net_not_used, overall, x95_percent_ci, n, month) %>% 
+  filter(year<2020) %>% # leave out 2020-21 as reasons changed
+  rename(ci95=x95_percent_ci,
+         reason=reason_net_not_used) %>% 
+  mutate(
+    # year=case_when(dataset=="SNHR8I" & month==12 ~ 2020,
+    #                     TRUE ~ as.numeric(year)),
+         reason=str_remove(reason, "reasonnotused=="),
+         reason=tolower(reason),
+         reason=if_else(reason=="no mosquitos","no mosquitoes",reason),
+         mdate=my(paste(month, year, sep = "/")),
+         reason=case_when(reason=="not efficient" ~ "not effective",
+                          TRUE ~ as.character(reason)),
+         reason = as.factor(reason),
+        reason = fct_relevel(reason,
+      levels = c(
+        "net was used",
+        "no mosquitoes",
+        "other",
+        "heat",
+        "torn",
+        "not effective",
+        "don't know"
+      )
+    )) %>% 
+    separate(ci95, c("lb", "ub"), sep="-", convert=TRUE) %>% 
+  mutate_at(c('lb', 'ub'), as.numeric)
+
+nmonths <- sreas %>% 
+  group_by(dataset) %>% 
+  summarize(nmonth=length(unique(month))) ## up to 10 months for Senegal cDHS
+
+start_date <- as.Date("2011-01-01")
+end_date <- as.Date("2019-12-01")
+
+full_int <- interval(start_date, end_date)
+
+month_seq = seq(start_date, end_date, by = "month")
+month_int = interval(floor_date(month_seq, "month"), ceiling_date(month_seq, "month") - days(1))
+
+transmission <- data.frame(month_seq) %>% 
+  mutate(month=month(month_seq),
+         transmission = case_when(month>6 ~ "high",
+                                  month<=6 ~ "low"),
+         ymin=70,
+         ymax=80,
+         transl=case_when(transmission=="low" ~ 0,
+                          transmission=="high" ~ 90))
+
+sreas %>% 
+  filter(n>10) %>% 
+  ggplot() +
+  geom_col(data=transmission, aes(y=transl, x=month_seq, alpha="high transmission season")) +
+  geom_line(aes(x=mdate, y=overall, color=reason)) +
+  geom_ribbon(aes(x=mdate, ymin=lb, ymax=ub, fill=reason), alpha=0.2) +
+  scale_alpha_manual(values=c(0.10,0.0)) +
+  labs(x="",
+       y="Percent of all nets",
+       color="",
+       alpha="") +
+  scale_color_brewer(palette="Set2") +
+  scale_fill_brewer(palette="Set2") +
+  theme(legend.position = "bottom") +
+  guides(fill="none")
+```
+
+Seasonal trends in reasons for not using nets in Senegal were apparent (Fig. \@ref(fig:seasons-fig)) with the percentage of nets used the previous night peaking during the high transmission season (shown approximatively above as July-December) and falling during the drier months of February-May. Correspondingly, the proportion of nets not used due to "no mosquitoes" peaked during the drier months. 
+
+```{r roomtomove}
+roommove <- pcat %>% 
+  filter(type=="extra" | type=="objective") %>% 
+  mutate(tot=sum(pct))
+```
+
+# Discussion
+
+Over the past nearly twenty years, an average of over 70% of ITNs were reported as being used the previous night in `r count(pnets)` large household surveys from `r words(length(unique(pnets$country)))` countries. Questions about why nets go unused have only been included in `r words(length(unique(fulllist)))` surveys from `r words(length(unique(nummis$country)))` countries, but among these, the primary reasons given were that unused nets are surplus to immediate requirements or are not needed due to perceived low risk of malaria and/or mosquito bites. Responses related to extra nets were more frequent among households owning more ITNs than deemed strictly necessary by WHO (one ITN per two people) [@WorldHealthOrganization:2019ws]. Unsurprisingly, the proportion of nets used the previous night was lower in households with "more than enough" nets than in households with "not enough" or "enough" nets, while at the same time, the proportion of people that used an ITN the previous night was highest in households with "enough" or "more than enough" ITNs. Households with more than one ITN per two people may have acquired additional nets to cover individual sleeping spaces or to accommodate sleepers who cannot share a sleeping space and thus are able to have most household members sleep under a net; other households may have extra nets being saved for later use, when current nets wear out. Households with "not enough" ITNs had lower rates of population use, but high rates of nets being used - indicating that these households are using the nets that they have, and are challenged primarily by not having enough for other members of the family. It should be noted that having 'extra' nets is reflective of the inherent inefficiencies of ITN distribution systems, wherein some households will have too few while others may receive additional nets slightly earlier than required [@Bhatt:2015gn]. The authors view having extra nets on hand within households as a positive, given the unpredictability of net replacement timing.
+
+Reasons related to net attributes, including size, shape, color, texture, and mosquito-killing ability, were inconsistently included in survey questionnaires, but represented a negligible fraction of reasons for not using nets. While this does not preclude these issues from contributing to net non-use, it provides some evidence that these net attributes are not a key priority when families are making net use decisions. The 2011 Pulford review findings [@Pulford:2011dc] that discomfort due to heat and perceived low mosquito density were the most widely identified reasons for non-use are partially confirmed here; heat per se was not widely reported in more recent surveys, but risk perception as a category, particularly for Senegal, was a key driver. Pulford et al also use categories such as "social factors" (sleeping elsewhere), "technical factors" (not being able to hang a net), which are considered "objective" reasons for non-use in our study. Pulford's review, conducted just as universal coverage campaigns were scaling up, was limited to 22 studies between 1990 and 2010. Since this time, a number of qualitative research studies have also been conducted, in which respondents cite being bothered by net attributes including smell, itching, shape, and size [@Mattern:2016dp; @Berthe:2014ja; @Sande:2012vb; @Galvin:2011ea]. However, these reasons were only rarely cited during quantitative surveys included in this study. Research from Senegal indicates that initial itchiness or smell of nets are transitory, noticeable when nets are first received, but subsiding over time, not impeding net use [@Berthe:2014ja]. Other less preferable attributes of nets may similarly become less noticeable over time, and no longer constitute a key reason for non-use, particularly when, as in most countries distributing ITNs, there are seldom enough nets in good condition for everyone to use. Families thus face choices about using the imperfect ITNs they have, or risk contracting malaria. 
+
+Nearly 80 unique answer options were included across the surveys. The categorization of responses into "extra", "risk perception", "objective", "subjective", etc., is intended to facilitate interpretation and guide national malaria programmes and their partners in designing appropriate responses for improving net use. Where the majority of unused nets are not used due to subjective reasons, social behaviour change may be able to change attitudes and behaviours; however, where most nets are unused due to being too old or torn, programmes may need to focus on net maintenance behaviours and/or additional ITN distribution to improve ITN use rates.
+
+As one example, Senegal has focused messaging over the last decade to address the perceived lower risk of malaria in the hot/dry season, in part because of findings in these surveys, through the "Trois Toutes" campaign ("Toute la famille, toutes les nuits, toute l'année" or "Every family member; every night; all year round"). Self-reported use of nets all year round has increased over time, although it remains unclear whether this is driven primarily by corresponding increases in overall access to ITNs with the household, or represent real changes in behaviour for more consistent ITN use. The continuous DHS in Senegal, conducted over multiple months annually for the last eight years, present a unique opportunity for assessing trends over time in year-round use, as well as evaluating the associations between seasons and frequency of certain responses, notably "no/few mosquitoes". Indeed, net use peaks during periods of high malaria transmission, while the proportion of nets not used due to "no mosquitoes" peaks during the hot dry season when mosquito densities are substantially lower. 
+
+Another example of refining the net non-use question to better inform programming is from Uganda. Following the 2009 MIS survey Uganda implemented "hang up campaigns" to ensure nets were hung and used, partially in response to low hanging rates observed in the 2009 and other surveys. Operational research showed that these hang up campaigns did not improve hanging or use rates, as net hanging increased at similar rates over time in control and intervention groups [@Anonymous:2015ff]. In its most recent surveys, Uganda teased apart the nebulous "not hung" answer option to better focus on specific barriers to net use, enabling the programme to understand what lies behind the non-use of nets. Key reasons for non-use in 2018 were "saving net for later", "user not here", and "too old/torn", none of which are best addressed with social behaviour change (SBC) efforts to hang up nets. The specification of reasons for non-use enables programmes and their SBC partners to better design and target net use interventions. The absence of these types of questions even in many recent surveys has been a missed opportunity, particularly as ITNs remain the primary tool for malaria vector control across the globe. Happily, however, the question is now standard in MIS and DHS surveys conducted since 2019, with a set of recommended response options drawn in large part from earlier iterations of the present study. 
+
+Urban and rural differences in net use have been observed in many countries and settings, and typically reflect differences in perception of risk of malaria, driven by underlying malaria transmission rates (which can also vary considerably within urban areas [@10.1186/s12936-016-1138-4]). In Ghana, Guinea, and Nigeria, where malaria risk is considerably lower in urban areas [@nig18DHSreport;@GhanaStatisticalService:2017ug; @ghmis2019; @nigmis2021;@gnmis2021], nets are used at lower rates by urban residents, while in Tanzania, low-transmission zones tend to be more rural, contributing to lower net use rates in rural areas. In the context of lower malaria risk, people are more likely to cite subjective reasons for not using available nets, as the Ghana results demonstrate here (Fig. \@ref(fig:gh-reas) in Supplemental Material).
+
+```{r obj_sbc}
+sbc <- summcat %>% 
+  mutate(sbc=case_when(type=="net used" ~ "net used",
+                       type %in% c("fears","net attributes","subjective","risk perception","other") ~ "sbc",
+                       type %in% c("objective","extra") ~ "obj")) %>%
+  group_by(country, sbc) %>% 
+  summarize(sum=sum(pct)) %>% 
+  filter(sbc=="obj") %>% 
+  arrange(sum)
+  
+  
+  # ggplot() +
+  # geom_col(aes(x=pct, y=country, fill=sbc)) +
+  # scale_fill_brewer(palette="Set2")
+```
+
+These findings also highlight that there may be more limited "room for improvement" in ITN use than previously thought. Nets not used for 'objective' reasons and those that are 'extra' are relatively impervious to social behaviour change communication, and these categories explain non-use for, on average, `r round(roommove$tot[1], digits=0)`% of all nets in the included surveys, with a range of `r min(sbc$sum)`% to `r max(sbc$sum)`% of all nets depending on the country and survey. Even with highly effective social behaviour change, not all nets can be reasonably expected to be used. 
+
+
+## Limitations
+
+
+The study has several limitations. First, the question of reasons why nets were not used was included in only `r words(length(unique(fulllist)))` surveys in `r words(length(unique(nummis$country)))` countries, with nine of these from Senegal. While it is not possible to generalize reasons for non-use of nets to other countries, the present findings show that there are substantial similarities across countries in overall percentage of nets used and the relative importance of certain types of reasons. Second, response options and the number of reasons vary considerably by country, from `r words(min(count$count))` in Senegal to `r words(max(count$count))` in Liberia and Mozambique. Nonetheless, some of the differences in response options were minimal changes in wording, and major categories of reasons were generally included in each survey. Third, the categorization of the reasons for non-use into broader categories relies on assumptions about which barriers are similar, and opinions may differ depending on subject familiarity, lived experience, and other factors. Some reasons may also belong in multiple categories. Fourth, around half the surveys posed the question about reasons for why a net wasn't used the previous night as a multiple choice question, while the other half restricted it to a single response. This may introduce some unequal weighting into the results, or put more emphasis on single-choice responses to the exclusion of other possible reasons for not using nets. Finally, there were a substantial number of responses recorded as "other" in many of the surveys; it cannot be determined what type of reason this may have been, although it seems likely that they are at least in part related to extra nets or saving nets for future use, given the increase in other responses among households with "more than enough" nets. 
+
+# Conclusion
+The percentage of nets used the previous night averaged over 70% from 2003-2020, with no discernible change over this period. Reported reasons for why a net was unused fell largely into three categories - nets that were extra/being saved for future use; the perception that there was little risk of malaria (particularly in dry season); and "other" responses. Net attributes such as color, size, shape, and texture, and fears related to chemicals were the least frequent reasons given. Classifying reasons for non-use into broader categories facilitates the design of appropriate SBC interventions to address the major underlying reasons for non-use, where this is feasible. Finally, national malaria programs should take advantage of the inclusion of this question in future surveys to provide actionable data to inform SBC programming.
+
+# Declarations
+
+## Ethics approval and consent to participate
+
+Not applicable
+
+## Consent for publication
+
+Not applicable
+
+## Availability of data and materials
+
+Code is available at https://github.com/hkoenker/Reasons. Data are publicly available from www.dhsprogram.com and from mics.unicef.org.  
+
+## Competing interests
+
+The authors declare that they have no competing interests.
+
+## Funding
+
+This work was supported, in whole or in part, by the Bill & Melinda Gates Foundation INV-016322. Under the grant conditions of the Foundation, a Creative Commons Attribution 4.0 Generic License has already been assigned to the Author Accepted Manuscript version that might arise from this submission. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+
+## Authors' contributions
+HK designed the study and conducted the analysis. EKK and CT contributed to the analysis. ME, RO, ES, EKK, and CT provided inputs on the drafts. All authors reviewed and approved the final version of the manuscript.
+
+## Acknowledgements
+
+An early version of this study was made possible by the generous support of the American people through the United States Agency for International Development (USAID) under the terms of USAID/JHU Cooperative Agreement No: AID-OAAA-14-00057 for the VectorWorks Project. The contents are the responsibility of the authors and do not necessarily reflect the views of USAID or the United States Government. 
+
+
+
+# Supplemental Material
+
+```{r summcat-cty, include=FALSE, fig.width=7, fig.height=5, fig.align="center", fig.topcaption=TRUE, out.width="80%", fig.cap = "Reported net use and reasons for non-use equally weighted by country"}
+
+ctycat <- summcat %>% 
+  mutate(cty=word(country)) %>% 
+  # filter(cty!="Senegal") %>% 
+  group_by(cty, type) %>% 
+  # group_by(type) %>%
+  summarize(pct=mean(pct)) %>% 
+  arrange(-pct)
+
+ctycat %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-pct) # order the bars in reverse order of frequency (so they show up in order in plot)
+         ) %>% # order the countries in reverse order  (so they show up in alpha order in plot)
+  ggplot() +
+  geom_col(aes(x=pct, y=cty, fill=type)) +
+  # geom_text(aes(x = 95, y = cty, label=x1), size=3, color="white") +
+  scale_fill_manual(values = reason_palette) +
+  scale_y_discrete(limits=rev) + # reverse order the y-axis so it's alpha order top to bottom
+  labs(y="",
+       x="Percent",
+       fill = "Reason category")
+```
+
+
+```{r tz-facet, fig.width = 7, fig.height = 5, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reported net use and reasons for non-use by low and high transmission zones, Tanzania 2017-18 MIS"}
+
+tzz %>% 
+  mutate(type=as.factor(type), # make type a factor, for reordering
+         type=fct_reorder(type,-zpct) # order the bars in reverse order of frequency (so they show up in order in plot)
+         ) %>% # order
+  group_by(zone, transm, type) %>% 
+  summarise(sum=sum(zpct)) %>% 
+  ggplot() +
+  geom_col(aes(x=type, y=sum, fill=type)) +
+  geom_text(aes(x=type, y=sum, label=sum), vjust=-.20, size=3) +
+  facet_wrap(transm~zone) +
+  scale_fill_manual(values=reason_palette) +
+  scale_y_continuous(limits=c(0,100)) +
+  theme(axis.text.x = element_blank()) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        strip.background = element_blank(),
+        panel.border = element_rect(colour = "white", fill = NA)) +
+  labs(y="Percent",
+       x="",
+       fill="")
+```
+
+```{r urbrural-bars, fig.width=7, fig.height=7, fig.align="center", fig.topcaption=TRUE, out.width="80%", fig.cap = "Percentage-point difference in urban vs rural percent of nets used the previous night, over time"}
+
+pnrdiv %>% 
+  ggplot() +
+  geom_col(aes(y=delta, x=year, fill=as.factor(moreurban))) +
+    # scale_alpha_discrete(range=c(0.3, 1), labels=c("p≥0.05", "p<0.05")) +
+  scale_fill_manual(values=c("darkseagreen", "orchid", "lightgrey")) +
+  # scale_fill_brewer(palette="Set2") +
+  facet_wrap(~country) +
+    # coord_flip()+
+  labs(x="",
+       y="Difference in percent of bednets used the previous night, urban/rural",
+       fill="",
+       alpha="") +
+  theme(
+    legend.position = "right",
+    axis.text.y = element_text(size=6),
+    axis.text.x = element_text(size=6, angle=45),
+    strip.background = element_rect(color="white"),
+    strip.text = element_text(size=7)
+  )
+```
+
+```{r func_reasonscombo, eval=FALSE}
+
+
+### Make a plot for each df:
+reas <- function(data) {
+data %>%
+  mutate(reason_net_not_used=tolower(reason_net_not_used)) %>% 
+    filter(reason_net_not_used!="total",
+           reason_net_not_used!="net used",
+           reason_net_not_used!="net was used") %>% 
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used))) %>% 
+  ggplot(aes(x = overall, y = fct_reorder(reason_net_not_used, overall), fill = type)) +
+  geom_col() +
+  scale_fill_manual(values = c("net used"=rgb(102,194,165, maxColorValue=255), "objective" = rgb(141,160,203, maxColorValue=255), "subjective" = rgb(252,141,98, maxColorValue=255),  "risk perception" = rgb(231,138,195, maxColorValue=255),  "net attributes" = rgb(229,196,148, maxColorValue=255), "extra" = rgb(166,216,84, maxColorValue=255), "fears" = rgb(255,217,47, maxColorValue=255), "other"="lightgray")) +
+  labs(x = "",
+       y = "",
+       fill = "Reason type",
+       title = data$country[1]) +
+    theme(plot.title = element_text(hjust = 0, size=10))
+}
+```
+
+
+```{r func_reasons_urban}
+### Make a plot for each df:
+reasurb <- function(data) {
+data %>%
+  mutate(reason_net_not_used=tolower(reason_net_not_used)) %>% 
+    filter(reason_net_not_used!="total",
+           reason_net_not_used!="net used",
+           reason_net_not_used!="net was used") %>% 
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used))) %>% 
+    pivot_longer(cols=c(urban, rural), names_to="residence") %>% 
+  ggplot(aes(x = value, y = fct_reorder(reason_net_not_used, overall), fill = type, alpha=as.factor(residence))) +
+  geom_col(position=position_dodge()) +
+    scale_alpha_discrete(range=c(.5,1)) +
+    scale_x_continuous(limits=c(0,100)) +
+    geom_text(aes(x=value, y = fct_reorder(reason_net_not_used, overall), label=value, group=as.factor(residence)), size=3, position=position_dodge(width=.9), hjust=-.2) +
+  scale_fill_manual(values = c("net used"=rgb(102,194,165, maxColorValue=255), "objective" = rgb(141,160,203, maxColorValue=255), "subjective" = rgb(252,141,98, maxColorValue=255),  "risk perception" = rgb(231,138,195, maxColorValue=255),  "net attributes" = rgb(229,196,148, maxColorValue=255), "extra" = rgb(166,216,84, maxColorValue=255), "fears" = rgb(255,217,47, maxColorValue=255), "other"="lightgray")) +
+  labs(x = "Percent",
+       y = "",
+       fill = "Reason type",
+       alpha = "",
+       title = data$country[1]) +
+    theme(plot.title = element_text(hjust = 0, size=10)) +
+    guides(alpha = guide_legend(reverse = TRUE))
+}
+```
+
+
+### Ghana
+```{r gh-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Ghana 2019"}
+reasurb(Ghana2019)  
+```
+
+### Guinea
+
+```{r gn-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Guinea 2021"}
+reasurb(Guinea2021)
+```
+
+### Kenya
+
+```{r kn1-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Kenya 2015"}
+reasurb(Kenya2015)
+```
+
+```{r kn2-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Kenya 2020"}
+reasurb(Kenya2020)
+```
+
+### Liberia
+
+```{r lb-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Liberia 2016"}
+reasurb(Liberia2016)
+```
+
+### Madagascar
+
+```{r md-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Madagascar 2021"}
+reasurb(Madagascar2021)
+```
+
+### Mali
+
+```{r ml-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Mali 2021"}
+reasurb(Mali2021)
+```
+
+### Mozambique
+
+```{r mz-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Mozambique 2018"}
+reasurb(Mozambique2018)
+```
+
+### Nigeria
+
+```{r ng-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Nigeria 2010"}
+reasurb(Nigeria2010)
+```
+
+
+```{r ng2-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Nigeria 2015"}
+reasurb(Nigeria2015)
+```
+
+
+```{r ng3-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Nigeria 2018"}
+reasurb(Nigeria2018)
+```
+
+
+```{r ng4-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Nigeria 2021"}
+reasurb(Nigeria2021)
+```
+
+### Senegal
+
+```{r sn1-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2011"}
+reasurb(Senegal2011)
+```
+
+```{r sn2-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2012"}
+reasurb(Senegal2012)
+```
+
+```{r sn3-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2014"}
+reasurb(Senegal2014)
+```
+ 
+```{r sn4-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2015"}
+reasurb(Senegal2015)
+```
+ 
+```{r sn5-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2016"}
+reasurb(Senegal2016)
+```
+ 
+```{r sn6-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2017"}
+reasurb(Senegal2017)
+```
+  
+```{r sn7-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2018"}
+reasurb(Senegal2018)
+```
+  
+```{r sn8-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2019"}
+reasurb(Senegal2019)
+```
+  
+```{r sn9-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Senegal 2020-2021"}
+reasurb(Senegal2021)
+```
+ 
+### Tanzania
+
+```{r tz1-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Tanzania 2011-12"}
+reasurb(Tanzania2011)
+```
+ 
+ 
+```{r tz2-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Tanzania 2015"}
+reasurb(Tanzania2015)
+```
+
+ 
+```{r tz3-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Tanzania 2017-2018"}
+reasurb(Tanzania2017)
+```
+ 
+### Uganda
+
+```{r ug1-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Uganda 2009"}
+reasurb(Uganda2009)
+```
+
+ 
+```{r ug2-reas, fig.width = 7, fig.height = 7, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Uganda 2014"}
+reasurb(Uganda2014)
+```
+ 
+
+```{r ug3-reas, fig.width = 7, fig.height = 7, warning=FALSE, warning=FALSE, fig.align='center', fig.topcaption=TRUE, out.width="80%", fig.cap = "Reasons nets were not used the previous night, Uganda 2019"}
+reasurb(Uganda2019)
+```
+ 
+
+```{r teststuff, eval=FALSE}
+test <- Ghana2019 %>%
+  mutate(reason_net_not_used=tolower(reason_net_not_used)) %>% 
+    filter(reason_net_not_used!="total",
+           reason_net_not_used!="net used",
+           reason_net_not_used!="net was used") %>% 
+  mutate(type = case_when(reason_net_not_used == "net was used the previous night" ~ "net used",
+                          reason_net_not_used == "too old/torn" ~ "objective",
+                          reason_net_not_used == "used/perforated" ~ "objective",
+                          reason_net_not_used == "net in poor condition" ~ "objective",
+                          reason_net_not_used == "net too dirty" ~ "objective",
+                          reason_net_not_used == "net not available last night/washed" ~ "objective", 
+                          reason_net_not_used == "not in good condition" ~ "objective",
+                          reason_net_not_used == "too old/too many holes" ~ "objective",
+                          reason_net_not_used == "net faulty/torn/unusable" ~ "objective",
+                          grepl("wash", reason_net_not_used) ~ "objective",
+                          grepl("usual", reason_net_not_used) ~ "objective",
+                          grepl("hang", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "too weak to hang" ~ "objective",
+                          grepl("torn", reason_net_not_used) ~ "objective",
+                          reason_net_not_used == "difficult to hang" ~ "objective",
+                         reason_net_not_used == "net too old/torn" ~ "objective",
+                          reason_net_not_used == "net not needed last night" ~ "extra",
+                          reason_net_not_used == "net not needed" ~ "extra",
+                          reason_net_not_used == "reserved-for future use-new" ~ "extra", 
+                          reason_net_not_used == "saving it for later" ~ "extra",
+                          reason_net_not_used == "extra/saved for later" ~ "extra",
+                          reason_net_not_used == "extra net/for visitors" ~ "extra",
+                          reason_net_not_used == "not hung up/stored away" ~ "extra",
+                          reason_net_not_used == "saving for later" ~ "extra",
+                          reason_net_not_used == "excess nets" ~ "extra",
+                          reason_net_not_used == "saving to replace other net" ~ "extra",
+                          grepl("extra", reason_net_not_used) ~ "extra",
+                          reason_net_not_used == "other" ~ "other",
+                          reason_net_not_used == "other reason" ~ "other",
+                          reason_net_not_used == "don't know" ~ "other",
+                          reason_net_not_used == "not hung" ~ "other",
+                          reason_net_not_used == "not needed last night" ~ "other",
+                          reason_net_not_used == "no mosquitos" ~ "risk perception",
+                          reason_net_not_used == "no malaria now" ~ "risk perception",
+                          reason_net_not_used == "saving for rainy season" ~ "risk perception",
+                          grepl("malaria", reason_net_not_used) ~ "risk perception",
+                          reason_net_not_used == "no mosquitoes" ~ "risk perception",
+                         reason_net_not_used == "think no need to use" ~ "risk perception",
+                          reason_net_not_used == "no longer kills/repels mosquitoes" ~ "subjective",
+                          reason_net_not_used == "child doesn't like" ~ "subjective",
+                          reason_net_not_used == "feel closed in/afraid" ~ "subjective",
+                          reason_net_not_used == "net never used" ~ "subjective",
+                          grepl("smell", reason_net_not_used) ~ "subjective",
+                          reason_net_not_used == "feel closed in" ~ "subjective",
+                          reason_net_not_used == "not effective" ~ "subjective",
+                          reason_net_not_used == "heat" ~ "subjective",
+                          reason_net_not_used == "itn provokes coughing" ~ "subjective",
+                          reason_net_not_used == "causes itching" ~ "subjective",
+                          reason_net_not_used == "slept outside" ~ "subjective",
+                          reason_net_not_used == "slept outdoors" ~ "subjective",
+                          reason_net_not_used == "too hot" ~ "subjective",
+                          reason_net_not_used == "bad for health" ~ "fears",
+                          reason_net_not_used == "superstition/witchcraft" ~ "fears",
+                          reason_net_not_used == "feel itn chemicals are unsafe" ~ "fears",
+                          reason_net_not_used == "chemicals not safe" ~ "fears",
+                          reason_net_not_used == "chemicals are unsafe" ~ "fears",
+                          grepl("rough", reason_net_not_used) ~ "net attributes",
+                          reason_net_not_used == "net too small" ~ "net attributes",
+                          reason_net_not_used == "net too small/short" ~ "net attributes",
+                          reason_net_not_used == "net brought bedbugs" ~ "subjective",
+                          reason_net_not_used == "don't like shape/color/size" ~ "net attributes",
+                          reason_net_not_used == "prefer other method" ~ "net attributes",
+                          reason_net_not_used == "net too short/small" ~ "net attributes",
+                          reason_net_not_used == "net brought bugs" ~ "net attributes",
+                          reason_net_not_used == "bedbugs" ~ "net attributes",
+                          reason_net_not_used == "don't like shape" ~ "net attributes",
+                         reason_net_not_used == "size of the bed" ~ "net attributes",
+                          reason_net_not_used == "skin irritation" ~ "net attributes",
+                         reason_net_not_used == "don't like color" ~ "net attributes",
+                         reason_net_not_used == "don't like size" ~ "net attributes",
+                          TRUE ~ as.character(reason_net_not_used))) %>% 
+    pivot_longer(cols=c(urban, rural), names_to="residence")
+```
+ 
+
+# References
+
