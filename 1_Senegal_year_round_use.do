@@ -21,8 +21,8 @@ set maxvar 20000
 	putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/output/Reasons for not using nets.xlsx", sheet("Senegal Use All Year") modify 
 		putexcel A1="Year" B1="% household that use nets year round" C1="lb" D1="ub" E1="dataset"
 		
-	global senyearall "SNHR5H SNHR61 SNHR6D SNHR70 SNHR7H SNHR7Q SNHR7Z SNHR80 SNHR8A"
-	tokenize sh114b sh127b sh127b sh127b sh127b	sh127b sh128b sh128b sh128b 
+	global senyearall "SNHR5H SNHR61 SNHR6D SNHR70 SNHR7H SNHR7Q SNHR7Z SNHR80 SNHR8A" // not present in 2020-21 (SNHR8I)
+	tokenize sh114b sh127b sh127b sh127b sh127b	sh127b sh128b sh128b sh128b
 	local row=2
 	
 	foreach c in $senyearall {
@@ -261,8 +261,8 @@ set maxvar 20000
 		
 		** Senegal 2017, 2018, 2019 surveys: sh128c
 		
-			tokenize "H I J"
-			foreach c in SNHR7Z SNHR80 SNHR8A {
+			tokenize "H I J "
+			foreach c in SNHR7Z SNHR80 SNHR8A  {
 			
 		
 				use `c'FL.dta, clear // Senegal 2017, 2018, 2019 // sh128c question
@@ -413,7 +413,7 @@ set maxvar 20000
 		** Senegal 2017, 2018, 2019 surveys: sh128c
 		
 			
-			foreach c in SNHR7Z SNHR80 SNHR8A {
+			foreach c in SNHR7Z SNHR80 SNHR8A SNHR8I {
 			
 		
 				use `c'FL.dta, clear // Senegal 2017, 2018, 2019 // sh128c question
