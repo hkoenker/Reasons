@@ -413,7 +413,7 @@ set maxvar 20000
 		** Senegal 2017, 2018, 2019 surveys: sh128c
 		
 			
-			foreach c in SNHR7Z SNHR80 SNHR8A SNHR8I {
+			foreach c in SNHR7Z SNHR80 SNHR8A {
 			
 		
 				use `c'FL.dta, clear // Senegal 2017, 2018, 2019 // sh128c question

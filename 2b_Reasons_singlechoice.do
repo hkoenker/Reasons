@@ -1818,7 +1818,7 @@ gen filename="SNHR8I"
 		mat mat3=e(ub)
 		mat mat4=e(obs)
 		
-		forvalues i=1(1)13 { 
+		forvalues i=1(1)14 { 
 			scalar r`i'=round(mat1[1,`i'],0.1)
 			scalar lb`i'=round(mat2[1,`i'],0.1)
 			scalar ub`i'=round(mat3[1,`i'],0.1)
@@ -1832,7 +1832,7 @@ gen filename="SNHR8I"
 			local row=`row'+1
 		}
 		
-		putexcel C4="Too hot" C5="Don't like shape/color/size" C6="Don't like smell" C7="Too torn" C8="Unable to hang" C9="Slept outside" C10=("Not effective") C11="Usual user not here" C12="No mosquitoes/malaria" C13="Saving for later" C14 =("Net was used") C15=("Other") C16=("Don't know")  C17=("Total")
+		putexcel C4="Too hot" C5="Don't like shape/color/size" C6="Don't like smell" C7="Too torn" C8="Unable to hang" C9="Slept outside" C10=("Not effective") C11="Usual user not here" C12="No mosquitoes/malaria" C13="Saving for later" C14 =("Net was used") C15=("Other") C16=("Total")
 				
 		
 		scalar drop _all
@@ -1859,7 +1859,7 @@ gen filename="SNHR8I"
 			mat mat1=e(b)
 			mat mat4=e(obs)
 		local row=4 // set the starting row (back again after loop)
-			forvalues i=1(1)8 { // create scalars looping through the matrix results
+			forvalues i=1(1)14 { // create scalars looping through the matrix results
 				scalar r`i'=round(mat1[1,`i'],0.1)
 				
 				putexcel `1'`row'=(r`i') // put the result into tokenized column (`1') and looping row
@@ -1900,7 +1900,7 @@ gen filename="SNHR8I"
 			mat mat1=e(b)
 			mat mat4=e(obs)
 		local row=4 // set the starting row (back again after loop)
-			forvalues i=1(1)8 { // create scalars looping through the matrix results
+			forvalues i=1(1)14 { // create scalars looping through the matrix results
 				scalar r`i'=round(mat1[1,`i'],0.1)
 				
 				putexcel `1'`row'=(r`i') // put the result into tokenized column (`1') and looping row
@@ -1923,7 +1923,7 @@ gen filename="SNHR8I"
 		mat drop _all
 		
 		local row=4
-		forvalues z = 4/11 {
+		forvalues z = 4/16 {
 			putexcel A`row'=(dataset) B`row'=(hv007)
 			local row=`row'+1
 		}

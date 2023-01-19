@@ -6,7 +6,7 @@ putexcel set "/Users/hannahkoenker/Dropbox/A DHS MIS Datasets/Analysis/Reasons/o
 	
 	local row=2
 
-foreach c in SNHR61 SNHR6D SNHR70 SNHR7H SNHR7Q SNHR7Z SNHR80 SNHR8A {
+foreach c in SNHR61 SNHR6D SNHR70 SNHR7H SNHR7Q SNHR7Z SNHR80 SNHR8A SNHR8I {
 	
 	use `c'_netfile_reasons, clear
 	
